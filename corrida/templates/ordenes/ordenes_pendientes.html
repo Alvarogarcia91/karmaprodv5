@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<br>
+<br>
+
+<h1>Ordenes Pendientes</h1>
+<br>
+<hr class="style1">
+    <h3>Corridas en Producción</h3>
+    {% for corrida in corridas_en_produccion %}
+    <table class="table table-hover" >
+        <thead >
+            <tr>
+            <th> No.Orden</th>
+            <th> Tipo de espuma</th>
+            <th> Descripcion </th>
+            <th> Tipo de unidad </th>
+            <th> Forma </th>
+            <th> Cantidad </th>
+            <th> Remover </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <form action="{% url 'corrida:editar_cantidades_corrida' %}" method="POST">
+            {% csrf_token %}
+            {% for elementoCorrida in corrida %}
+
+            <tr>
+                <td>{{ elementoCorrida.corrida }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas.forma }}</td>
+                <td>
+                    <input type="text"  size="5" id="{{elementoCorrida.cantidad}}" name="cantidades" value="{{ elementoCorrida.cantidad }}">
+                    <input type="hidden" id ="{{elementoCorrida.id}}" name="elementoIds" value="{{elementoCorrida.id}}">
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="{% url 'corrida:remover_elemento_ordenes_pendientes' elementoCorrida.id %}" role="button"> Remover  </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <input type="submit" class="btn btn-warning" value="Cambiar Cantidades">
+    </form>
+    <hr class="style4">
+    <br>
+    {% endfor %}
+    <hr class="style7">
+    <br>
+    <h3>Corridas Pendientes</h3>
+    {% for corrida in corridas_pendientes %}
+    <table class="table table-hover" >
+        <thead>
+            <tr>
+            <th> No.Orden</th>
+            <th> Tipo de espuma</th>
+            <th> Descripcion </th>
+            <th> Tipo de unidad </th>
+            <th> Forma </th>
+            <th> Cantidad </th>
+            <th> Remover </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% with corrida_id=corrida.0.corrida_id %}
+            <form action="{% url 'corrida:producir_corrida' corrida_id  %}" method="POST">
+
+            {% csrf_token %}
+            {% for elementoCorrida in corrida %}
+
+            <tr>
+                <td>{{ elementoCorrida.corrida }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
+                <td>{{ elementoCorrida.bloqueMedidas.forma }}</td>
+                <td>
+                    <input type="text" size="5" id="{{elementoCorrida.cantidad}}" name="cantidades" value="{{ elementoCorrida.cantidad }}">
+                    <input type="hidden" id ="{{elementoCorrida.id}}" name="elementoIds" value="{{elementoCorrida.id}}">
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="{% url 'corrida:remover_elemento_ordenes_pendientes' elementoCorrida.id %}" role="button"> Remover  </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- este boton de summit truena  input type="submit" class="btn btn-warning" value="Producir Orden" -->
+    <a class="btn btn-success" href="#" role="button"> Producir Orden  </a>
+    <a class="btn btn-info" href="{% url 'corrida:cancelar_corrida' corrida_id %}" role="button"> Cancelar  </a>
+    {% endwith %}
+    </form>
+    <hr class="style4">
+    <br>
+    {% endfor %}
+
+
+   
+{%endblock%}

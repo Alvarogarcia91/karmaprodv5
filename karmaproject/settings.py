@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'espumas',
+    'corrida',
     'widget_tweaks',
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'karmaproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'shop','templates/')],
+        'DIRS': [os.path.join(BASE_DIR,'espumas','templates/'),os.path.join(BASE_DIR,'corrida','templates/'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

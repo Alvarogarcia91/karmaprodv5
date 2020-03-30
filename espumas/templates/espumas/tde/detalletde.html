@@ -1,0 +1,95 @@
+{% extends "basedetalles.html" %}
+{% block content %}
+
+
+<br>
+<h2>Detalles de: <font color="green">{{ itemsFront.tipo_de_espuma }} </font></h2>
+
+
+<br>
+<table class="table table-hover" >
+        <thead>
+          <tr>
+
+            <th>ID</th>
+            <th>Tipo espuma</th>
+            <th>Formulacion Clave </th>
+            <th>Multiplicador</th>
+            <th>Precio</th>
+            <th>Familia</th>
+
+            <th>Disponible </th>
+
+            
+            <th>Densidad Descripcion </th>
+            <th>Densidad Objetivo_minima </th>
+            <th>Densidad Objetivo_maxima </th>
+            <th>Dureza Objetivo_minima </th>
+            <th>Dureza Objetivo_maxima </th>
+            <th>Flujo de aire minimo </th>
+            <th>Flujo de aire maximo </th>
+            
+            <th>Retardante flama</th>
+            <th>Anti bacterial</th>
+            <th>Anti estatica</th>
+            <th>Color</th>
+            <th>Elongacion</th>
+            <th>Histasis</th>
+            <th>Sag factor</th>
+            <th>Extra1</th>
+            <th>Extra2</th>
+            
+            
+
+
+          </tr>
+        </thead>
+
+        <tbody>
+            
+
+        <tr>
+
+
+        <td>{{ itemsFront.id }}</td>
+        <td>{{ itemsFront.tipo_de_espuma }}</td>
+        <td>{{ itemsFront.formulacion_o_clave }}</td>
+        <td>{{ itemsFront.multiplicador }}</td>
+        <td>{{ itemsFront.precio }}</td>
+        <td>{{ itemsFront.familia }}</td>
+        <td>{{ itemsFront.disponible }}</td>
+        
+
+        <td>{{ itemsFront.densidad_descripcion }}</td>
+        <td>{{ itemsFront.densidad_objetivo_minima }}</td>
+        <td>{{ itemsFront.densidad_objetivo_maxima }}</td>
+        <td>{{ itemsFront.dureza_objetivo_minima }}</td>
+        <td>{{ itemsFront.dureza_objetivo_maxima }}</td>
+        <td>{{ itemsFront.Flujo_de_aire_minimo }}</td>
+        <td>{{ itemsFront.flujo_de_aire_maximo }}</td>
+
+
+        <td>{{ itemsFront.retardante_flama }}</td>
+        <td>{{ itemsFront.anti_bacterial }}</td>
+        <td>{{ itemsFront.anti_estatica }}</td>
+        <td>{{ itemsFront.color }}</td>
+        <td>{{ itemsFront.elongacion }}</td>
+        <td>{{ itemsFront.histasis }}</td>
+        <td>{{ itemsFront.sag_factor }}</td>
+        <td>{{ itemsFront.extra1 }}</td>
+        <td>{{ itemsFront.extra2 }}</td>
+
+
+
+        
+
+           
+
+        </td>
+
+        </tbody>
+    </table>
+    <br>
+    <a class="btn btn-primary" href="{% url 'espumas:tde' %}" role="button"> Regresar </a>
+<br>
+{%endblock%}

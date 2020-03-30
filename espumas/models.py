@@ -89,7 +89,7 @@ class BloqueMedidas(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    #stock = models.IntegerField(default=400,editable=False)
+    stock = models.IntegerField(default=500,editable=False)
 
     class Meta:
         ordering = ('tipo_de_espuma','tipo_de_unidad')

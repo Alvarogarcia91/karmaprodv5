@@ -24,16 +24,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-#index
-#http://127.0.0.1:8000/
-#Index esta en la espumas app
+    #index
+    #http://127.0.0.1:8000/
+    #Index esta en la espumas app
     path('',views.index,name='index'),
 
-
-
-
-
-
+    path('corrida/', include('corrida.urls')),
 
     path('espumas/',include('espumas.urls')),
 

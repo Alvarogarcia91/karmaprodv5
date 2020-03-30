@@ -1,0 +1,19 @@
+{% extends "basedetalles.html" %}
+{% block content %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <h2>
+        Estas seguro que deseas borrar este Tipo De Espuma?
+        <br>
+        <br>
+        <font color="red"> {{ item.tipo_de_espuma }}</font> 
+        <br>
+        <br>
+        <button class="btn btn-danger" type="submit"> BORRAR </button>
+        <a class="btn btn-info" href="{% url 'espumas:tde' %}" role="button"> Regresar </a>
+    </h2>
+</form>
+
+{%endblock%}

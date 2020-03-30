@@ -1,0 +1,24 @@
+{% extends "basedetalles.html" %}
+{% block content %}
+
+
+
+
+<form method="POST">
+    {% csrf_token %}
+    <h2>
+        Estas seguro que deseas borrar este bloque?
+        <br>
+        <br>
+         
+         Medidas Descripcion: <font color="green">{{ item.descripcion }}</font> - TDE:<font color="red"> {{ item.tipo_de_espuma }}</font> - Unidad: <font color="orange">{{ item.tipo_de_unidad }} </font>
+         <br>
+         <br>
+        <button  class="btn btn-danger" type="submit"> BORRAR </button>
+        <a class="btn btn-info" href="{% url 'espumas:espumas' %}" role="button"> Regresar </a>
+    </h2>
+</form>
+
+
+
+{%endblock%}
