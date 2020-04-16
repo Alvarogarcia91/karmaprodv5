@@ -1,86 +1,100 @@
 {% extends "basedetalles.html" %}
 {% block content %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-12 offset-1">
+          
 
-
-<br>
-<h2>Detalles de: <font color="green">{{ itemsFront.descripcion }}</font> - TDE:<font color="red"> {{ itemsFront.tipo_de_espuma }}</font> - Unidad: <font color="orange">{{ itemsFront.tipo_de_unidad }} </font></h2>
-
-<br>
-
-<table class="table table-hover" >
-        <thead>
-          <tr>
-
-            <th>ID</th>
-            <th>Descripcion </th>
-            <th>Tipo espuma</th>
-            <th>Tipo de Unidad </th>
-            <th>forma</th>
-
-            <th>Largo Frio Objetivo</th>
-            <th>Ancho Frio Objetivo</th>
-            <th>Alto Frio Objetivo </th>
-
+            <br>
+            <h2>Detalles de: <font color="green">{{ itemsFront.descripcion }}</font> - TDE:<font color="red"> {{ itemsFront.tipo_de_espuma }}</font> - Unidad: <font color="orange">{{ itemsFront.tipo_de_unidad }} </font></h2>
             
-            <th>Flujo De Air Objetivo </th>
+            <br>
+        </div>
+    </div>
+</div>
 
-            <th>Largo Caliente Setting Predefinido  </th>
-            <th>Ancho Caliente Setting Predefinido </th>
-            <th>Alto Caliente Setting Predefinido </th>
-
-            <th> Cliente </th>
-            <th>Medida Disponible </th>
-            
-            <th>Fecha_De_Creado </th>
-            <th>Fecha_Actualizado</th>
-            
-            
-
-
-          </tr>
-        </thead>
-
-        <tbody>
-            
-
-        <tr>
-
-
-        <td>{{ itemsFront.id }}</td>
-        <td>{{ itemsFront.descripcion }}</td>
-        <td>{{ itemsFront.tipo_de_espuma }}</td>
-        <td>{{ itemsFront.tipo_de_unidad }}</td>
-        <td>{{ itemsFront.forma }}</td>
-
-        <td>{{ itemsFront.largo_frio_objetivo }}</td>
-        <td>{{ itemsFront.ancho_frio_objetivo }}</td>
-        <td>{{ itemsFront.alto_frio_objetivo }}</td>
-
-        <td>{{ itemsFront.flujo_de_aire_objetivo }}</td>
-
-        <td>{{ itemsFront.largo_caliente_setting_predefinido }}</td>
-        <td>{{ itemsFront.ancho_caliente_setting_predefinido }}</td>
-        <td>{{ itemsFront.alto_caliente_setting_predefinido }}</td>
-
-        <td>{{ itemsFront.cliente }}</td>
-        <td>{{ itemsFront.medida_dispobible }}</td>
-
-        <td>{{ itemsFront.created }}</td>
-        <td>{{ itemsFront.updated }}</td>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover table-bordered  " >
+                <thead class="thead-light">
+                  <tr>
         
-
-
-
+                    <th>ID</th>
+                    <th>Descripcion </th>
+                    <th>Tipo espuma</th>
+                    <th>Tipo de Unidad </th>
+                    <th>forma</th>
         
+                    <th>Largo Frio Objetivo</th>
+                    <th>Ancho Frio Objetivo</th>
+                    <th>Alto Frio Objetivo </th>
+        
+                    
+                    <th>Flujo De Air Objetivo </th>
+        
+                    <th>Largo Caliente Setting Predefinido  </th>
+                    <th>Ancho Caliente Setting Predefinido </th>
+                    <th>Alto Caliente Setting Predefinido </th>
+        
+                    <th> uso_objetivo </th>
+                    <th>Medida Disponible </th>
+                    
+                    <th>Fecha_De_Creado </th>
+                    <th>Fecha_Actualizado</th>
+        
+                  </tr>
+                </thead>
+        
+                <tbody>
+                    
+                <tr>
+        
+                <td>{{ itemsFront.id }}</td>
+                <td>{{ itemsFront.descripcion }}</td>
+                <td>{{ itemsFront.tipo_de_espuma }}</td>
+                <td>{{ itemsFront.tipo_de_unidad }}</td>
+                <td>{{ itemsFront.forma }}</td>
+        
+                <td>{{ itemsFront.largo_frio_objetivo }}</td>
+                <td>{{ itemsFront.ancho_frio_objetivo }}</td>
+                <td>{{ itemsFront.alto_frio_objetivo }}</td>
+        
+                <td>{{ itemsFront.flujo_de_aire_objetivo }}</td>
+        
+                <td>{{ itemsFront.largo_caliente_setting_predefinido }}</td>
+                <td>{{ itemsFront.ancho_caliente_setting_predefinido }}</td>
+                <td>{{ itemsFront.alto_caliente_setting_predefinido }}</td>
+        
+                <td>{{ itemsFront.uso_objetivo }}</td>
+                <td>{{ itemsFront.medida_dispobible }}</td>
+        
+                <td>{{ itemsFront.created }}</td>
+                <td>{{ itemsFront.updated }}</td>      
+        
+                </td>
+                </tbody>
+            </table>
+                  
+                  
 
-           
-
-        </td>
-
-        </tbody>
-    </table>
-    <br>
-    <a class="btn btn-primary" href="{% url 'espumas:espumas' %}" role="button"> Regresar </a>
+    
+     
+      
+    
+      <div class="container">
+        <div class="row">
+          <div class="col-12 offset-2">
+            
+            
+                    <br>
+                    <a class="btn btn-primary" href="{% url 'espumas:espumas' %}" role="button"> Regresar </a>
+            
+                  <br>
+              </div>
+          </div>
+      </div>
+      
 
 {%endblock%}

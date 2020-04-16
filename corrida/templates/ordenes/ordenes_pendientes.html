@@ -93,7 +93,7 @@
         </tbody>
     </table>
     <!-- este boton de summit truena  input type="submit" class="btn btn-warning" value="Producir Orden" -->
-    <a class="btn btn-success" href="#" role="button"> Producir Orden  </a>
+    <a class="btn btn-success" href="{%url 'corrida:producir_corrida' corrida_id %}" role="button"> Producir Orden  </a>
     <a class="btn btn-info" href="{% url 'corrida:cancelar_corrida' corrida_id %}" role="button"> Cancelar  </a>
     {% endwith %}
     </form>

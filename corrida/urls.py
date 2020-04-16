@@ -19,8 +19,15 @@ urlpatterns = [
     path('producir_corrida/<int:corrida_id>/', views.producir_corrida, name='producir_corrida'),
     path('producir_bloques/<int:corrida_id>/', views.producir_bloques, name='producir_bloques'),
     path('producir_bloques/<int:corrida_id>/<int:elementoCorrida_id>/', views.producir_bloques, name='producir_bloques'),
-    path('producir_bloques/<int:corrida_id>/<int:elementoCorrida_id>/', views.producir_bloques, name='producir_bloques'),
+    # path('producir_bloques/<int:corrida_id>/<int:elementoCorrida_id>/', views.producir_bloques, name='producir_bloques'),
     path('producir_bloque_seleccionado/', views.producir_bloque_seleccionado, name='producir_bloque_seleccionado'),
     
     path('editar_cantidades_corrida/', views.editar_cantidades_corrida, name='editar_cantidades_corrida'),
+
+    path('corrida_producida/<int:corrida_id>/', views.corrida_producida, name='corrida_producida'),
+
+    path('corridas_producidas/', views.corridas_producidas, name='corridas_producidas'),
+
+    path('inventario/', views.inventario, name='inventario'),
+
 ]

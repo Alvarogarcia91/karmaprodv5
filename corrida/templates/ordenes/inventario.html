@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+ 
+
+<br>
+<div class="container">
+        <div class="row">
+            <div class="col-6 offset-3 ">
+<h1>
+    Inventario
+</h1>
+            </div>
+        </div>
+</div>
+<br>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3 ">
+
+    
+
+    {% for tipo_con_medidas in tipos_con_medidas %} 
+
+    <h3>Bloques disponibles para el TDE: <span class="badge badge-primary badge-pill">{{tipo_con_medidas.tipo_de_espuma}} </span> </h3>
+    <table class="table table-striped table-sm" style="padding: 5rem">
+            <thead>
+            <tr>
+                
+                <th> Medidas</th>
+            
+                <th> Bloques Disponibles</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for medida_con_count in tipo_con_medidas.medidas_con_count %}
+                <tr>
+                
+                    <td> {{medida_con_count.medida.descripcion}} </td>
+                    
+                    <td> <b> {{medida_con_count.bloques_producidos_count}}</b> </td>
+                        
+                </tr> 
+                    {% endfor %}
+                    
+                    
+            
+            </tbody>
+    </table>
+    {% endfor %}
+        </div>
+    </div>  
+</div>
+
+{%endblock%}

@@ -82,7 +82,7 @@ class BloqueMedidas(models.Model):
     largo_caliente_setting_predefinido = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
     ancho_caliente_setting_predefinido = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
     alto_caliente_setting_predefinido = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
-    cliente  = models.CharField(max_length=200, blank=True,null=True)
+    uso_objetivo  = models.CharField(max_length=200, blank=True,null=True)
     medida_dispobible =models.BooleanField(default = True)
 
     disponible =models.BooleanField(default = True)

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3> <b>Corridas producidas </b>  </h3>
+    
+    
+    <div class="container">
+
+    </div>
+
+    <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th> Numero De Corrida </th>
+                <th> Fecha de Producida </th>
+                <th> Fecha a Programada </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                    {% for corridas_producidas in corridas_producidas %}
+                <td><a href="{% url 'corrida:corrida_producida' corridas_producidas.id %} "> {{corridas_producidas.id}} </a></td>
+               
+                <td>{{corridas_producidas.created}}</td>
+                
+                <td>{{bloque_producido.fecha_programada}}</td>
+                
+    
+              </tr>
+              
+              {%endfor%} 
+            </tbody>
+          </table>
+    
+        </div>
+
+
+{%endblock%}

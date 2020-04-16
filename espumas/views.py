@@ -13,6 +13,7 @@ from django.template.loader import get_template
 from django.template import loader
 #from .models import Cantidadp
 from corrida.models import Corrida, ElementoCorrida
+from django.db.models import Count
 from .forms import *
 
 
@@ -52,6 +53,7 @@ def espumas(request, tipo_id=0):
         'itemsFront':item_list,
         'corridaFront': elementoCorrida_list,
         'menufront':tde_menus,
+        'tipo_id':tipo_id,
     }
     return render(request,'espumas/espumas.html',context)
 

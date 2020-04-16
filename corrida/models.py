@@ -44,7 +44,7 @@ class ElementoCorrida(models.Model):
 		return self.bloqueMedidas.largo_frio_objetivo * self.cantidad
 
 	def __str__(self):
-		return '{0} {1},{2} {3}'.format( self.corrida.id, self.bloqueMedidas.tipo_de_espuma, self.bloqueMedidas.descripcion, self.bloqueMedidas.tipo_de_unidad)
+		return '{0} {1},{2}'.format( self.bloqueMedidas.tipo_de_espuma, self.bloqueMedidas.descripcion, self.bloqueMedidas.tipo_de_unidad)
 
 
 
@@ -53,7 +53,7 @@ class ElementoCorrida(models.Model):
 class BloqueProducido(models.Model):
 	
 	DEFECTOS_CHOICES=[
-		('sd', 'Sin defectos'),
+		('sd', ''),
 		('ph','Pinhole'),
 		('g', 'Grieta'),
 		('v', 'Vena'),
@@ -68,9 +68,12 @@ class BloqueProducido(models.Model):
 	elemento_corrida = models.ForeignKey(ElementoCorrida, on_delete=models.CASCADE)
 	revision_calidad = models.BooleanField(default=True)
 	defecto = models.CharField(max_length=2,choices=DEFECTOS_CHOICES, default='sd')
+	largo_caliente = models.DecimalField(max_digits=10, decimal_places=2)
+	ancho_caliente = models.DecimalField(max_digits=10, decimal_places=2)
 	alto_caliente = models.DecimalField(max_digits=10, decimal_places=2)
-	peso_caliente = models.DecimalField(max_digits=10, decimal_places=2)
 	flujo_de_aire_caliente = models.DecimalField(max_digits=10, decimal_places=2)
+	peso_caliente = models.DecimalField(max_digits=10, decimal_places=2)
+	comentario =models.CharField(max_length =300,blank = True,null=True)
 	
 	#active = models.BooleanField(default=True)
 
@@ -78,17 +81,21 @@ class BloqueProducido(models.Model):
 		db_table = 'BloqueProducido'
 
 	def volumen(self):
-		return (self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000
+		return round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
 
 	def densidad(self):
-		return self.volumen / self.peso_caliente
+		volumen = float(self.volumen()) 
+		peso = float(self.peso_caliente)
+		return round((peso ) / (volumen),2)
 
 	def lote(self):
 		meses = {"1":"L", "2":"U", "3":"I", "4":"S", "5":"V", "6":"G", "7":"A", "8":"R", "9":"C", "10":"M", "11":"T", "12":"Z"}
 		created = self.created.date()
 		letra = meses[str(created.month)]
 		tipo_de_espuma = self.elemento_corrida.bloqueMedidas.tipo_de_espuma
-		lote = '{0}{1}{2}-{3}'.format(letra, created.day, created.year, tipo_de_espuma)
+		corrida = self.elemento_corrida.corrida
+		year = str(created.year)[-2:]
+		lote = '{0}{1}{2}/{3}/{4}'.format(letra, created.day, year, corrida, tipo_de_espuma)
 		return lote
 		
 

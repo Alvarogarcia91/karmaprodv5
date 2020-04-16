@@ -1,130 +1,200 @@
-{% extends "base.html" %}
+{% extends "baseprod.html" %}
 {% block content %}
 
 
-<h1>Produciendo orden {{elementoCorrida.corrida}}</h1>
-<div class="container">
+
+
+        <div class="row">
+                <div class="col-12 ">
+    <h3><b>Produciendo Orden:<font color="green"> {{elementoCorrida.corrida_id}} </font></b></h3>
+                </div>
+            </div>
+
+<!--  Row Master-->
     <div class="row">
-        <div class="col-6">
-            <table class="table table-hover" >
-                <thead>
+        <!-- COL Elementos -->
+        <div class="col-3" >
+            
+            <table class="table table-hover  table-responsive "  >
+                <thead class="thead-light">
                     <tr>
-        
                     <th> Tipo de espuma</th>
                     <th> Descripcion </th>
                     <th> Tipo de unidad </th>
-                    <th> Selecionar </th>
+                  
+                    <!-- <th> Selecionar </th> -->
                     </tr>
                 </thead>
-        
                 <tbody>
-                    {% for elementoCorrida in elementos %}
+                    {% for elemento in elementos %}
                     <tr>
-                        <td>{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
-                        <td>{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
-                        <td>{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
-                        <td><input type="submit" class="btn btn-info" value="Selecionar"> </td>
+                        <td>{{ elemento.bloqueMedidas.tipo_de_espuma }}</td>
+                        <td>{{ elemento.bloqueMedidas.descripcion }}</td>         
+                        {% if elementoCorrida.bloqueMedidas.id == elemento.bloqueMedidas.id   %}
+                        <td><span class="badge badge-success badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
+                        {%else%}
+                        <td><span class="badge badge-primary badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
+                        {%endif%}
+<!--                        
+                        <td><a class="btn btn-primary" href="{% url 'corrida:producir_bloques' elemento.corrida_id  elemento.id %}" role="button"> Selecionar </a> 
+                        </td> -->
                     </tr>
                     {% endfor %}
-        
                 </tbody>
             </table>        
         </div>
-        <div class="col-3 offset-2">
-            <p>Tipo de espuma: {{elementoCorrida.bloqueMedidas.tipo_de_espuma}}</p>
-            <p>Descripción: {{elementoCorrida.bloqueMedidas.descripcion}}</p>
-            <p>Unidad: {{elementoCorrida.bloqueMedidas.tipo_de_unidad}}</p>
-            <p>Largo: {{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}</p>
-            <p>Ancho: {{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}</p>
-            <p>Bloques Producidos: 0/{{elementoCorrida.cantidad}}</p>
 
-        </div>
-    </div>
-    <br>
-
-    <div class="container">
+        
+        <!-- Settings -->
+        <div class="col-8" style="padding: 0" >
             <div class="row">
-                <div class="col-12">
-                    <table class="table table-hover" >
-                        <thead>
-                            <tr>
-                
-                            <th>Peso </th>
-                            <th> Alto </th>
-                            <th> Flujo de Aire </th>
-                            <th> OK </th>
-                            <th> Defecto </th>
-                            
-                            </tr>
-                        </thead>
-                
-                        <tbody>
-                                <form action="{% url 'corrida:producir_bloque_seleccionado' %}" method="POST">
-                                        {% csrf_token %}
-                            
-                            <tr>
-                                    <input type="hidden" id ="{{elementoCorrida.id}}" name="elemento_corrida" value="{{elementoCorrida.id}}">
-                                <td>
-                                <input type="text" size="5" id="peso_caliente" name="peso_caliente">
-                                </td>
-                                <td>
-                                <input type="text" size="5" id="alto_caliente" name="alto_caliente">
-                                </td>
-                                <td>
-                                <input type="text" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
-                                </td>
-                                <td>
-                                
-                                <input class="form-check-input" type="checkbox" name="revision_calidad"  checked id="revision_calidad" value="True">
-                                </td>
-                                <td>
-                                    <select id="defecto" name="defecto">
-                                        {% for choice in tipos_defectos %}
-                                        <option value="{{choice.0}}">{{choice.1}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </td>
-                                
-                            </tr>
-                            
-                
-                        </tbody>
-                    </table>        
+                <div class="col-6 offset-0 ">
+                    <table class="table table-bordered table-sm " >
+                            <thead class="thead-light">
+                                <tr>
+                                        <td colspan="6"  class="text-center"> <b>Settings </b></td>
+                                </tr>
+                                <tr>
+                                    <th> Largo</th>
+                                    <th> Ancho </th>
+                                    <th> Alto </th>
+                                    <th> F.Aire </th>
+                                    <th> Uso </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}</span></td>
+                                    <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}</span></td>
+            
+                                    <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.alto_caliente_setting_predefinido}}</span></td>
+                                    <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.flujo_de_aire_objetivo}}</span></td>
+                                    
+                                    <td>{{ elemento.bloqueMedidas.uso_objetivo }}</td>
+                                    
+                                </tr>
+                            </tbody>
+                    </table>
                 </div>
 
-
-
-<br>
-
-<br>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 offset-8">
-                    
-                    <input type="submit" class="btn btn-success" value="Siguiente Block">
-                    
-                    <a class="btn btn-danger" href="#" role="button"> Terminar Corrida  </a>
+                <!--Columna de contador  -->
+                <div class="col-6 offset-0 ">
+                    <b>Bloques Producidos: </b>
+                    <span class="badge badge-warning badge-pill">{{bloquesProducidosCount}}/{{elementoCorrida.cantidad}}</span>
+                </div> 
             </div>
-        </div>
-    </form>
-<br>
-    <h3>Lista de Bloques Producidos en la orden: {{elementoCorrida.corrida}}</h3>
-    {% with lote=bloquesProducidos.0.lote %}
-    <h4>Numero de Lote: {{lote}}</h4>
-    {% endwith %}
-    <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-hover" >
-                        <thead>
-                            <tr>
+            <br>
 
-                            <th> N.Block </th>
+            <!--Captura  -->
+            <div class="row">
+                <table class="table  table-sm table-responsive{-sm|-md|-lg|-xl} " >
+                    <thead class="thead-light">
+                        <tr>
+                        <th><b> Largo(CM)</b></th>
+                        <th><b> Ancho(CM)</b></th>
+                        <th><b> Alto(CM)</b> </th>
+
+                        <th><b> Flujo de Aire</b> </th>
+                        <th><b> Peso (KG)</b></th>
+                        <th><b> OK </th></b>
+                        <th><b> Observaciones</b> </th>
+                        <th><b> Comentarios</b></th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <form action="{% url 'corrida:producir_bloque_seleccionado' %}" method="POST">
+                                    {% csrf_token %}
+                        
+                        <tr>
+                                <input type="hidden" id ="{{elementoCorrida.id}}" name="elemento_corrida" value="{{elementoCorrida.id}}">
+                                
+                            <td>
+                            <input type="text" size="5" id="largo_caliente" name="largo_caliente">
+                            </td>
+                            <td>
+                            <input type="text" size="5" id="ancho_caliente" name="ancho_caliente">
+                            </td>
+                            <td>
+                            <input type="text" size="5" id="alto_caliente" name="alto_caliente">
+                            </td>
+                            <td>
+                            <input type="text" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
+                            </td>
+                            <td>
+                            <input type="text" size="5" id="peso_caliente" name="peso_caliente">
+                            </td>
+                            <td>
+                            <input class="form-check-input" type="checkbox" name="revision_calidad"  checked id="revision_calidad" value="True">
+                            </td>
+                            <td>
+                                <select id="defecto" name="defecto">
+                                    {% for choice in tipos_defectos %}
+                                    <option value="{{choice.0}}">{{choice.1}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" size="25" id="alto_caliente" name="comentario">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--Row de captura  -->
+            <div class="row">
+                <div class="col-6">
+                        <a class="btn btn-danger" href = "#" role="button"> Cancelar Corrida  </a>
+                </div>
+                    
+                <div class="col-6">
+                        {% if bloqueMedidas.tipo_de_unidad.tipo_de_unidad == 'Inicio' or bloqueMedidas.tipo_de_unidad.tipo_de_unidad == 'Cambio' %}
+                    <select id="opciones" name="selector">
+                        {% for opcion in opciones %}
+                    <option value="{{opcion.id}}">{{opcion}}</option>å
+                        {% endfor %}
+                    </select>
+                    <input type="submit" class="btn btn-success" value="Elegir Block" name="opcion">
+                        {% endif %}
+                        {% if bloqueMedidas.tipo_de_unidad.tipo_de_unidad == 'Normal' %}
+                    <input type="submit" class="btn btn-success" value="Siguiente Block" name="siguiente">
+                    
+                    <!-- if de hidden button  -->
+                    <input type="submit" class="btn btn-info" value="Cambio" name="cambio">
+                    <input type="submit" class="btn btn-warning" value="Terminar Corrida" name="final" >
+                        {% endif %}
+
+                </div>
+                        
+                </form>
+                    
+            </div>
+            <br>
+
+            <!-- Row de Heading del visor -->
+            <div class="row">
+                <div class="col-12 offset-0">
+                    <p><b>Bloques Producidos de: <font color="green"> {{elementoCorrida.bloqueMedidas.tipo_de_espuma}}</font>
+                            {% with lote=bloquesProducidos.0.lote %} 
+                    Numero de Lote: <font color="blue">{{lote}}</font> </p></b>
+                    {% endwith %}
+                </div>
+            </div>
+
+            <div class="row">
+                    <table class="table table-striped table-sm table-responsive{-sm|-md|-lg|-xl}" >
+                        <thead class="thead-light">
+                            <tr class="table-primary">
+                            <th> # </th>
                             <th> TDE </th>
-                            <th> Medidas </th>
+                            <th> Largo </th>
+                            <th> Ancho </th>
+                            <th> Alto </th>
+                            <th> Peso </th>
                             <th> Unidad </th>
                             <th> OK </th>
-                            <th> Defecto </th>
+                            <th> Observacion </th>
+                            <th> Comentario </th>
                             <th> Volumen </th>
                             <th> Densidad </th>
                             
@@ -132,52 +202,67 @@
                         </thead>
                 
                         <tbody>
-                                
                             
                             {% for bloque in bloquesProducidos %}
-                            <tr>
-                                
-                                <td>
-                                        {{bloque.id}}
-                                </td>
-                                <td>
-                                        {{bloque.elemento_corrida.bloqueMedidas.tipo_de_espuma}}
-                                </td>
-                                <td>
-                                        {{bloque.elemento_corrida.bloqueMedidas}}
-                                </td>
-                                <td>
-                                        {{bloque.elemento_corrida.bloqueMedidas.tipo_de_unidad}}
-                                </td>
-                                <td>
-                                        {{bloque.revision_calidad}}
-                                </td>
-                                <td>
-                                        {{bloque.get_defecto_display}} 
-                                </td>
-                                <td>
-                                        {{bloque.volumen}}
-                                </td>
-                                <td>
-                                        {{bloque.id}}
-                                </td>
-                                
+                            <tr >
+                                <td>{{bloque.no_de_bloque}}  </td>
+                                <td>{{bloque.elemento_corrida.bloqueMedidas.tipo_de_espuma}}  </td>
+                                <td>{{bloque.largo_caliente}}  </td>
+                                <td>{{bloque.ancho_caliente}}  </td>
+                                <td>{{bloque.alto_caliente}}  </td>
+                                <td>{{bloque.peso_caliente}}  </td>
+                                <td>{{bloque.elemento_corrida.bloqueMedidas.tipo_de_unidad}}  </td>
+                                <td>{{bloque.revision_calidad}}  </td>
+                                <td>{{bloque.get_defecto_display}}   </td>
+                                <td>{{bloque.comentario}}  </td>
+                                <td>{{bloque.volumen}}  </td>
+                                <td>{{bloque.densidad}}  </td>
                             </tr>
                             {% endfor %}
-                            
-                
                         </tbody>
-                    </table>        
-                </div>
+                    </table>    
+            </div>
+
+        </div>  
+    </div>
 
 
-    
 
 
-
-
-</div>
-
-
-   
 {%endblock%}
+
+
+
+        <!-- <div class="col-3 offset-0 ">
+            
+            <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-center align-items-center">
+                                Settings 
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Largo: 
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Ancho:
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Alto:
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.alto_caliente_setting_predefinido}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                F.Aire:
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.flujo_de_aire_objetivo}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Uso:
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.uso_objetivo}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <b>Bloques Producidos: </b>
+                          <span class="badge badge-warning badge-pill">0/{{elementoCorrida.cantidad}}</span>
+                        </li>
+                        
+                    </ul> 
+        </div>   -->

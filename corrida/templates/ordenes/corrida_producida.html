@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2> <b>
+
+Resumen de Orden </h2></b> 
+
+
+
+<p>  
+     
+</p>
+<table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th> # </th>
+            <th> TDE </th>
+            <th> Unidad </th>
+            <th> Largo </th>
+            <th> Ancho </th>
+            <th> Alto </th>
+            <th> F.Aire </th>
+            <th> Peso </th>
+            <th> OK </th>
+            <th> Observacion </th>
+            <th> Volumen </th>
+            <th> Densidad </th>
+            <th> Comentario </th>
+            <th> Lote </th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+        {%for bloque_producido  in bloques_producidos %}
+            
+            <td>{{bloque_producido.no_de_bloque}}</td>
+            <td>{{bloque_producido.elemento_corrida.bloqueMedidas.tipo_de_espuma}}</td>
+            <td>{{bloque_producido.elemento_corrida.bloqueMedidas.tipo_de_unidad}}</td>
+            <td>{{bloque_producido.largo_caliente}}</td>
+            <td>{{bloque_producido.ancho_caliente}}</td>
+            <td>{{bloque_producido.alto_caliente}}</td>
+            <td>{{bloque_producido.flujo_de_aire_caliente}}</td>
+            <td>{{bloque_producido.peso_caliente}}</td>
+            <td>{{bloque_producido.revision_calidad}}</td>
+            <td>{{bloque_producido.get_defecto_display}}</td>
+            <td>{{bloque_producido.volumen}}</td>
+            <td>{{bloque_producido.densidad}}</td>
+            <td>{{bloque_producido.comentario}}</td>
+            <td>{{bloque_producido.lote}}</td>
+
+          </tr>
+          
+          {%endfor%} 
+        </tbody>
+      </table>
+
+
+   
+{% endblock%}

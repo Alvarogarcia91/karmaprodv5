@@ -6,7 +6,7 @@ from.models import *
 class medidasForm(forms.ModelForm):
     class Meta:
         model = BloqueMedidas
-        fields = ['tipo_de_espuma','tipo_de_unidad','forma','medida_dispobible','descripcion','ancho_frio_objetivo','largo_frio_objetivo','alto_frio_objetivo','flujo_de_aire_objetivo','ancho_caliente_setting_predefinido','largo_caliente_setting_predefinido','alto_caliente_setting_predefinido','cliente',]
+        fields = ['tipo_de_espuma','tipo_de_unidad','forma','medida_dispobible','descripcion','ancho_frio_objetivo','largo_frio_objetivo','alto_frio_objetivo','flujo_de_aire_objetivo','ancho_caliente_setting_predefinido','largo_caliente_setting_predefinido','alto_caliente_setting_predefinido','uso_objetivo',]
         widgets = {
             'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
             # 'tipo_de_espuma': forms.ChoiceField(),
@@ -19,7 +19,7 @@ class medidasForm(forms.ModelForm):
             'largo_caliente_setting_predefinido': forms.NumberInput(attrs={'class': 'form-control'}),
             'ancho_caliente_setting_predefinido': forms.NumberInput(attrs={'class': 'form-control'}),
             'alto_caliente_setting_predefinido': forms.NumberInput(attrs={'class': 'form-control'}),
-            'cliente': forms.TextInput(attrs={'class': 'form-control'}),
+            'uso_objetivo': forms.TextInput(attrs={'class': 'form-control'}),
             
         }
         

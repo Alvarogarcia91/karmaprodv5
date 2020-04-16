@@ -26,7 +26,7 @@ admin.site.register(Tipos_de_Unidad,TiposDeUnidadAdmin)
 
 
 class BloqueMedidasdAdmin(admin.ModelAdmin):
-    list_display = ['descripcion','tipo_de_espuma','tipo_de_unidad','forma','largo_frio_objetivo','ancho_frio_objetivo','alto_frio_objetivo','flujo_de_aire_objetivo','largo_caliente_setting_predefinido','ancho_caliente_setting_predefinido','alto_caliente_setting_predefinido','cliente','medida_dispobible','created','updated']
-    # list_editable = ['','','','','','','','','','','','','','','','','','','','','','',]
+    list_display = ['id','descripcion','tipo_de_espuma','tipo_de_unidad','forma','largo_frio_objetivo','ancho_frio_objetivo','alto_frio_objetivo','flujo_de_aire_objetivo','largo_caliente_setting_predefinido','ancho_caliente_setting_predefinido','alto_caliente_setting_predefinido','uso_objetivo','medida_dispobible','created','updated']
+    list_editable = ['descripcion','largo_frio_objetivo','ancho_frio_objetivo','alto_frio_objetivo','flujo_de_aire_objetivo','largo_caliente_setting_predefinido','ancho_caliente_setting_predefinido','alto_caliente_setting_predefinido','uso_objetivo','medida_dispobible',]
     # prepopulated_fields = {'slug':('name',)}
 admin.site.register(BloqueMedidas,BloqueMedidasdAdmin)
