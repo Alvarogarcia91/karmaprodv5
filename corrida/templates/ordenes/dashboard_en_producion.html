@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+ 
+
+
+<!--  Row Master-->
+<div class="row">
+        <!-- COL Elementos -->
+    <div class="col-10 offset-1" >
+        <br>
+        <h1 class="text-center my_title text-primary" ><b>  Dashboard de Corridas en Producción</h1>  </b>
+        <br>   
+        {% if not corridas_en_produccion%}
+        <!-- Si no hay corridas produciendose -->
+        <div>
+            <div class="text-center">
+                <br>
+                <br>
+                <h2 class="text-center my_title">
+                    No hay ordenes produciendose actualmente.
+                </h2>
+                <br>
+            </div>
+        </div>
+        {% else %}
+
+            {% for corrida in corridas_en_produccion %}
+            <table class="table table-hover table-sm" >
+                <thead >
+                    <tr>
+                        <th> No.Orden</th>
+                        <th> Tipo de espuma</th>
+                        <th> Descripcion </th>
+                        <th> Tipo de unidad </th>
+                        <th> Cantidad </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for elementoCorrida in corrida %}
+
+                    <tr>
+                        <td>{{ elementoCorrida.corrida }}</td>
+                        <td>{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
+                        <td>{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
+                        <td>{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
+                    
+                        <td>0/{{ elementoCorrida.cantidad }}</td>
+                    
+                    </tr>
+                
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            <br>
+            {% endfor %}
+            <br>
+            <hr class="style7">
+            <br>
+        {% endif %}
+
+    </div>
+</div>
+
+{%endblock%}

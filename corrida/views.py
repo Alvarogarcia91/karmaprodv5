@@ -142,10 +142,7 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		opciones = elementos.filter(bloqueMedidas__tipo_de_espuma = bloqueMedidas.tipo_de_espuma).filter(bloqueMedidas__tipo_de_unidad = normal_id)
 	if bloqueMedidas.tipo_de_unidad_id == cambio_id: 
 		opciones = elementos.filter(bloqueMedidas__tipo_de_unidad = normal_id)
-		print(opciones)
-	
-
-
+		# print(opciones)
 	
 	bloquesProducidos = BloqueProducido.objects.filter(elemento_corrida = elementoCorrida.id).order_by('-no_de_bloque')
 	bloquesProducidosCount = bloquesProducidos.count()
@@ -244,6 +241,7 @@ def cancelar_corrida(request, corrida_id):
 	except Corrida.DoesNotExist:
 		#error corrida no existe
 		pass
+		# redirect al "resumen"
 	return redirect('corrida:ordenes_pendientes')
 	
 def editar_cantidades_corrida(request):
@@ -303,8 +301,6 @@ def inventario(request):
 	# normal_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Normal')[0].id
 	# bloques_disponibles = BloqueProducido.objects.filter( elemento_corrida__bloqueMedidas_tipo_de_unidad = normal_id)[0]
 
-
-
 	# este me da los que no tienen defecto
 	# bloques_disponibles = BloqueProducido.objects.filter( revision_calidad = True)
 
@@ -333,3 +329,27 @@ def inventario(request):
 
 	}
 	return render(request ,'ordenes/inventario.html' ,context )
+
+
+
+
+
+
+def dashboard_en_producion(request):
+
+
+	
+	corridas_en_produccion = Corrida.objects.filter(en_produccion=True)
+	corridas_en_produccion_list = []
+	
+	for corrida in corridas_en_produccion:
+		elementos = ElementoCorrida.objects.filter(corrida = corrida)
+		corridas_en_produccion_list.append(list(elementos))
+	context ={
+	
+		'corridas_en_produccion': corridas_en_produccion_list,
+	}
+	return render(request,'ordenes/dashboard_en_producion.html',context)
+
+
+	

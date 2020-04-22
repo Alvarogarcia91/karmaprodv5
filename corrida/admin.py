@@ -7,7 +7,7 @@ from .models import *
 
 class CorridaAdmin(admin.ModelAdmin):
     list_display = ['id','created','pre_orden','pendiente_produccion','en_produccion','cancelada','producto_terminado','fecha_programada',]
-    #list_editable = []
+    list_editable = ['pre_orden','pendiente_produccion','en_produccion','cancelada','producto_terminado']
     # prepopulated_fields = {'slug':('name',)}
 admin.site.register(Corrida,CorridaAdmin)
 

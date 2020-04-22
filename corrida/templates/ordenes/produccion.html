@@ -13,21 +13,24 @@
 <!--  Row Master-->
     <div class="row">
         <!-- COL Elementos -->
-        <div class="col-3" >
+        <div class="col-4" >
             
-            <table class="table table-hover  table-responsive "  >
+            <table class="table table-hover  table-responsive  "  >
                 <thead class="thead-light">
                     <tr>
-                    <th> Tipo de espuma</th>
-                    <th> Descripcion </th>
-                    <th> Tipo de unidad </th>
+                    <th style="width: 1px"> Tipo de espuma</th>
+                    <th style="width: 1px"> Descripcion </th>
+                    <th style="width: 1px"> Tipo de unidad </th>
+                    
+                    <th style="width: 1px"> Cantidad </th>
                   
                     <!-- <th> Selecionar </th> -->
                     </tr>
                 </thead>
                 <tbody>
                     {% for elemento in elementos %}
-                    <tr>
+                    {% if elementoCorrida.bloqueMedidas.id == elemento.bloqueMedidas.id   %}
+                    <tr class="table-success" >
                         <td>{{ elemento.bloqueMedidas.tipo_de_espuma }}</td>
                         <td>{{ elemento.bloqueMedidas.descripcion }}</td>         
                         {% if elementoCorrida.bloqueMedidas.id == elemento.bloqueMedidas.id   %}
@@ -35,10 +38,26 @@
                         {%else%}
                         <td><span class="badge badge-primary badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
                         {%endif%}
+                        <td class="text-center"> <b> {{elemento.cantidad}} </b></td>
+<!--                        
+                        <td><a class="btn btn-primary" href="{% url 'corrida:producir_bloques' elemento.corrida_id  elemento.id %}" role="button"> Selecionar </a> 
+                        </td> -->
+                    {%else%}
+                    <tr >
+
+                        <td>{{ elemento.bloqueMedidas.tipo_de_espuma }}</td>
+                        <td>{{ elemento.bloqueMedidas.descripcion }}</td>         
+                        {% if elementoCorrida.bloqueMedidas.id == elemento.bloqueMedidas.id   %}
+                        <td><span class="badge badge-success badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
+                        {%else%}
+                        <td><span class="badge badge-primary badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
+                        {%endif%}
+                        <td class="text-center"> <b> {{elemento.cantidad}} </b></td>
 <!--                        
                         <td><a class="btn btn-primary" href="{% url 'corrida:producir_bloques' elemento.corrida_id  elemento.id %}" role="button"> Selecionar </a> 
                         </td> -->
                     </tr>
+                    {%endif%}
                     {% endfor %}
                 </tbody>
             </table>        
@@ -143,11 +162,9 @@
             </div>
             <!--Row de captura  -->
             <div class="row">
-                <div class="col-6">
-                        <a class="btn btn-danger" href = "#" role="button"> Cancelar Corrida  </a>
-                </div>
+                
                     
-                <div class="col-6">
+                <div class="col-7 offset-1">
                         {% if bloqueMedidas.tipo_de_unidad.tipo_de_unidad == 'Inicio' or bloqueMedidas.tipo_de_unidad.tipo_de_unidad == 'Cambio' %}
                     <select id="opciones" name="selector">
                         {% for opcion in opciones %}
@@ -164,6 +181,9 @@
                     <input type="submit" class="btn btn-warning" value="Terminar Corrida" name="final" >
                         {% endif %}
 
+                </div>
+                <div class="col-3">
+                        <a class="btn btn-danger" href = "#" role="button"> Cancelar Corrida  </a>
                 </div>
                         
                 </form>
