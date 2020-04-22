@@ -24,10 +24,6 @@ def _corrida_actual():
 def agrega_a_corrida(request, bloque_medidas_id):
 	bloqueMedidas = BloqueMedidas.objects.get(id=bloque_medidas_id)
 	corrida = _corrida_actual()
-	elementos_corrida =  ElementoCorrida.objects.filter(corrida_id = corrida.id)
-	
-
-
 	try:
 		elemento_corrida = ElementoCorrida.objects.get(bloqueMedidas= bloqueMedidas, corrida=corrida)
 		elemento_corrida.cantidad += 1
@@ -36,8 +32,7 @@ def agrega_a_corrida(request, bloque_medidas_id):
 		elemento_corrida = ElementoCorrida.objects.create(
 					bloqueMedidas = bloqueMedidas,
 					corrida = corrida,
-					cantidad = 1,
-					turno = turno,
+					cantidad = 1
 			)
 		elemento_corrida.save()
 		
@@ -61,7 +56,8 @@ def orden_de_corrida(request):
 		corrida.pre_orden = False
 		corrida.pendiente_produccion = True
 		corrida.save()
-		
+		#arreglar el redirect a catalogo de corridas
+		#redirigir a las ordenes de corridas
 	return redirect('corrida:ordenes_pendientes')
 
 

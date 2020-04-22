@@ -14,7 +14,6 @@ class Corrida(models.Model):
 	cancelada = models.BooleanField(default=False)
 	producto_terminado = models.BooleanField(default=False)
 	fecha_programada = models.DateTimeField(null=True)
-	
 
 
 	class Meta:
@@ -98,7 +97,7 @@ class BloqueProducido(models.Model):
 		corrida = self.elemento_corrida.corrida
 		year = str(created.year)[-2:]
 		consecutivo_anual = Corrida.objects.filter(producto_terminado = True).filter( created__year = datetime.datetime.today().year).count()
-		corridas_en_dia = Corrida.objects.filter(corrida)
+		
 		# cifrado/(3dig cons anual)(1dig #corrida)/TDE/
 		lote = '{0}{1}{2}/{3}/{4}-{5:03d}'.format(letra, created.day, year, corrida, tipo_de_espuma,consecutivo_anual)
 		return lote
