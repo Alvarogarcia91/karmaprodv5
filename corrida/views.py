@@ -229,8 +229,7 @@ def producir_bloque_seleccionado (request):
 
 		
 			return redirect('corrida:corrida_producida',corrida)#al resumen de prod
-		if !elemento_siguiente:
-			elemento_siguiente = 
+		
 		bloque_producido.save()
 
 
