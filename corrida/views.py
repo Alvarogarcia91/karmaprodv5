@@ -24,6 +24,10 @@ def _corrida_actual():
 def agrega_a_corrida(request, bloque_medidas_id):
 	bloqueMedidas = BloqueMedidas.objects.get(id=bloque_medidas_id)
 	corrida = _corrida_actual()
+	elementos_corrida =  ElementoCorrida.objects.filter(corrida_id = corrida.id)
+	
+
+
 	try:
 		elemento_corrida = ElementoCorrida.objects.get(bloqueMedidas= bloqueMedidas, corrida=corrida)
 		elemento_corrida.cantidad += 1
@@ -32,7 +36,8 @@ def agrega_a_corrida(request, bloque_medidas_id):
 		elemento_corrida = ElementoCorrida.objects.create(
 					bloqueMedidas = bloqueMedidas,
 					corrida = corrida,
-					cantidad = 1
+					cantidad = 1,
+					turno = turno,
 			)
 		elemento_corrida.save()
 		
@@ -56,8 +61,7 @@ def orden_de_corrida(request):
 		corrida.pre_orden = False
 		corrida.pendiente_produccion = True
 		corrida.save()
-		#arreglar el redirect a catalogo de corridas
-		#redirigir a las ordenes de corridas
+		
 	return redirect('corrida:ordenes_pendientes')
 
 
@@ -200,7 +204,7 @@ def producir_bloque_seleccionado (request):
 		elemento_siguiente = elemento_corrida
 		if 'cambio' in request.POST:
 			cambio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Cambio')[0].id
-			elemento_siguiente = ElementoCorrida.objects.filter(corrida_id=elemento_corrida.corrida_id).filter(bloqueMedidas__tipo_de_espuma = elemento_corrida.bloqueMedidas.tipo_de_espuma).filter(bloqueMedidas__tipo_de_unidad_id = cambio_id).filter(bloqueMedidas__largo_caliente_setting_predefinido = elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido).filter(bloqueMedidas__ancho_caliente_setting_predefinido = elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)[0]
+			elemento_siguiente = ElementoCorrida.objects.filter(corrida_id=elemento_corrida.corrida_id).filter(bloqueMedidas__tipo_de_espuma = elemento_corrida.bloqueMedidas.tipo_de_espuma).filter(bloqueMedidas__tipo_de_unidad_id = cambio_id).filter(bloqueMedidas__largo_caliente_setting_predefinido = elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido).filter(bloqueMedidas__ancho_caliente_setting_predefinido = elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido).first()
 			
 			print(elemento_siguiente)
 			
@@ -222,9 +226,11 @@ def producir_bloque_seleccionado (request):
 			corrida.cancelada = False
 			corrida.producto_terminado = True
 			corrida.save()
+
 		
 			return redirect('corrida:corrida_producida',corrida)#al resumen de prod
-
+		if !elemento_siguiente:
+			elemento_siguiente = 
 		bloque_producido.save()
 
 
