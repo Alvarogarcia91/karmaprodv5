@@ -76,7 +76,8 @@ class BloqueProducido(models.Model):
 	peso_caliente = models.DecimalField(max_digits=10, decimal_places=2)
 	comentario =models.CharField(max_length =300,blank = True,null=True)
 	lote = models.CharField(max_length =50,blank = True,null=True)
-	
+	volumen = models.DecimalField(max_digits=10, decimal_places=2,  blank= True, null = True)
+	densidad = models.DecimalField(max_digits=10, decimal_places=2, blank= True, null = True)
 	#active = models.BooleanField(default=True)
 
 	class Meta:
@@ -89,7 +90,6 @@ class BloqueProducido(models.Model):
 		
 		# lote
 		meses = {"1":"L", "2":"U", "3":"I", "4":"S", "5":"V", "6":"G", "7":"A", "8":"R", "9":"C", "10":"M", "11":"T", "12":"Z"}
-		
 		today = datetime.datetime.today()
 		letra = meses[str(today.month)]
 		year = str(today.year)[-2:]
@@ -98,20 +98,27 @@ class BloqueProducido(models.Model):
 		corridas_en_dia = BloqueProducido.objects.filter(created__date = today).distinct('elemento_corrida__corrida_id').count() 
 		if not corridas_en_dia:
 			corridas_en_dia = 1
-		
 		consecutivo_anual = Corrida.objects.filter(producto_terminado = True).filter( created__year = today.year).count() + 1
-		
 		# cifrado/(3dig cons anual)(1dig #corrida)/TDE/
 		self.lote = '{0}{1}{2}/{3:03d}{4}/{5}'.format(letra, today.day, year, consecutivo_anual, corridas_en_dia, tipo_de_espuma)
 		
+		# # volumen
+		# volumen = round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
+		# self.volumen = volumen
+
+		# # densidad
+		# peso = float(self.peso_caliente)
+		# densidad = round((peso) / (volumen),2)
+		# self.densidad = densidad
+
 		# save
 		super().save(*args, **kwargs)
 
-	def volumen(self):
+	def volumen_calculado(self):
 		return round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
 
-	def densidad(self):
-		volumen = float(self.volumen()) 
+	def densidad_calculada(self):
+		volumen = float(self.volumen_calculado()) 
 		peso = float(self.peso_caliente)
 		return round((peso ) / (volumen),2)
 

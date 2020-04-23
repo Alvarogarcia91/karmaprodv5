@@ -7,7 +7,7 @@ from django.template.loader import get_template
 from django.template import loader
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.db.models import Max, Count 
+from django.db.models import Max, Count, Sum, Avg
 import datetime
 
 
@@ -253,7 +253,25 @@ def editar_cantidades_corrida(request):
 
 def corrida_producida(request,corrida_id):
 	bloques_producidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = corrida_id).order_by('no_de_bloque')
-	
+	resumen = {
+		"bloques_normales": 0,
+		"bloques_ok": 0,
+		"bloques_ng": 0,
+		"bloques_cambio": 0,
+		"densidad_promedio": 0,
+		"metros_planeados": 0,
+		"metros_producidos": 0,
+		"peso_producido": 0,
+	}
+	resumen['bloques_normales'] = bloques_producidos.filter(elemento_corrida__bloqueMedidas__tipo_de_unidad__tipo_de_unidad = "Normal").count()
+	resumen['bloques_ok'] = bloques_producidos.filter(revision_calidad = True).count()
+	resumen['bloques_ng'] = bloques_producidos.filter(revision_calidad = False).count()
+	resumen['metros_producidos'] = str(bloques_producidos.aggregate(Sum('largo_caliente'))['largo_caliente__sum'])
+	resumen['bloques_cambio'] = bloques_producidos.filter(elemento_corrida__bloqueMedidas__tipo_de_unidad__tipo_de_unidad = "Cambio").count()
+	resumen['metros_planeados'] = str(bloques_producidos.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum'])
+	resumen['densidad_promedio'] = bloques_producidos.aggregate(Avg('densidad'))['densidad__avg']
+	resumen['peso_producido'] = str(bloques_producidos.aggregate(Sum('peso_caliente'))['peso_caliente__sum'])
+	print(resumen)
 	context ={
 		'bloques_producidos': bloques_producidos
 
