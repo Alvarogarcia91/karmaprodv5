@@ -273,8 +273,8 @@ def corrida_producida(request,corrida_id):
 	resumen['peso_producido'] = str(bloques_producidos.aggregate(Sum('peso_caliente'))['peso_caliente__sum'])
 	print(resumen)
 	context ={
-		'bloques_producidos': bloques_producidos
-
+		'bloques_producidos': bloques_producidos,
+		'resumen': resumen
 	}
 	return render(request ,'ordenes/corrida_producida.html' ,context )
 

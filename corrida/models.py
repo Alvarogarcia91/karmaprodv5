@@ -102,25 +102,25 @@ class BloqueProducido(models.Model):
 		# cifrado/(3dig cons anual)(1dig #corrida)/TDE/
 		self.lote = '{0}{1}{2}/{3:03d}{4}/{5}'.format(letra, today.day, year, consecutivo_anual, corridas_en_dia, tipo_de_espuma)
 		
-		# # volumen
-		# volumen = round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
-		# self.volumen = volumen
+		# volumen
+		volumen = round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
+		self.volumen = volumen
 
-		# # densidad
-		# peso = float(self.peso_caliente)
-		# densidad = round((peso) / (volumen),2)
-		# self.densidad = densidad
+		# densidad
+		peso = float(self.peso_caliente)
+		densidad = round((peso) / (volumen),2)
+		self.densidad = densidad
 
 		# save
 		super().save(*args, **kwargs)
 
-	def volumen(self):
-		return round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
+	# def volumen(self):
+	# 	return round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
 
-	def densidad(self):
-		volumen = float(self.volumen()) 
-		peso = float(self.peso_caliente)
-		return round((peso ) / (volumen),2)
+	# def densidad(self):
+	# 	volumen = float(self.volumen()) 
+	# 	peso = float(self.peso_caliente)
+	# 	return round((peso ) / (volumen),2)
 
 	def __str__(self):
 		return 'Alto: {0} | Peso: {1} | F.Aire: {2}  '   .format(self.alto_caliente, self.peso_caliente,self.flujo_de_aire_caliente)
