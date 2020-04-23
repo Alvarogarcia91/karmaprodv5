@@ -29,10 +29,10 @@ class Corrida(models.Model):
 class ElementoCorrida(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now = True)
-	bloqueMedidas = models.ForeignKey(BloqueMedidas, on_delete=models.CASCADE)
-	corrida = models.ForeignKey(Corrida, on_delete=models.CASCADE)
+	bloqueMedidas = models.ForeignKey(BloqueMedidas, on_delete = models.CASCADE)
+	corrida = models.ForeignKey(Corrida, on_delete = models.CASCADE)
 	cantidad = models.IntegerField()
-	turno = models.IntegerField()
+	# turno = models.IntegerField()
 	#active = models.BooleanField(default=True)
 
 	class Meta:
@@ -75,11 +75,37 @@ class BloqueProducido(models.Model):
 	flujo_de_aire_caliente = models.DecimalField(max_digits=10, decimal_places=2)
 	peso_caliente = models.DecimalField(max_digits=10, decimal_places=2)
 	comentario =models.CharField(max_length =300,blank = True,null=True)
+	lote = models.CharField(max_length =50,blank = True,null=True)
 	
 	#active = models.BooleanField(default=True)
 
 	class Meta:
 		db_table = 'BloqueProducido'
+	
+	def save(self, *args, **kwargs):
+		# no_de_bloque
+		bloques_en_corrida = BloqueProducido.objects.filter(elemento_corrida__corrida_id = self.elemento_corrida.corrida_id).count()
+		self.no_de_bloque = bloques_en_corrida + 1
+		
+		# lote
+		meses = {"1":"L", "2":"U", "3":"I", "4":"S", "5":"V", "6":"G", "7":"A", "8":"R", "9":"C", "10":"M", "11":"T", "12":"Z"}
+		
+		today = datetime.datetime.today()
+		letra = meses[str(today.month)]
+		year = str(today.year)[-2:]
+		tipo_de_espuma = self.elemento_corrida.bloqueMedidas.tipo_de_espuma
+		corrida = self.elemento_corrida.corrida
+		corridas_en_dia = BloqueProducido.objects.filter(created__date = today).distinct('elemento_corrida__corrida_id').count() 
+		if not corridas_en_dia:
+			corridas_en_dia = 1
+		
+		consecutivo_anual = Corrida.objects.filter(producto_terminado = True).filter( created__year = today.year).count() + 1
+		
+		# cifrado/(3dig cons anual)(1dig #corrida)/TDE/
+		self.lote = '{0}{1}{2}/{3:03d}{4}/{5}'.format(letra, today.day, year, consecutivo_anual, corridas_en_dia, tipo_de_espuma)
+		
+		# save
+		super().save(*args, **kwargs)
 
 	def volumen(self):
 		return round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
@@ -88,20 +114,6 @@ class BloqueProducido(models.Model):
 		volumen = float(self.volumen()) 
 		peso = float(self.peso_caliente)
 		return round((peso ) / (volumen),2)
-
-	def lote(self):
-		meses = {"1":"L", "2":"U", "3":"I", "4":"S", "5":"V", "6":"G", "7":"A", "8":"R", "9":"C", "10":"M", "11":"T", "12":"Z"}
-		created = self.created.date()
-		letra = meses[str(created.month)]
-		tipo_de_espuma = self.elemento_corrida.bloqueMedidas.tipo_de_espuma
-		corrida = self.elemento_corrida.corrida
-		year = str(created.year)[-2:]
-		consecutivo_anual = Corrida.objects.filter(producto_terminado = True).filter( created__year = datetime.datetime.today().year).count()
-		
-		# cifrado/(3dig cons anual)(1dig #corrida)/TDE/
-		lote = '{0}{1}{2}/{3}/{4}-{5:03d}'.format(letra, created.day, year, corrida, tipo_de_espuma,consecutivo_anual)
-		return lote
-		
 
 	def __str__(self):
 		return 'Alto: {0} | Peso: {1} | F.Aire: {2}  '   .format(self.alto_caliente, self.peso_caliente,self.flujo_de_aire_caliente)

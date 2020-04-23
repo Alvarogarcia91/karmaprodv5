@@ -8,6 +8,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.db.models import Max, Count 
+import datetime
 
 
 #from django.core.mail import EmailMessage
@@ -127,6 +128,8 @@ def producir_corrida(request, corrida_id):
 	return redirect('corrida:producir_bloques',corrida_id )
 
 def producir_bloques(request, corrida_id, elementoCorrida_id=None):
+	bloques_corridas = BloqueProducido.objects.filter(created__date = datetime.datetime.today()).distinct('elemento_corrida__corrida_id')
+	print(bloques_corridas)
 	elementos = ElementoCorrida.objects.filter(corrida = corrida_id)
 	inicio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Inicio')[0].id
 	cambio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Cambio')[0].id
@@ -155,7 +158,6 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		'tipos_defectos':defectos,
 		'opciones':opciones,
 		'bloquesProducidosCount':bloquesProducidosCount,
-
     }
 	
 	return render(request, 'ordenes/produccion.html',context) 
@@ -167,17 +169,10 @@ def producir_bloque_seleccionado (request):
 		print(request.POST)
 		print(request.POST.get('revision_calidad'))
 		elemento_corrida = ElementoCorrida.objects.get(id=request.POST.get('elemento_corrida'))
-
 		bloque_producido = BloqueProducido()
 		bloques_producidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = elemento_corrida.corrida_id)
-		if bloques_producidos:
-			num_max = bloques_producidos.aggregate(Max('no_de_bloque')) 
-			print(num_max)
-			bloque_producido.no_de_bloque = num_max['no_de_bloque__max'] + 1
-		else:
-			bloque_producido.no_de_bloque = 1
-
 		bloque_producido.elemento_corrida_id = request.POST.get('elemento_corrida')
+
 		if 	request.POST.get('revision_calidad'):   
 			bloque_producido.revision_calidad = request.POST.get('revision_calidad')
 		else:
@@ -190,8 +185,6 @@ def producir_bloque_seleccionado (request):
 		bloque_producido.ancho_caliente = request.POST.get('ancho_caliente')
 		bloque_producido.flujo_de_aire_caliente = request.POST.get('flujo_de_aire_caliente')
 		bloque_producido.comentario = request.POST.get('comentario')
-		
-
 		
 
 		elemento_siguiente = elemento_corrida
@@ -338,7 +331,7 @@ def inventario(request):
 def dashboard_en_producion(request):
 
 
-	
+
 	corridas_en_produccion = Corrida.objects.filter(en_produccion=True)
 	corridas_en_produccion_list = []
 	
