@@ -114,11 +114,11 @@ class BloqueProducido(models.Model):
 		# save
 		super().save(*args, **kwargs)
 
-	def volumen_calculado(self):
+	def volumen(self):
 		return round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
 
-	def densidad_calculada(self):
-		volumen = float(self.volumen_calculado()) 
+	def densidad(self):
+		volumen = float(self.volumen()) 
 		peso = float(self.peso_caliente)
 		return round((peso ) / (volumen),2)
 
