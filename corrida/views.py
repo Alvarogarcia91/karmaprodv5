@@ -130,7 +130,8 @@ def producir_corrida(request, corrida_id):
 def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 	bloques_corridas = BloqueProducido.objects.filter(created__date = datetime.datetime.today()).distinct('elemento_corrida__corrida_id')
 	print(bloques_corridas)
-	elementos = ElementoCorrida.objects.filter(corrida = corrida_id)
+	elementos = ElementoCorrida.objects.filter(corrida = corrida_id).annotate(num_bloques = Count('bloqueproducido'))
+	print(elementos[0].num_bloques)
 	inicio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Inicio')[0].id
 	cambio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Cambio')[0].id
 	normal_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Normal')[0].id
@@ -348,9 +349,12 @@ def inventario(request):
 
 def dashboard_en_producion(request):
 
+	
 
+	
 
-	corridas_en_produccion = Corrida.objects.filter(en_produccion=True)
+	corridas_en_produccion = Corrida.objects.filter(en_produccion=True).annotate(num_bloques = Count('en_produccion'))
+	
 	corridas_en_produccion_list = []
 	
 	for corrida in corridas_en_produccion:
@@ -359,6 +363,7 @@ def dashboard_en_producion(request):
 	context ={
 	
 		'corridas_en_produccion': corridas_en_produccion_list,
+		
 	}
 	return render(request,'ordenes/dashboard_en_producion.html',context)
 
