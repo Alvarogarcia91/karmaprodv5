@@ -349,11 +349,8 @@ def inventario(request):
 
 def dashboard_en_producion(request):
 
-	
 
-	
-
-	corridas_en_produccion = Corrida.objects.filter(en_produccion=True).annotate(num_bloques = Count('en_produccion'))
+	corridas_en_produccion = Corrida.objects.filter(en_produccion = True).annotate(num_bloques = Count('en_produccion'))
 	
 	corridas_en_produccion_list = []
 	
@@ -366,6 +363,16 @@ def dashboard_en_producion(request):
 		
 	}
 	return render(request,'ordenes/dashboard_en_producion.html',context)
+
+
+
+def bloques_disponibles(request):
+	bloques_disponibles = BloqueProducido.objects.all()
+	context ={
+		'bloques_disponibles':bloques_disponibles,
+	}
+	return render(request,'bloques/bloques_disponibles.html',context)
+
 
 
 	
