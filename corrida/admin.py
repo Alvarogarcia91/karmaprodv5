@@ -11,6 +11,12 @@ class CorridaAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug':('name',)}
 admin.site.register(Corrida,CorridaAdmin)
 
+class LoteAdmin(admin.ModelAdmin):
+    list_display = ['created','no_de_lote','dureza_capturada','sag_factor_capturado','densidad_capturada','flujo_de_aire_astm_capturado','pruebas_realizadas','pruebas_pasadas']
+    list_editable = ['pruebas_realizadas','pruebas_pasadas']
+    # prepopulated_fields = {'slug':('name',)}
+admin.site.register(Lote,LoteAdmin)
+
 class ElementoCorridaAdmin(admin.ModelAdmin):
     list_display = ['created','bloqueMedidas','corrida','cantidad',]
     #list_editable = []
