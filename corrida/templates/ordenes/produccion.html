@@ -210,8 +210,9 @@
                             <th> Largo </th>
                             <th> Ancho </th>
                             <th> Alto </th>
+                            <th> F.Aire </th>
                             <th> Peso </th>
-                            <th> Unidad </th>
+                           
                             <th> OK </th>
                             <th> Observacion </th>
                             <th> Comentario </th>
@@ -227,17 +228,25 @@
                             <tr >
                                 <td>{{bloque.no_de_bloque}}  </td>
                                 <td>{{bloque.elemento_corrida.bloqueMedidas.tipo_de_espuma}}  </td>
-                                <td>{{bloque.largo_caliente}}  </td>
-                                <td>{{bloque.ancho_caliente}}  </td>
-                                <td>{{bloque.alto_caliente}}  </td>
+                                <td> <span class="badge badge-{{bloque.largo_caliente_color}} badge-pill"> {{bloque.largo_caliente}} </span>  </td>
+                                <td> <span class="badge badge-{{bloque.ancho_caliente_color}} badge-pill"> {{bloque.ancho_caliente}} </span> </td>
+                                <td> <span class="badge badge-{{bloque.alto_caliente_color}} badge-pill"> {{bloque.alto_caliente}} </span>    </td> 
+                                <td>{{bloque.flujo_de_aire_caliente}}  </td>
                                 <td>{{bloque.peso_caliente}}  </td>
-                                <td>{{bloque.elemento_corrida.bloqueMedidas.tipo_de_unidad}}  </td>
-                                <td>{{bloque.revision_calidad}}  </td>
+                                
+                                {% if bloque.revision_calidad == True %}
+                                    <td>   </td>
+                                {% else %}
+                                    <td> X </td>
+
+                                {%endif%}
                                 <td>{{bloque.get_defecto_display}}   </td>
                                 <td>{{bloque.comentario}}  </td>
                                 <td>{{bloque.volumen}}  </td>
-                                <td>{{bloque.densidad}}  </td>
+                                <td><span class="badge badge-{{bloque.densidad_color}} badge-pill"> {{bloque.densidad}}  </span></td>
+                                
                             </tr>
+
                             {% endfor %}
                         </tbody>
                     </table>    

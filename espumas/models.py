@@ -98,24 +98,24 @@ class BloqueMedidas(models.Model):
 
     
     largo_caliente_setting_predefinido = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    largo_caliente_maximo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    largo_caliente_minimo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    largo_caliente_parametro_alto = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    largo_caliente_parametro_bajo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
+    largo_caliente_maximo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    largo_caliente_minimo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    largo_caliente_parametro_alto = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    largo_caliente_parametro_bajo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
 
 
     ancho_caliente_setting_predefinido = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    ancho_caliente_maximo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    ancho_caliente_minimo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    ancho_caliente_parametro_alto = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    ancho_caliente_parametro_bajo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
+    ancho_caliente_maximo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    ancho_caliente_minimo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    ancho_caliente_parametro_alto = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    ancho_caliente_parametro_bajo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
     
 
     alto_caliente_setting_predefinido = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
-    alto_caliente_maximo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    alto_caliente_minimo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    alto_caliente_parametro_alto = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
-    alto_caliente_parametro_bajo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
+    alto_caliente_maximo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    alto_caliente_minimo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    alto_caliente_parametro_alto = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    alto_caliente_parametro_bajo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
 
    
     uso_objetivo  = models.CharField(max_length=200, blank=True,null=True)

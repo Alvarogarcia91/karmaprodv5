@@ -91,10 +91,10 @@ class BloqueProducido(models.Model):
 	elemento_corrida = models.ForeignKey(ElementoCorrida, on_delete = models.CASCADE)
 	revision_calidad = models.BooleanField(default=True)
 	defecto = models.CharField(max_length=2,choices=DEFECTOS_CHOICES, default='sd')
-	largo_caliente = models.DecimalField(max_digits=10, decimal_places=2)
-	ancho_caliente = models.DecimalField(max_digits=10, decimal_places=2)
-	alto_caliente = models.DecimalField(max_digits=10, decimal_places=2)
-	flujo_de_aire_caliente = models.DecimalField(max_digits=10, decimal_places=2)
+	largo_caliente = models.DecimalField(max_digits=10, decimal_places=2 ,null = True, default = 122,blank = True )
+	ancho_caliente = models.DecimalField(max_digits=10, decimal_places=2,null = True,default = 122 ,blank = True)
+	alto_caliente = models.DecimalField(max_digits=10, decimal_places=2,null = True , default = 122,blank = True )
+	flujo_de_aire_caliente = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True)
 	peso_caliente = models.DecimalField(max_digits=10, decimal_places=2)
 	comentario = models.CharField(max_length =300,blank = True,null=True)
 	volumen = models.DecimalField(max_digits=10, decimal_places=2,  blank= True, null = True)
@@ -135,13 +135,100 @@ class BloqueProducido(models.Model):
 		# save
 		super().save(*args, **kwargs)
 
-	# def volumen(self):
-	# 	return round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
+	def densidad_color(self):
+		tipo_de_espuma =  self.elemento_corrida.bloqueMedidas.tipo_de_espuma
+		maxima = tipo_de_espuma.densidad_objetivo_maxima
+		minima = tipo_de_espuma.densidad_objetivo_minima
+		alta = tipo_de_espuma.densidad_objetivo_alta
+		baja = tipo_de_espuma.densidad_objetivo_baja
+		amarillo = 'warning'
+		gris = 'secondary'
+		rojo = 'danger'
 
-	# def densidad(self):
-	# 	volumen = float(self.volumen()) 
-	# 	peso = float(self.peso_caliente)
-	# 	return round((peso ) / (volumen),2)
+		if maxima and minima and alta and baja:
+			if self.densidad >= baja and self.densidad <= alta:
+				return gris 
+			if (self.densidad >= minima and self.densidad <= baja) or (self.densidad >= alta and self.densidad <= maxima):
+				return amarillo
+			if self.densidad <= minima or self.densidad >= maxima:
+				return rojo
+		else:
+			return gris
+		
+
+
+	def largo_caliente_color(self):
+		largo_caliente_setting_predefinido =  self.elemento_corrida.bloqueMedidas
+		maxima = largo_caliente_setting_predefinido.largo_caliente_maximo
+		minima = largo_caliente_setting_predefinido.largo_caliente_minimo
+		alta = largo_caliente_setting_predefinido.largo_caliente_parametro_alto
+		baja = largo_caliente_setting_predefinido.largo_caliente_parametro_bajo
+		amarillo = 'warning'
+		gris = 'secondary'
+		rojo = 'danger'
+	
+
+		if maxima and minima and alta and baja:
+			if self.largo_caliente >= baja and self.largo_caliente <= alta:
+				return gris 
+			if (self.largo_caliente >= minima and self.largo_caliente <= baja) or (self.largo_caliente >= alta and self.largo_caliente <= maxima):
+				return amarillo
+			if self.largo_caliente <= minima or self.largo_caliente >= maxima:
+				return rojo
+		else:
+			return gris
+
+	
+	def ancho_caliente_color(self):
+		ancho_caliente_setting_predefinido =  self.elemento_corrida.bloqueMedidas
+		maxima = ancho_caliente_setting_predefinido.ancho_caliente_maximo
+		minima = ancho_caliente_setting_predefinido.ancho_caliente_minimo
+		alta = ancho_caliente_setting_predefinido.ancho_caliente_parametro_alto
+		baja = ancho_caliente_setting_predefinido.ancho_caliente_parametro_bajo
+		amarillo = 'warning'
+		gris = 'secondary'
+		rojo = 'danger'
+	
+
+		if maxima and minima and alta and baja:
+			if self.ancho_caliente > baja and self.ancho_caliente < alta:
+				return gris 
+			if (self.ancho_caliente > minima and self.ancho_caliente < baja) or (self.ancho_caliente > alta and self.ancho_caliente < maxima):
+				return amarillo
+			if self.ancho_caliente < minima or self.ancho_caliente > maxima:
+				return rojo
+		else:
+			return gris
+
+
+	def alto_caliente_color(self):
+		alto_caliente_setting_predefinido =  self.elemento_corrida.bloqueMedidas
+		maxima = alto_caliente_setting_predefinido.alto_caliente_maximo
+		minima = alto_caliente_setting_predefinido.alto_caliente_minimo
+		alta = alto_caliente_setting_predefinido.alto_caliente_parametro_alto
+		baja = alto_caliente_setting_predefinido.alto_caliente_parametro_bajo
+		amarillo = 'warning'
+		gris = 'secondary'
+		rojo = 'danger'
+	
+
+		if maxima and minima and alta and baja:
+			if self.alto_caliente > baja and self.alto_caliente < alta:
+				return gris 
+			if (self.alto_caliente > minima and self.alto_caliente < baja) or (self.alto_caliente > alta and self.alto_caliente < maxima):
+				return amarillo
+			if self.alto_caliente < minima or self.alto_caliente > maxima:
+				return rojo
+		else:
+			return gris
+		
+	
+	def flujo_de_aire_caliente_color(self):
+		tipo_de_espuma =  self.elemento_corrida.bloqueMedidas.tipo_de_espuma
+	
+		
+
+
 
 	def __str__(self):
 		return 'Alto: {0} | Peso: {1} | F.Aire: {2}  '   .format(self.alto_caliente, self.peso_caliente,self.flujo_de_aire_caliente)
