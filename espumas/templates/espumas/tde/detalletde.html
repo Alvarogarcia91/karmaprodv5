@@ -19,15 +19,29 @@
             <th>Familia</th>
 
             <th>Disponible </th>
-
             
             <th>Densidad Descripcion </th>
-            <th>Densidad Objetivo_minima </th>
-            <th>Densidad Objetivo_maxima </th>
-            <th>Dureza Objetivo_minima </th>
-            <th>Dureza Objetivo_maxima </th>
-            <th>Flujo de aire minimo </th>
-            <th>Flujo de aire maximo </th>
+            <th>Densidad Tipo </th>
+            <th>Densidad Objetivo Maxima </th>
+            <th>Densidad Objetivo Minima </th>
+            <th>Densidad Objetivo Parametro Alto </th>
+            <th>Densidad Objetivo Parametro Bajo </th>
+
+            <th>Dureza Tipo </th>
+            <th>Dureza Objetivo Maxima </th>
+            <th>Dureza Objetivo Minima </th>
+            <th>Dureza Objetivo Parametro Alto </th>
+            <th>Dureza Objetivo Parametro Bajo </th>
+
+            <th>Flujo De Aire ASTM Maximo </th>
+            <th>Flujo De Aire ASTM Minimo </th>
+            <th>Flujo De Aire ASTM Parametro Alto </th>
+            <th>Flujo De Aire ASTM Parametro Bajo </th>
+
+            <th>Flujo De Aire Campo Maximo  </th>
+            <th>Flujo De Aire Campo Minimo  </th>
+            <th>Flujo De Aire Campo Parametro Alto  </th>
+            <th>Flujo De Aire Campo Parametro Bajo </th>
             
             <th>Retardante flama</th>
             <th>Anti bacterial</th>
@@ -58,16 +72,29 @@
         <td>{{ itemsFront.precio }}</td>
         <td>{{ itemsFront.familia }}</td>
         <td>{{ itemsFront.disponible }}</td>
-        
 
         <td>{{ itemsFront.densidad_descripcion }}</td>
-        <td>{{ itemsFront.densidad_objetivo_minima }}</td>
+        <td>{{ itemsFront.densidad_tipo }}</td>
         <td>{{ itemsFront.densidad_objetivo_maxima }}</td>
-        <td>{{ itemsFront.dureza_objetivo_minima }}</td>
+        <td>{{ itemsFront.densidad_objetivo_minima }}</td>
+        <td>{{ itemsFront.densidad_objetivo_alta }}</td>
+        <td>{{ itemsFront.densidad_objetivo_baja }}</td>
+       
+        <td>{{ itemsFront.dureza_tipo }}</td>
         <td>{{ itemsFront.dureza_objetivo_maxima }}</td>
-        <td>{{ itemsFront.id }}</td>
-        <td>{{ itemsFront.id }}</td>
+        <td>{{ itemsFront.dureza_objetivo_minima }}</td>
+        <td>{{ itemsFront.dureza_objetivo_alta }}</td>
+        <td>{{ itemsFront.dureza_objetivo_baja }}</td>
 
+        <td>{{ itemsFront.flujo_de_aire_astm_maximo }}</td>
+        <td>{{ itemsFront.flujo_de_aire_astm_minimo }}</td>
+        <td>{{ itemsFront.flujo_de_aire_astm_bajo }}</td>
+        <td>{{ itemsFront.flujo_de_aire_astm_alto }}</td>
+
+        <td>{{ itemsFront.flujo_de_aire_campo_maximo }}</td>
+        <td>{{ itemsFront.flujo_de_aire_campo_minimo }}</td>
+        <td>{{ itemsFront.flujo_de_aire_campo_bajo }}</td>
+        <td>{{ itemsFront.flujo_de_aire_campo_alto }}</td>
 
         <td>{{ itemsFront.retardante_flama }}</td>
         <td>{{ itemsFront.anti_bacterial }}</td>

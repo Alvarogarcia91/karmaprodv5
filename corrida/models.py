@@ -30,12 +30,13 @@ class Lote(models.Model):
 	created = models.DateTimeField(auto_now_add = True)
 	updated = models.DateTimeField(auto_now = True)
 	no_de_lote = models.CharField(max_length = 100)
-	dureza_capturada = models.DecimalField(max_digits = 10, decimal_places = 2)
-	sag_factor_capturado = models.DecimalField(max_digits = 10, decimal_places = 2)
-	densidad_capturada = models.DecimalField(max_digits = 10, decimal_places = 2)
-	flujo_de_aire_astm_capturado = models.DecimalField(max_digits = 10, decimal_places = 2)
+	dureza_capturada = models.DecimalField(max_digits = 10, decimal_places = 2, null = True)
+	sag_factor_capturado = models.DecimalField(max_digits = 10, decimal_places = 2, null = True)
+	densidad_capturada = models.DecimalField(max_digits = 10, decimal_places = 2, null = True)
+	flujo_de_aire_astm_capturado = models.DecimalField(max_digits = 10, decimal_places = 2, null = True )
 	pruebas_realizadas = models.BooleanField(default = False)
 	pruebas_pasadas = models.BooleanField(default = False)
+	
 
 
 	class Meta:

@@ -28,13 +28,13 @@ class Tipos_de_Espuma(models.Model):
    
     flujo_de_aire_astm_maximo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_astm_minimo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
-    flujo_de_aire_astm_bajo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_astm_alto = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
+    flujo_de_aire_astm_bajo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
 
     flujo_de_aire_campo_maximo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_campo_minimo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
-    flujo_de_aire_campo_bajo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_campo_alto = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
+    flujo_de_aire_campo_bajo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
 
 
     retardante_flama = models.CharField(max_length = 200, blank = True)
