@@ -51,7 +51,7 @@ class Lote(models.Model):
 class ElementoCorrida(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now = True)
-	lote = models.ForeignKey(Lote, on_delete=models.CASCADE)
+	lote = models.ForeignKey(Lote, on_delete=models.CASCADE, null= True)
 	bloqueMedidas = models.ForeignKey(BloqueMedidas, on_delete = models.CASCADE)
 	corrida = models.ForeignKey(Corrida, on_delete = models.CASCADE)
 	cantidad = models.IntegerField()
@@ -129,9 +129,12 @@ class BloqueProducido(models.Model):
 					no_de_lote = no_de_lote
 			)
 			lote.save()
+			elemento_corrida = self.elemento_corrida
+			elemento_corrida.lote_id = lote.id
+			elemento_corrida.save()
 
 		# volumen
-		volumen = round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
+		volumen = round((float(self.largo_caliente) * float(self.ancho_caliente) * float(self.alto_caliente))/(1000000),2)
 		self.volumen = volumen
 
 		# densidad
