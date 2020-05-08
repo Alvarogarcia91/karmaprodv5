@@ -174,7 +174,7 @@ def producir_bloque_seleccionado (request):
 		bloques_producidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = elemento_corrida.corrida_id)
 		bloque_producido.elemento_corrida_id = request.POST.get('elemento_corrida')
 
-		if 	request.POST.get('revision_calidad'):   
+		if 	request.POST.get('revision_calidad'):
 			bloque_producido.revision_calidad = request.POST.get('revision_calidad')
 		else:
 			bloque_producido.revision_calidad = False
@@ -348,26 +348,26 @@ def inventario(request):
 
 
 def dashboard_en_producion(request):
-
-
-	corridas_en_produccion = Corrida.objects.filter(en_produccion = True).annotate(num_bloques = Count('en_produccion'))
-	
+	corridas_en_produccion = Corrida.objects.filter(en_produccion = True)
 	corridas_en_produccion_list = []
-	
 	for corrida in corridas_en_produccion:
-		elementos = ElementoCorrida.objects.filter(corrida = corrida)
+		elementos = ElementoCorrida.objects.filter(corrida = corrida).annotate(num_bloques = Count('bloqueproducido'))
 		corridas_en_produccion_list.append(list(elementos))
 	context ={
 		'corridas_en_produccion': corridas_en_produccion_list,
 	}
 	return render(request,'ordenes/dashboard_en_producion.html',context)
 
-def lotes_pendientes(request):
+def lotes(request):
 	lotes_pendientes = Lote.objects.filter(pruebas_realizadas = False)
+	lotes_aprobados = Lote.objects.filter(pruebas_pasadas = True)
+	lotes_rechazados = Lote.objects.filter(pruebas_pasadas = False).filter(pruebas_realizadas = True)
 	context = {
 		'lotes_pendientes': lotes_pendientes,
+		'lotes_aprobados': lotes_aprobados,
+		'lotes_rechazados': lotes_rechazados,
 	}
-	return render(request,'ordenes/lotes_pendientes.html', context)
+	return render(request,'ordenes/lotes.html', context)
 
 def aprobar_lote(request, lote_id):
 	lote = Lote.objects.get(id=lote_id)
@@ -376,10 +376,14 @@ def aprobar_lote(request, lote_id):
 	lote.densidad_capturada = request.POST.get('densidad_capturada')
 	lote.flujo_de_aire_astm_capturado = request.POST.get('flujo_de_aire_astm_capturado')
 	lote.pruebas_pasadas = request.POST.get('pruebas_pasadas')
+	if 	request.POST.get('pruebas_pasadas'):
+		lote.pruebas_pasadas = True
+	else:
+		lote.pruebas_pasadas = False
 	if lote.dureza_capturada and lote.sag_factor_capturado and lote.densidad_capturada and lote.flujo_de_aire_astm_capturado:
 		lote.pruebas_realizadas = True
 	lote.save()
-	return redirect('corrida:lotes_pendientes')
+	return redirect('corrida:lotes')
 
 def bloques_disponibles(request):
 	bloques_disponibles = BloqueProducido.objects.all()

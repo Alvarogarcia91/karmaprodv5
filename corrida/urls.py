@@ -30,7 +30,7 @@ urlpatterns = [
 
     path('inventario/', views.inventario, name='inventario'),
 
-    path('lotes_pendientes/', views.lotes_pendientes, name='lotes_pendientes'),
+    path('lotes/', views.lotes, name='lotes'),
 
     path('aprobar_lote/<int:lote_id>/', views.aprobar_lote, name='aprobar_lote'),
 
