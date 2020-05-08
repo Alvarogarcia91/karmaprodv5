@@ -30,6 +30,10 @@ urlpatterns = [
 
     path('inventario/', views.inventario, name='inventario'),
 
+    path('lotes_pendientes/', views.lotes_pendientes, name='lotes_pendientes'),
+
+    path('aprobar_lote/<int:lote_id>/', views.aprobar_lote, name='aprobar_lote'),
+
     path('dashboard/', views.dashboard_en_producion, name='dashboard'),
 
     path('bloques_disponibles/', views.bloques_disponibles, name='bloques_disponibles'),
