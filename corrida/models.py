@@ -109,20 +109,26 @@ class BloqueProducido(models.Model):
 		bloques_en_corrida = BloqueProducido.objects.filter(elemento_corrida__corrida_id = self.elemento_corrida.corrida_id).count()
 		self.no_de_bloque = bloques_en_corrida + 1
 		
-		# # lote
-		# meses = {"1":"L", "2":"U", "3":"I", "4":"S", "5":"V", "6":"G", "7":"A", "8":"R", "9":"C", "10":"M", "11":"T", "12":"Z"}
-		# today = datetime.datetime.today()
-		# letra = meses[str(today.month)]
-		# year = str(today.year)[-2:]
-		# tipo_de_espuma = self.elemento_corrida.bloqueMedidas.tipo_de_espuma
-		# corrida = self.elemento_corrida.corrida
-		# corridas_en_dia = BloqueProducido.objects.filter(created__date = today).distinct('elemento_corrida__corrida_id').count() 
-		# if not corridas_en_dia:
-		# 	corridas_en_dia = 1
-		# consecutivo_anual = Corrida.objects.filter(producto_terminado = True).filter( created__year = today.year).count() + 1
-		# # cifrado/(3dig cons anual)(1dig #corrida)/TDE/
-		# self.lote = '{0}{1}{2}/{3:03d}{4}/{5}'.format(letra, today.day, year, consecutivo_anual, corridas_en_dia, tipo_de_espuma)
-		
+		# lote
+		bloques_en_elemento_corrida = BloqueProducido.objects.filter(elemento_corrida_id = self.elemento_corrida.id).count()
+		if bloques_en_elemento_corrida == 0:
+			meses = {"1":"L", "2":"U", "3":"I", "4":"S", "5":"V", "6":"G", "7":"A", "8":"R", "9":"C", "10":"M", "11":"T", "12":"Z"}
+			today = datetime.datetime.today()
+			letra = meses[str(today.month)]
+			year = str(today.year)[-2:]
+			tipo_de_espuma = self.elemento_corrida.bloqueMedidas.tipo_de_espuma
+			corrida = self.elemento_corrida.corrida
+			corridas_en_dia = BloqueProducido.objects.filter(created__date = today).distinct('elemento_corrida__corrida_id').count() 
+			if not corridas_en_dia:
+				corridas_en_dia = 1
+			consecutivo_anual = Corrida.objects.filter(producto_terminado = True).filter( created__year = today.year).count() + 1
+			# cifrado/(3dig cons anual)(1dig #corrida)/TDE/
+			no_de_lote = '{0}{1}{2}/{3:03d}{4}/{5}'.format(letra, today.day, year, consecutivo_anual, corridas_en_dia, tipo_de_espuma)
+			lote = Lote.objects.create(
+					no_de_lote = no_de_lote
+			)
+			lote.save()
+
 		# volumen
 		volumen = round((self.alto_caliente * self.elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido * self.elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido)/1000000,2)
 		self.volumen = volumen

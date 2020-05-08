@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from espumas.models import *
-from .models import ElementoCorrida, Corrida, BloqueMedidas, BloqueProducido
+from .models import ElementoCorrida, Corrida, BloqueMedidas, BloqueProducido, Lote
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.template.loader import get_template
@@ -358,13 +358,28 @@ def dashboard_en_producion(request):
 		elementos = ElementoCorrida.objects.filter(corrida = corrida)
 		corridas_en_produccion_list.append(list(elementos))
 	context ={
-	
 		'corridas_en_produccion': corridas_en_produccion_list,
-		
 	}
 	return render(request,'ordenes/dashboard_en_producion.html',context)
 
+def lotes_pendientes(request):
+	lotes_pendientes = Lote.objects.filter(pruebas_realizadas = False)
+	context = {
+		'lotes_pendientes': lotes_pendientes,
+	}
+	return render(request,'ordenes/lotes_pendientes.html', context)
 
+def aprobar_lote(request, lote_id):
+	lote = Lote.objects.get(id=lote_id)
+	lote.dureza_capturada = request.POST.get('dureza_capturada')
+	lote.sag_factor_capturado = request.POST.get('sag_factor_capturado')
+	lote.densidad_capturada = request.POST.get('densidad_capturada')
+	lote.flujo_de_aire_astm_capturado = request.POST.get('flujo_de_aire_astm_capturado')
+	lote.pruebas_pasadas = request.POST.get('pruebas_pasadas')
+	if lote.dureza_capturada and lote.sag_factor_capturado and lote.densidad_capturada and lote.flujo_de_aire_astm_capturado:
+		lote.pruebas_realizadas = True
+	lote.save()
+	return redirect('corrida:lotes_pendientes')
 
 def bloques_disponibles(request):
 	bloques_disponibles = BloqueProducido.objects.all()
