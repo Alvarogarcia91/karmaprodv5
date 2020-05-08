@@ -6,7 +6,7 @@
 <div class="container">
         <div class="row">
             <div class="col-6 offset-3 ">
-                    <h1 class="text-center my_title text-primary" ><b>  Inventario </h1>  </b>
+                    <h1 class="text-center my_title text-large text-primary" > <b>  Inventario </h1>  </b>
 <br>
             </div>
         </div>
@@ -16,13 +16,15 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6 offset-3 ">
+        <div class="col-8 offset-2 ">
 
     
 
     {% for tipo_con_medidas in tipos_con_medidas %} 
 <br>
-    <h3 class="text-center my_title text-secondary">Bloques disponibles para el TDE: <span class="badge badge-primary badge-pill">{{tipo_con_medidas.tipo_de_espuma}} </span> </h3>
+    <h3 class="text-center my_title text-info">Bloques disponibles para el TDE: <span class="badge badge-primary badge-pill">{{tipo_con_medidas.tipo_de_espuma}} </span> </h3>
+   
+<br>
     <table class="table table-striped table-sm" style="padding: 5rem">
             <thead>
             <tr>

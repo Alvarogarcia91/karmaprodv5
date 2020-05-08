@@ -50,6 +50,7 @@ $(document).ready(function() {
             <tr>
                 <th>Descripcion</th>
                 <th>Tipo de Espuma</th>
+                <th>No.Bloque</th>
                 <th>Lote</th>
                 <th>Largo</th>
                 <th>Ancho</th>
@@ -63,7 +64,8 @@ $(document).ready(function() {
             <tr>
                 <td>{{bloques.elemento_corrida.bloqueMedidas}} </td>
                 <td > <b> {{bloques.elemento_corrida.bloqueMedidas.tipo_de_espuma}} </b></td>
-                <td>{{bloques.id}} </td>
+                <td>{{bloques.no_de_bloque}} </td>
+                <td>{{bloques.elemento_corrida.lote.no_de_lote}} </td>
                 <td>{{bloques.largo_caliente}} </td>
                 <td>{{bloques.ancho_caliente}} </td>
                 <td>{{bloques.alto_caliente}} </td>
