@@ -49,8 +49,8 @@ class tdeForm(forms.ModelForm):
     class Meta:
         model = Tipos_de_Espuma
         fields = ['tipo_de_espuma','formulacion_o_clave','multiplicador','precio','familia',
-        'densidad_descripcion','densidad_tipo','densidad_objetivo_maxima','densidad_objetivo_minima','densidad_objetivo_alta','densidad_objetivo_baja',
-        'dureza_tipo','dureza_objetivo_maxima','dureza_objetivo_minima','dureza_objetivo_alta','dureza_objetivo_baja',
+        'densidad_descripcion','densidad_objetivo','densidad_objetivo_maxima','densidad_objetivo_minima','densidad_objetivo_alta','densidad_objetivo_baja',
+        'dureza_objetivo','dureza_objetivo_maxima','dureza_objetivo_minima','dureza_objetivo_alta','dureza_objetivo_baja',
         'flujo_de_aire_astm_maximo','flujo_de_aire_astm_minimo','flujo_de_aire_astm_alto','flujo_de_aire_astm_bajo',
         'flujo_de_aire_campo_maximo','flujo_de_aire_campo_minimo','flujo_de_aire_campo_alto','flujo_de_aire_campo_bajo',
         'retardante_flama','anti_bacterial','anti_estatica','color','elongacion','histasis','sag_factor','disponible']
@@ -62,13 +62,13 @@ class tdeForm(forms.ModelForm):
             'familia': forms.NumberInput(attrs={'class': 'form-control'}),
             
             'densidad_descripcion': forms.TextInput(attrs={'class': 'form-control'}),
-            'densidad_tipo' : forms.TextInput(attrs={'class': 'form-control'}),
+            'densidad_objetivo' : forms.TextInput(attrs={'class': 'form-control'}),
             'densidad_objetivo_maxima': forms.NumberInput(attrs={'class': 'form-control'}),
             'densidad_objetivo_minima': forms.NumberInput(attrs={'class': 'form-control'}),
             'densidad_objetivo_alta': forms.TextInput(attrs={'class': 'form-control'}),
             'densidad_objetivo_baja': forms.TextInput(attrs={'class': 'form-control'}),
 
-            'dureza_tipo' : forms.NumberInput(attrs={'class': 'form-control'}),
+            'dureza_objetivo' : forms.NumberInput(attrs={'class': 'form-control'}),
             'dureza_objetivo_maxima': forms.NumberInput(attrs={'class': 'form-control'}),
             'dureza_objetivo_minima': forms.NumberInput(attrs={'class': 'form-control'}),
             'dureza_objetivo_alta' : forms.NumberInput(attrs={'class': 'form-control'}),   

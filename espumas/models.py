@@ -12,7 +12,7 @@ class Tipos_de_Espuma(models.Model):
 
     disponible = models.BooleanField(default = True)
 
-    densidad_tipo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
+    densidad_objetivo = models.DecimalField(max_digits=10, decimal_places=2,blank = True, null=True)
 
     densidad_descripcion = models.CharField(max_length = 200,blank = True)
     densidad_objetivo_maxima = models.DecimalField(max_digits = 10, decimal_places = 2, blank = True, null=True)
@@ -20,17 +20,19 @@ class Tipos_de_Espuma(models.Model):
     densidad_objetivo_alta = models.DecimalField(max_digits = 10, decimal_places = 2, blank = True, null=True)
     densidad_objetivo_baja = models.DecimalField(max_digits = 10, decimal_places = 2, blank = True, null=True)
 
-    dureza_tipo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null=True)
+    dureza_objetivo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null=True)
     dureza_objetivo_maxima = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True)
     dureza_objetivo_minima = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True)
     dureza_objetivo_alta = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True)
     dureza_objetivo_baja = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True)
    
+    flujo_de_aire_astm_objetivo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_astm_maximo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_astm_minimo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_astm_alto = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_astm_bajo = models.DecimalField(max_digits = 10, decimal_places = 2,blank = True, null = True) 
 
+    flujo_de_aire_campo_objetivo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_campo_maximo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_campo_minimo = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 
     flujo_de_aire_campo_alto = models.DecimalField(max_digits=10, decimal_places = 2,blank = True, null = True) 

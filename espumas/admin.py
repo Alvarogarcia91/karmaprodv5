@@ -4,14 +4,14 @@ from .models import *
 
 class TiposDeEspumaAdmin(admin.ModelAdmin):
     list_display = ['tipo_de_espuma','formulacion_o_clave','multiplicador','precio','familia','disponible',
-    'densidad_tipo','densidad_descripcion','densidad_objetivo_maxima','densidad_objetivo_minima','densidad_objetivo_alta','densidad_objetivo_baja',
-    'dureza_tipo','densidad_objetivo_maxima','dureza_objetivo_minima','dureza_objetivo_alta','dureza_objetivo_baja',
+    'densidad_objetivo','densidad_descripcion','densidad_objetivo_maxima','densidad_objetivo_minima','densidad_objetivo_alta','densidad_objetivo_baja',
+    'dureza_objetivo','densidad_objetivo_maxima','dureza_objetivo_minima','dureza_objetivo_alta','dureza_objetivo_baja',
     'flujo_de_aire_astm_maximo','flujo_de_aire_astm_minimo','flujo_de_aire_astm_bajo','flujo_de_aire_astm_alto',
     'flujo_de_aire_campo_maximo','flujo_de_aire_campo_minimo','flujo_de_aire_campo_bajo','flujo_de_aire_campo_alto',
     'retardante_flama','anti_bacterial','anti_estatica','color','elongacion','histasis','sag_factor','extra1','extra2',]
     list_editable = ['formulacion_o_clave','multiplicador','precio','familia','disponible',
-    'densidad_tipo','densidad_descripcion','densidad_objetivo_maxima','densidad_objetivo_minima','densidad_objetivo_alta','densidad_objetivo_baja',
-    'dureza_tipo','densidad_objetivo_maxima','dureza_objetivo_minima','dureza_objetivo_alta','dureza_objetivo_baja',
+    'densidad_objetivo','densidad_descripcion','densidad_objetivo_maxima','densidad_objetivo_minima','densidad_objetivo_alta','densidad_objetivo_baja',
+    'dureza_objetivo','densidad_objetivo_maxima','dureza_objetivo_minima','dureza_objetivo_alta','dureza_objetivo_baja',
     'flujo_de_aire_astm_maximo','flujo_de_aire_astm_minimo','flujo_de_aire_astm_bajo','flujo_de_aire_astm_alto',
     'flujo_de_aire_campo_maximo','flujo_de_aire_campo_minimo','flujo_de_aire_campo_bajo','flujo_de_aire_campo_alto',
     'retardante_flama','anti_bacterial','anti_estatica','color','elongacion','histasis','sag_factor','extra1','extra2',]
