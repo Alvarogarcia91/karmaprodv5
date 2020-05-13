@@ -3,18 +3,18 @@
 
 
 
-<h1>Lotes Pendientes</h1>
+<h1 class="text-left  text-info" >Lotes Pendientes</h1>
 <br>
 <table class="table table-sm" >
     <thead>
         <tr>
-            <th> No. de Lote</th>
-            <th> Dureza </th>
-            <th> SAG Factor</th>
-            <th> Densidad </th>
-            <th> Flujo de aire </th>
-            <th> Aprobar </th>
-            <th></th>
+            <th class="text-center" > No. de Lote</th>
+            <th class="text-center" > Dureza </th>
+            <th class="text-center" > SAG Factor</th>
+            <th class="text-center" > Densidad </th>
+            <th class="text-center" > Flujo de aire </th>
+            <th class="text-center" > Aprobar </th>
+            <th class="text-center" ></th>
         </tr>
     </thead>
     <tbody>
@@ -22,25 +22,25 @@
             <form action="{% url 'corrida:aprobar_lote' lote.id %}" method="POST">
             {% csrf_token %}
             <tr>
-                <td>
+                <td class="text-center" >
                     {{lote.no_de_lote}}
                 </td>
-                <td>
+                <td class="text-center" >
                     <input type="text"  size="5" id="dureza_capturada" name="dureza_capturada" value="{{ lote.dureza_capturada }}">
                 </td>
-                <td>
+                <td class="text-center" >
                     <input type="text"  size="5" id="sag_factor_capturado" name="sag_factor_capturado" value="{{ lote.sag_factor_capturado }}">
                 </td>
-                <td>
+                <td class="text-center" >
                     <input type="text"  size="5" id="densidad_capturada" name="densidad_capturada" value="{{ lote.densidad_capturada }}">
                 </td>
-                <td>
+                <td class="text-center" >
                     <input type="text"  size="5" id="flujo_de_aire_astm_capturado" name="flujo_de_aire_astm_capturado" value="{{ lote.flujo_de_aire_astm_capturado }}">
                 </td>
-                <td>
+                <td class="text-center" >
                     <input class="form-check-input" type="checkbox" name="pruebas_pasadas" checked id="pruebas_pasadas" value="{{lote.pruebas_pasadas}}">
                 </td>
-                <td>
+                <td class="text-center" >
                     <input type="submit" class="btn btn-success" role="button" value="Guardar Cambios">
                 </td>
             </tr>
@@ -50,17 +50,17 @@
 </table>
 <hr class="style4">
 <br>
-<h1>Lotes Aprobados</h1>
+<h1 class="text-left  text-info" >Lotes Aprobados</h1>
 <br>
 <table class="table table-sm" >
     <thead>
         <tr>
-            <th> No. de Lote</th>
-            <th> Dureza </th>
-            <th> SAG Factor</th>
-            <th> Densidad </th>
-            <th> Flujo de aire </th>
-            <th></th>
+            <th class="text-center" > No. de Lote</th>
+            <th class="text-center" > Dureza </th>
+            <th class="text-center" > SAG Factor</th>
+            <th class="text-center" > Densidad </th>
+            <th class="text-center" > Flujo de aire </th>
+            <th class="text-center" ></th>
         </tr>
     </thead>
     <tbody>
@@ -68,27 +68,27 @@
             <form action="{% url 'corrida:aprobar_lote' lote.id %}" method="POST">
             {% csrf_token %}
             <tr>
-                <td>{{lote.no_de_lote}}</td>
-                <td>{{lote.dureza_capturada}}</td>
-                <td>{{lote.sag_factor_capturado}}</td>
-                <td>{{lote.densidad_capturada}}</td>
-                <td>{{lote.flujo_de_aire_astm_capturado}}</td>
+                <td class="text-center" >{{lote.no_de_lote}}</td>
+                <td class="text-center" >{{lote.dureza_capturada}}</td>
+                <td class="text-center" >{{lote.sag_factor_capturado}}</td>
+                <td class="text-center" >{{lote.densidad_capturada}}</td>
+                <td class="text-center" >{{lote.flujo_de_aire_astm_capturado}}</td>
             </tr>
             </form>
         {% endfor %}
     </tbody>
 </table>
-<h1>Lotes Rechazados</h1>
+<h1 class="text-left  text-info" > Lotes Rechazados</h1>
 <br>
 <table class="table table-sm" >
     <thead>
         <tr>
-            <th> No. de Lote</th>
-            <th> Dureza </th>
-            <th> SAG Factor</th>
-            <th> Densidad </th>
-            <th> Flujo de aire </th>
-            <th></th>
+            <th class="text-center" > No. de Lote</th>
+            <th class="text-center" > Dureza </th>
+            <th class="text-center" > SAG Factor</th>
+            <th class="text-center" > Densidad </th>
+            <th class="text-center" > Flujo de aire </th>
+            <th class="text-center" ></th>
         </tr>
     </thead>
     <tbody>
@@ -96,11 +96,11 @@
             <form action="{% url 'corrida:aprobar_lote' lote.id %}" method="POST">
             {% csrf_token %}
             <tr>
-                <td>{{lote.no_de_lote}}</td>
-                <td>{{lote.dureza_capturada}}</td>
-                <td>{{lote.sag_factor_capturado}}</td>
-                <td>{{lote.densidad_capturada}}</td>
-                <td>{{lote.flujo_de_aire_astm_capturado}}</td>
+                <td class="text-center" >{{lote.no_de_lote}}</td>
+                <td class="text-center" >{{lote.dureza_capturada}}</td>
+                <td class="text-center" >{{lote.sag_factor_capturado}}</td>
+                <td class="text-center" >{{lote.densidad_capturada}}</td>
+                <td class="text-center" >{{lote.flujo_de_aire_astm_capturado}}</td>
             </tr>
             </form>
         {% endfor %}

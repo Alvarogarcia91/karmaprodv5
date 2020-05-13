@@ -5,48 +5,41 @@
 
 <br>
 <hr class="style1">
-<h1>Ordenes</h1>
+<h1 class="text-info">Ordenes</h1>
     {% for corrida in corridasFront %}
     <table class="table table-hover" >
         <thead>
             <tr>
-            <th> No.Orden</th>
-            <th> Tipo de espuma</th>
-            <th> Descripcion </th>
-            <th> Tipo de unidad </th>
-            <th> Forma </th>
-            <th> Cantidad </th>
-            <th> Remover </th>
+            <th class="text-center" > No.Orden</th>
+            <th class="text-center" > Tipo de espuma</th>
+            <th class="text-center" > Descripcion </th>
+            <th class="text-center" > Tipo de unidad </th>
+            <th class="text-center" > Forma </th>
+            <th class="text-center" > Cantidad </th>
+            
             </tr>
         </thead>
 
         <tbody>
-            <form action="{% url 'corrida:orden_de_corrida' %}" method="POST">
-            {% csrf_token %}
+            
             {% for elementoCorrida in corrida %}
 
             <tr>
-                <td>{{ elementoCorrida.corrida }}</td>
-                <td>{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
-                <td>{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
-                <td>{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
-                <td>{{ elementoCorrida.bloqueMedidas.forma }}</td>
-                <td>
-                    <input type="text" size="5" id="{{elementoCorrida.cantidad}}" name="cantidades" value="{{ elementoCorrida.cantidad }}">
-                    <input type="hidden" id ="{{elementoCorrida.id}}" name="elementoIds" value="{{elementoCorrida.id}}">
-                </td>
-                <td>
-                    <a class="btn btn-danger" href="{% url 'corrida:remover_elemento_ordenes' elementoCorrida.id %}" role="button"> Remover  </a>
-                </td>
+                <td class="text-center" >{{ elementoCorrida.corrida }}</td>
+                <td class="text-center" >{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
+                <td class="text-center" >{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
+                <td class="text-center" >{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
+                <td class="text-center" >{{ elementoCorrida.bloqueMedidas.forma }}</td>
+                <td class="text-center" >{{elementoCorrida.cantidad}}</td>
+                
             </tr>
             {% endfor %}
             <br>
             <hr class="style1">
         </tbody>
     </table>
-    <!-- este boton de summit truena  input type="submit" class="btn btn-warning" value="Producir Orden" -->
-    <a class="btn btn-success" href="#" role="button"> Producir Orden  </a>
-    </form>
+   
+    
     {% endfor %}
 
 
