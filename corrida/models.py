@@ -24,13 +24,22 @@ class Corrida(models.Model):
 		elementos = self.elementocorrida_set.all()
 		area_total = 0
 		for elemento in elementos:
-			largo = elemento.bloqueMedidas.largo_caliente_setting_predefinido or 0
-			ancho = elemento.bloqueMedidas.ancho_caliente_setting_predefinido or 0
-			area_bloque = (largo + 10) * (ancho + 10)
+			largo = float(elemento.bloqueMedidas.largo_caliente_setting_predefinido) or 0
+			ancho = float(elemento.bloqueMedidas.ancho_caliente_setting_predefinido)or 0
+			area_bloque = ((largo/100) + 0.1) * ((ancho/100) + 0.1)
 			area_elemento = area_bloque * elemento.cantidad
 			area_total = area_total + area_elemento
 		
-		return area_total
+		return round(area_total,2)
+
+	def area_de_curado(self):
+		elementos = self.elementocorrida_set.all()
+		area_total = 0
+		for elemento in elementos:
+			area_elemento = elemento.area_de_curado()
+			area_total = area_total + area_elemento
+		return round(area_total,2)
+
 
 	def total_de_bloques(self):
 		return ElementoCorrida.objects.filter(corrida = self).aggregate(Sum('cantidad'))
@@ -75,6 +84,17 @@ class ElementoCorrida(models.Model):
 
 	def sub_total(self):
 		return self.bloqueMedidas.price * self.cantidad
+
+	def area_de_curado(self):
+		bloques = self.bloqueproducido_set.all()
+		area_total = 0
+		bloques_count = bloques.count()
+		margen_lineal = bloques_count * 0.1
+		largo_total = float(bloques.aggregate(sum=Sum('largo_caliente'))['sum'] or 0)
+		ancho_total = float(bloques.aggregate(sum=Sum('ancho_caliente'))['sum'] or 0)
+		area_total = ((largo_total/100)+(margen_lineal)) *((ancho_total/100)+(margen_lineal))
+
+		return area_total
 
 	def metros_lineales_individuales(self):
 		return self.bloqueMedidas.largo_frio_objetivo * self.cantidad

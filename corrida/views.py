@@ -263,10 +263,11 @@ def corrida_producida(request,corrida_id):
 	resumen['metros_planeados'] = str(bloques_producidos.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum'])
 	resumen['densidad_promedio'] = bloques_producidos.aggregate(Avg('densidad'))['densidad__avg']
 	resumen['peso_producido'] = str(bloques_producidos.aggregate(Sum('peso_caliente'))['peso_caliente__sum'])
-	print(resumen)
+	corrida = Corrida.objects.get(id=corrida_id)
 	context ={
 		'bloques_producidos': bloques_producidos,
-		'resumen': resumen
+		'resumen': resumen,
+		'corrida': corrida,
 	}
 	return render(request ,'ordenes/corrida_producida.html' ,context )
 
