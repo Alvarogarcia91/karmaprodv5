@@ -101,18 +101,9 @@ def ordenes(request):
 def ordenes_pendientes(request):
 	corridas_pendientes = Corrida.objects.filter(pendiente_produccion= True)
 	corridas_en_produccion = Corrida.objects.filter(en_produccion=True)
-	corridas_pendientes_list = []
-	corridas_en_produccion_list = []
-	for corrida in corridas_pendientes:
-		elementos = ElementoCorrida.objects.filter(corrida = corrida)
-		corridas_pendientes_list.append(list(elementos))
-
-	for corrida in corridas_en_produccion:
-		elementos = ElementoCorrida.objects.filter(corrida = corrida)
-		corridas_en_produccion_list.append(list(elementos))
 	context ={
-		'corridas_pendientes': corridas_pendientes_list,
-		'corridas_en_produccion': corridas_en_produccion_list,
+		'corridas_pendientes': corridas_pendientes,
+		'corridas_en_produccion': corridas_en_produccion,
 	}
 	return render(request, 'ordenes/ordenes_pendientes.html', context)
 

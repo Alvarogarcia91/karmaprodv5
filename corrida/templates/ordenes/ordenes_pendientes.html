@@ -26,7 +26,7 @@
         <tbody>
             
            
-            {% for elementoCorrida in corrida %}
+            {% for elementoCorrida in corrida.elementocorrida_set.all %}
 
             <tr>
                 <td class="text-center" >{{ elementoCorrida.corrida }}</td>
@@ -34,11 +34,18 @@
                 <td class="text-center" >{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
                 <td class="text-center" >{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
                 <td class="text-center" >{{ elementoCorrida.bloqueMedidas.forma }}</td>
-                <td class="text-center" >{{elementoCorrida.cantidad}}</td>
+                <td class="text-center" >{{ elementoCorrida.cantidad }}</td>
                 
             </tr>
             {% endfor %}
-
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Area de curado estimada: </td>
+                <td>{{ corrida.area_de_curado_estimada }}</td>
+            </tr>
         </tbody>
     </table>
     
@@ -64,10 +71,9 @@
         </thead>
 
         <tbody>
-            {% with corrida_id=corrida.0.corrida_id %}
             <form action="{% url 'corrida:editar_cantidades_corrida' %}" method="POST">
               {% csrf_token %}
-            {% for elementoCorrida in corrida %}
+            {% for elementoCorrida in corrida.elementocorrida_set.all %}
 
             <tr>
                 <td class="text-center" >{{ elementoCorrida.corrida }}</td>
@@ -84,12 +90,19 @@
                 </td>
             </tr>
             {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Area de curado estimada: </td>
+                <td>{{ corrida.area_de_curado_estimada }}</td>
+            </tr>
         </tbody>
     </table>
     <!-- este boton de summit truena  input type="submit" class="btn btn-warning" value="Producir Orden" -->
-    <a class="btn btn-success" href="{%url 'corrida:producir_corrida' corrida_id %}" role="button"> Producir Orden  </a>
-    <a class="btn btn-info" href="{% url 'corrida:cancelar_corrida' corrida_id %}" role="button"> Cancelar  </a>
-    {% endwith %}
+    <a class="btn btn-success" href="{%url 'corrida:producir_corrida' corrida.id %}" role="button"> Producir Orden  </a>
+    <a class="btn btn-info" href="{% url 'corrida:cancelar_corrida' corrida.id %}" role="button"> Cancelar  </a>
     <input type="submit" class="btn btn-warning" value="Cambiar Cantidades">
     </form>
     <hr class="style4">

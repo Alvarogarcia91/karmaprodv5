@@ -20,6 +20,18 @@ class Corrida(models.Model):
 		db_table = 'Corrida'
 		ordering = ['-id']
 
+	def area_de_curado_estimada(self):
+		elementos = self.elementocorrida_set.all()
+		area_total = 0
+		for elemento in elementos:
+			largo = elemento.bloqueMedidas.largo_caliente_setting_predefinido or 0
+			ancho = elemento.bloqueMedidas.ancho_caliente_setting_predefinido or 0
+			area_bloque = (largo + 10) * (ancho + 10)
+			area_elemento = area_bloque * elemento.cantidad
+			area_total = area_total + area_elemento
+		
+		return area_total
+
 	def total_de_bloques(self):
 		return ElementoCorrida.objects.filter(corrida = self).aggregate(Sum('cantidad'))
 
