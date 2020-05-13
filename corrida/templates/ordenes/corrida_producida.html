@@ -60,8 +60,13 @@ Resumen de Orden </h2></b>
             <td class="text-center" >{{bloque_producido.alto_caliente}}</td>
             <td class="text-center" >{{bloque_producido.flujo_de_aire_caliente}}</td>
             <td class="text-center" >{{bloque_producido.peso_caliente}}</td>
-            <td class="text-center" >{{bloque_producido.revision_calidad}}</td>
-            <td class="text-center" >{{bloque_producido.get_defecto_display}}</td>
+            {% if bloque_producido.revision_calidad == True %}
+            <td>   </td>
+            {% else %}
+            <td class="text-center" > <font color="red"> X </font> </td>
+            {%endif%}
+            
+            <td class="text-center" > <b> {{bloque_producido.get_defecto_display}} </b> </td>
             <td class="text-center" >{{bloque_producido.volumen}}</td>
             <td class="text-center" >{{bloque_producido.densidad}}</td>
             <td class="text-center" >{{bloque_producido.comentario}}</td>
