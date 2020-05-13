@@ -226,9 +226,9 @@
                             <tr >
                                 <td>{{bloque.no_de_bloque}}  </td>
                                 <td>{{bloque.elemento_corrida.bloqueMedidas.tipo_de_espuma}}  </td>
-                                <td> <span class="badge badge-{{bloque.largo_caliente_color}} badge-pill"> {{bloque.largo_caliente}} </span>  </td>
-                                <td> <span class="badge badge-{{bloque.ancho_caliente_color}} badge-pill"> {{bloque.ancho_caliente}} </span> </td>
-                                <td> <span class="badge badge-{{bloque.alto_caliente_color}} badge-pill"> {{bloque.alto_caliente}} </span>    </td> 
+                                <td> <span class="{{bloque.largo_caliente_class}}"> {{bloque.largo_caliente}} </span>  </td>
+                                <td> <span class="{{bloque.ancho_caliente_class}}"> {{bloque.ancho_caliente}} </span> </td>
+                                <td> <span class="{{bloque.alto_caliente_class}}"> {{bloque.alto_caliente}} </span>    </td> 
                                 <td>{{bloque.flujo_de_aire_caliente}}  </td>
                                 <td>{{bloque.peso_caliente}}  </td>
                                 
@@ -240,8 +240,8 @@
                                 {%endif%}
                                 <td>{{bloque.get_defecto_display}}   </td>
                                 <td>{{bloque.comentario}}  </td>
-                                <td>{{bloque.volumen}}  </td>
-                                <td><span class="badge badge-{{bloque.densidad_color}} badge-pill"> {{bloque.densidad}}  </span></td>
+                                <td> <span class="">{{bloque.volumen}}</span>  </td>
+                                <td><span class="{{bloque.densidad_class}}"> {{bloque.densidad}}  </span></td>
                                 
                             </tr>
 

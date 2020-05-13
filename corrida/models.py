@@ -154,87 +154,95 @@ class BloqueProducido(models.Model):
 		amarillo = 'warning'
 		gris = 'secondary'
 		rojo = 'danger'
+		color_class = ''
 
 		if maxima and minima and alta and baja:
 			if self.densidad >= baja and self.densidad <= alta:
-				return gris 
+				color_class = ''
 			if (self.densidad >= minima and self.densidad <= baja) or (self.densidad >= alta and self.densidad <= maxima):
-				return amarillo
+				color = amarillo
+				color_class ='badge badge-{0} badge-pill'.format(color)
 			if self.densidad <= minima or self.densidad >= maxima:
-				return rojo
-		else:
-			return gris
+				color = rojo
+				color_class ='badge badge-{0} badge-pill'.format(color)
 		
+		return color_class
 
 
-	def largo_caliente_color(self):
-		largo_caliente_setting_predefinido =  self.elemento_corrida.bloqueMedidas
-		maxima = largo_caliente_setting_predefinido.largo_caliente_maximo
-		minima = largo_caliente_setting_predefinido.largo_caliente_minimo
-		alta = largo_caliente_setting_predefinido.largo_caliente_parametro_alto
-		baja = largo_caliente_setting_predefinido.largo_caliente_parametro_bajo
+	def largo_caliente_class(self):
+		bloqueMedidas =  self.elemento_corrida.bloqueMedidas
+		maxima = bloqueMedidas.largo_caliente_maximo
+		minima = bloqueMedidas.largo_caliente_minimo
+		alta = bloqueMedidas.largo_caliente_parametro_alto
+		baja = bloqueMedidas.largo_caliente_parametro_bajo
 		amarillo = 'warning'
 		gris = 'secondary'
 		rojo = 'danger'
+		color_class = ''
 	
-
 		if maxima and minima and alta and baja:
 			if self.largo_caliente >= baja and self.largo_caliente <= alta:
-				return gris 
+				color_class = ''
 			if (self.largo_caliente >= minima and self.largo_caliente <= baja) or (self.largo_caliente >= alta and self.largo_caliente <= maxima):
-				return amarillo
+				color = amarillo
+				color_class ='badge badge-{0} badge-pill'.format(color)
 			if self.largo_caliente <= minima or self.largo_caliente >= maxima:
-				return rojo
-		else:
-			return gris
+				color = rojo
+				color_class ='badge badge-{0} badge-pill'.format(color)
+		
+		return color_class
 
 	
-	def ancho_caliente_color(self):
-		ancho_caliente_setting_predefinido =  self.elemento_corrida.bloqueMedidas
-		maxima = ancho_caliente_setting_predefinido.ancho_caliente_maximo
-		minima = ancho_caliente_setting_predefinido.ancho_caliente_minimo
-		alta = ancho_caliente_setting_predefinido.ancho_caliente_parametro_alto
-		baja = ancho_caliente_setting_predefinido.ancho_caliente_parametro_bajo
+	def ancho_caliente_class(self):
+		bloqueMedidas =  self.elemento_corrida.bloqueMedidas
+		maxima = bloqueMedidas.ancho_caliente_maximo
+		minima = bloqueMedidas.ancho_caliente_minimo
+		alta = bloqueMedidas.ancho_caliente_parametro_alto
+		baja = bloqueMedidas.ancho_caliente_parametro_bajo
 		amarillo = 'warning'
 		gris = 'secondary'
 		rojo = 'danger'
-	
+		color_class = ''
 
 		if maxima and minima and alta and baja:
 			if self.ancho_caliente > baja and self.ancho_caliente < alta:
-				return gris 
+				color_class = ''
 			if (self.ancho_caliente > minima and self.ancho_caliente < baja) or (self.ancho_caliente > alta and self.ancho_caliente < maxima):
-				return amarillo
+				color = amarillo
+				color_class ='badge badge-{0} badge-pill'.format(color)
 			if self.ancho_caliente < minima or self.ancho_caliente > maxima:
-				return rojo
-		else:
-			return gris
+				color = rojo
+				color_class ='badge badge-{0} badge-pill'.format(color)
+
+		return color_class
 
 
-	def alto_caliente_color(self):
-		alto_caliente_setting_predefinido =  self.elemento_corrida.bloqueMedidas
-		maxima = alto_caliente_setting_predefinido.alto_caliente_maximo
-		minima = alto_caliente_setting_predefinido.alto_caliente_minimo
-		alta = alto_caliente_setting_predefinido.alto_caliente_parametro_alto
-		baja = alto_caliente_setting_predefinido.alto_caliente_parametro_bajo
+	def alto_caliente_class(self):
+		bloqueMedidas =  self.elemento_corrida.bloqueMedidas
+		maxima = bloqueMedidas.alto_caliente_maximo
+		minima = bloqueMedidas.alto_caliente_minimo
+		alta = bloqueMedidas.alto_caliente_parametro_alto
+		baja = bloqueMedidas.alto_caliente_parametro_bajo
 		amarillo = 'warning'
 		gris = 'secondary'
 		rojo = 'danger'
-	
+		color_class = ''
 
 		if maxima and minima and alta and baja:
 			if self.alto_caliente > baja and self.alto_caliente < alta:
-				return gris 
+				color_class = ''
 			if (self.alto_caliente > minima and self.alto_caliente < baja) or (self.alto_caliente > alta and self.alto_caliente < maxima):
-				return amarillo
+				color = amarillo
+				color_class ='badge badge-{0} badge-pill'.format(color)
 			if self.alto_caliente < minima or self.alto_caliente > maxima:
-				return rojo
-		else:
-			return gris
+				color = rojo
+				color_class ='badge badge-{0} badge-pill'.format(color)
 		
+		return color_class
+
 	
-	def flujo_de_aire_caliente_color(self):
-		tipo_de_espuma =  self.elemento_corrida.bloqueMedidas.tipo_de_espuma
+	def flujo_de_aire_caliente_class(self):
+		return 'warning'
 	
 		
 
