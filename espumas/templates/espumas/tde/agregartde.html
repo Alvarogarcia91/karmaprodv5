@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
 	
@@ -8,22 +9,39 @@
 <div class="container">
     <form method="POST">
         {% csrf_token %}
-        <div class="row">
-            {% for field in form %}
-            <div class="px-4">
-                <label>{{field.label_tag}}</label>
-                {{field}}
-            </div>
-            {% endfor %}
-        </div>
+        <h2 class="text-primary">Datos Generales: </h2>
         <br>
+        {% for field in form.informacion_general %}
+            {% if forloop.first %}<div class="row">{% endif %}
+                <div class="form-group col">
+                    {{ field.label_tag }}
+                    {% render_field field class="form-control" %}
+                    {% if field.help_text %}
+                      <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                  </div>
+            {% if forloop.counter|divisibleby:5 %}</div><div class="row">{% endif %}
+            {% if forloop.last %}</div>{% endif %}
+        {% endfor %}
+        <br>
+        <h2 class="text-primary">Parámetros: </h2>
+        <br>
+        {% for field in form.parametros %}
+            {% if forloop.first %}<div class="row">{% endif %}
+                <div class="col form-group">
+                    {{ field.label_tag }}
+                    {% render_field field class="form-control" %}
+                    {% if field.help_text %}
+                      <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                  </div>
+            {% if forloop.counter|divisibleby:5 %}</div><div class="row">{% endif %}
+            {% if forloop.last %}</div>{% endif %}
+        {% endfor %}
         <br>
         <button class="btn btn-success" type="submit"> Guardar</button>
         <a class="btn btn-primary" href="{% url 'espumas:tde' %}" role="button"> Regresar </a>
-        </div>
     </form>
-            
-    <br>
     <br>
 </div>
 {% endblock %}
