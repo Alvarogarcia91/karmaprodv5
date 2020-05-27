@@ -132,3 +132,9 @@ STATICFILES_DIRS = (
     )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'static','media')
+
+from django.forms import Field
+Field.default_error_messages = {
+    'required': "Este campo es obligatorio.",
+    'invalid': "El valor es inválido",
+}

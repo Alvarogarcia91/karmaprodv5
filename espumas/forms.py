@@ -2,6 +2,7 @@
 
 from django import forms
 from.models import *
+from django.utils.translation import gettext_lazy as _
 
 class medidasForm(forms.ModelForm):
 
@@ -33,6 +34,23 @@ class medidasForm(forms.ModelForm):
 
 class tdeForm(forms.ModelForm):
 
+    class Meta:
+        model = Tipos_de_Espuma
+        fields = [
+        'tipo_de_espuma','formulacion_o_clave','multiplicador','precio','familia',
+        'retardante_flama','anti_bacterial','anti_estatica','color','elongacion','histasis','sag_factor','disponible',
+        'densidad_descripcion',
+        'densidad_objetivo_minima','densidad_objetivo_baja','densidad_objetivo','densidad_objetivo_alta','densidad_objetivo_maxima',
+        'dureza_objetivo_minima','dureza_objetivo_baja','dureza_objetivo','dureza_objetivo_alta','dureza_objetivo_maxima',
+        'flujo_de_aire_astm_minimo','flujo_de_aire_astm_bajo','flujo_de_aire_astm_objetivo','flujo_de_aire_astm_alto','flujo_de_aire_astm_maximo',
+        'flujo_de_aire_campo_minimo','flujo_de_aire_campo_bajo','flujo_de_aire_campo_objetivo','flujo_de_aire_campo_alto','flujo_de_aire_campo_maximo',
+        ]
+        # error_messages = {
+        #     'tipo_de_espuma':{
+        #         'required':'este campo es requerido compa',
+        #     } 
+        # }
+
     def informacion_general(self):
         fields = self.visible_fields()
         return [field for field in fields if (field.name in [
@@ -50,14 +68,3 @@ class tdeForm(forms.ModelForm):
         'flujo_de_aire_campo_minimo','flujo_de_aire_campo_bajo','flujo_de_aire_campo_objetivo','flujo_de_aire_campo_alto','flujo_de_aire_campo_maximo',
         ])]
     
-    class Meta:
-        model = Tipos_de_Espuma
-        fields = [
-        'tipo_de_espuma','formulacion_o_clave','multiplicador','precio','familia',
-        'retardante_flama','anti_bacterial','anti_estatica','color','elongacion','histasis','sag_factor','disponible',
-        'densidad_descripcion',
-        'densidad_objetivo_minima','densidad_objetivo_baja','densidad_objetivo','densidad_objetivo_alta','densidad_objetivo_maxima',
-        'dureza_objetivo_minima','dureza_objetivo_baja','dureza_objetivo','dureza_objetivo_alta','dureza_objetivo_maxima',
-        'flujo_de_aire_astm_minimo','flujo_de_aire_astm_bajo','flujo_de_aire_astm_objetivo','flujo_de_aire_astm_alto','flujo_de_aire_astm_maximo',
-        'flujo_de_aire_campo_minimo','flujo_de_aire_campo_bajo','flujo_de_aire_campo_objetivo','flujo_de_aire_campo_alto','flujo_de_aire_campo_maximo',
-        ]
