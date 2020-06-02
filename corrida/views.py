@@ -258,15 +258,47 @@ def corrida_producida(request,corrida_id):
 	resumen['bloques_normales'] = bloques_producidos.filter(elemento_corrida__bloqueMedidas__tipo_de_unidad__tipo_de_unidad = "Normal").count()
 	resumen['bloques_ok'] = bloques_producidos.filter(revision_calidad = True).count()
 	resumen['bloques_ng'] = bloques_producidos.filter(revision_calidad = False).count()
-	resumen['metros_producidos'] = str(bloques_producidos.aggregate(Sum('largo_caliente'))['largo_caliente__sum'])
 	resumen['bloques_cambio'] = bloques_producidos.filter(elemento_corrida__bloqueMedidas__tipo_de_unidad__tipo_de_unidad = "Cambio").count()
 	resumen['metros_planeados'] = str(bloques_producidos.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum'])
+	resumen['metros_producidos'] = str(bloques_producidos.aggregate(Sum('largo_caliente'))['largo_caliente__sum'])
 	resumen['densidad_promedio'] = bloques_producidos.aggregate(Avg('densidad'))['densidad__avg']
 	resumen['peso_producido'] = str(bloques_producidos.aggregate(Sum('peso_caliente'))['peso_caliente__sum'])
 	corrida = Corrida.objects.get(id=corrida_id)
+	elementos_corrida = ElementoCorrida.objects.filter(corrida_id = corrida_id).filter(bloqueMedidas__tipo_de_unidad__tipo_de_unidad = "Normal")
+	resumenes_por_tde = []
+	for elemento in elementos_corrida:
+		bloques = elemento.bloqueproducido_set.all()
+		bloques_count = bloques.count()
+		if bloques_count:
+			ok_count = bloques.filter(revision_calidad = True).count()
+			bloques_ng = bloques.filter(revision_calidad = False)
+			ng_count = bloques_ng.count()
+			porcentaje_ng = (ng_count/bloques_count)*100
+			densidad_promedio = bloques.aggregate(Avg('densidad'))['densidad__avg']
+			metros_planeados = str(bloques.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum'])
+			metros_producidos = str(bloques.aggregate(Sum('largo_caliente'))['largo_caliente__sum'])
+			metros_ng = str(bloques_ng.aggregate(Sum('largo_caliente'))['largo_caliente__sum'] or 0)
+			peso_producido = str(bloques.aggregate(Sum('peso_caliente'))['peso_caliente__sum'])
+			
+			resumen_tde ={
+				"tde": elemento.bloqueMedidas.tipo_de_espuma.tipo_de_espuma,
+				"normales_count": bloques_count,
+				"ok_count": ok_count,
+				"ng_count" : ng_count,
+				"porcentaje_ng": porcentaje_ng,
+				"densidad_promedio": densidad_promedio,
+				"metros_planeados": metros_planeados,
+				"metros_producidos": metros_producidos,
+				"metros_ng": metros_ng,
+				"peso_produdido": peso_producido,
+				"area_de_curado": elemento.area_de_curado()
+			}
+			resumenes_por_tde.append(resumen_tde)
+
 	context ={
 		'bloques_producidos': bloques_producidos,
 		'resumen': resumen,
+		'resumenes_por_tde': resumenes_por_tde,
 		'corrida': corrida,
 	}
 	return render(request ,'ordenes/corrida_producida.html' ,context )

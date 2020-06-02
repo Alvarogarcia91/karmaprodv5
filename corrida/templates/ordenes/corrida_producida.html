@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2 class="text-primary" > <b>
-
-Resumen de Orden </h2></b> 
+<h1 class="text-primary">
+  <b>Resumen de Espumado</b>
+</h1> 
 
 <table class="table table-striped table-sm">
         <thead>
@@ -25,13 +25,52 @@ Resumen de Orden </h2></b>
             <td class="text-center">{{resumen.bloques_ok}}</td>
             <td class="text-center">{{resumen.bloques_ng}}</td>
             <td class="text-center">{{resumen.bloques_cambio}}</td>
-            <td class="text-center">{{resumen.densidad_promedio|floatformat:2 }}</td>
-            <td class="text-center">{{resumen.metros_planeados}}</td>
-            <td class="text-center">{{resumen.metros_producidos}}</td>
-            <td class="text-center">{{resumen.peso_producido}}</td>
+            <td class="text-center">{{resumen.densidad_promedio|floatformat:2 }} kg/m<sup>3</sup></td>
+            <td class="text-center">{{resumen.metros_planeados}} m</td>
+            <td class="text-center">{{resumen.metros_producidos}} m</td>
+            <td class="text-center">{{resumen.peso_producido}} kg</td>
             <td class="text-center">{{corrida.area_de_curado}} m<sup>2</sup></td>
           </tr>
+        </tbody>
+</table>
+<br>
 
+{% for resumen_tde in resumenes_por_tde %}
+  <h3 class="text-info">{{resumen_tde.tde}}</h3>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">Bloques normales</th>
+          <th class="text-center" scope="col">Bloques OK</th>
+          <th class="text-center" scope="col">Bloques NG</th>
+          <th class="text-center" scope="col">% de bloques NG</th>
+          <th class="text-center" scope="col">Densidad promedio</th>
+          <th class="text-center" scope="col">Metros planeados</th>
+          <th class="text-center" scope="col">Metros producidos</th>
+          <th class="text-center" scope="col">Metros NG</th>
+          <th class="text-center" scope="col">Peso producido</th>
+          <th class="text-center" scope="col">Area de Curado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center">{{resumen_tde.normales_count}}</td>
+          <td class="text-center">{{resumen_tde.ok_count}}</td>
+          <td class="text-center">{{resumen_tde.ng_count}}</td>
+          <td class="text-center">{{resumen_tde.porcentaje_ng|floatformat:2}} %</td>
+          <td class="text-center">{{resumen_tde.densidad_promedio|floatformat:2 }} kg/m<sup>3</sup> </td>
+          <td class="text-center">{{resumen_tde.metros_planeados}} m</td>
+          <td class="text-center">{{resumen_tde.metros_producidos}} m</td>
+          <td class="text-center">{{resumen_tde.metros_ng}}m</td>
+          <td class="text-center">{{resumen_tde.peso_produdido}} kg</td>
+          <td class="text-center">{{resumen_tde.area_de_curado|floatformat:2}} m<sup>2</sup></td>
+        </tr>
+      </tbody>
+    </table>
+{% endfor %}
+<h2 class="text-primary">
+  Bloques Producidos
+</h2>
 <table class="table table-striped table-sm">
         <thead>
           <tr>
@@ -45,10 +84,8 @@ Resumen de Orden </h2></b>
             <th class="text-center"> Peso </th>
             <th class="text-center"> OK </th>
             <th class="text-center"> Observacion </th>
-            <th class="text-center"> Volumen </th>
             <th class="text-center"> Densidad </th>
             <th class="text-center"> Comentario </th>
-            <th class="text-center"> Lote </th>
           </tr>
         </thead>
         <tbody>
@@ -57,22 +94,35 @@ Resumen de Orden </h2></b>
             <td class="text-center" >{{bloque_producido.no_de_bloque}}</td>
             <td class="text-center" >{{bloque_producido.elemento_corrida.bloqueMedidas.tipo_de_espuma}}</td>
             <td class="text-center" >{{bloque_producido.elemento_corrida.bloqueMedidas.tipo_de_unidad}}</td>
-            <td class="text-center" >{{bloque_producido.largo_caliente}}</td>
-            <td class="text-center" >{{bloque_producido.ancho_caliente}}</td>
-            <td class="text-center" >{{bloque_producido.alto_caliente}}</td>
+            <td class="text-center">
+              <span class="{{bloque_producido.largo_caliente_class}}">
+                {{bloque_producido.largo_caliente}}
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="{{bloque_producido.ancho_caliente_class}}">
+                {{bloque_producido.ancho_caliente}}
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="{{bloque_producido.alto_caliente_class}}">
+                {{bloque_producido.alto_caliente}}
+              </span>
+            </td>
             <td class="text-center" >{{bloque_producido.flujo_de_aire_caliente}}</td>
             <td class="text-center" >{{bloque_producido.peso_caliente}}</td>
             {% if bloque_producido.revision_calidad == True %}
-            <td>   </td>
+              <td>   </td>
             {% else %}
-            <td class="text-center" > <font color="red"> X </font> </td>
+              <td class="text-center" > <font color="red"> X </font> </td>
             {%endif%}
-            
             <td class="text-center" > <b> {{bloque_producido.get_defecto_display}} </b> </td>
-            <td class="text-center" >{{bloque_producido.volumen}}</td>
-            <td class="text-center" >{{bloque_producido.densidad}}</td>
+            <td class="text-center">
+              <span class="{{bloque_producido.densidad_class}}">
+                {{bloque_producido.densidad}}
+              </span>
+            </td>
             <td class="text-center" >{{bloque_producido.comentario}}</td>
-            <td class="text-center" >{{bloque_producido.elemento_corrida.lote.no_de_lote}}</td>
           </tr>
           
           {%endfor%} 

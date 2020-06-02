@@ -177,7 +177,7 @@ class BloqueProducido(models.Model):
 		# save
 		super().save(*args, **kwargs)
 
-	def densidad_color(self):
+	def densidad_class(self):
 		tipo_de_espuma =  self.elemento_corrida.bloqueMedidas.tipo_de_espuma
 		maxima = tipo_de_espuma.densidad_objetivo_maxima
 		minima = tipo_de_espuma.densidad_objetivo_minima
@@ -191,10 +191,10 @@ class BloqueProducido(models.Model):
 		if maxima and minima and alta and baja:
 			if self.densidad >= baja and self.densidad <= alta:
 				color_class = ''
-			if (self.densidad >= minima and self.densidad <= baja) or (self.densidad >= alta and self.densidad <= maxima):
+			if (self.densidad >= minima and self.densidad < baja) or (self.densidad > alta and self.densidad <= maxima):
 				color = amarillo
 				color_class ='badge badge-{0} badge-pill'.format(color)
-			if self.densidad <= minima or self.densidad >= maxima:
+			if self.densidad < minima or self.densidad > maxima:
 				color = rojo
 				color_class ='badge badge-{0} badge-pill'.format(color)
 		
@@ -215,10 +215,10 @@ class BloqueProducido(models.Model):
 		if maxima and minima and alta and baja:
 			if self.largo_caliente >= baja and self.largo_caliente <= alta:
 				color_class = ''
-			if (self.largo_caliente >= minima and self.largo_caliente <= baja) or (self.largo_caliente >= alta and self.largo_caliente <= maxima):
+			if (self.largo_caliente >= minima and self.largo_caliente < baja) or (self.largo_caliente > alta and self.largo_caliente <= maxima):
 				color = amarillo
 				color_class ='badge badge-{0} badge-pill'.format(color)
-			if self.largo_caliente <= minima or self.largo_caliente >= maxima:
+			if self.largo_caliente < minima or self.largo_caliente > maxima:
 				color = rojo
 				color_class ='badge badge-{0} badge-pill'.format(color)
 		
@@ -237,9 +237,9 @@ class BloqueProducido(models.Model):
 		color_class = ''
 
 		if maxima and minima and alta and baja:
-			if self.ancho_caliente > baja and self.ancho_caliente < alta:
+			if self.ancho_caliente >= baja and self.ancho_caliente <= alta:
 				color_class = ''
-			if (self.ancho_caliente > minima and self.ancho_caliente < baja) or (self.ancho_caliente > alta and self.ancho_caliente < maxima):
+			if (self.ancho_caliente >= minima and self.ancho_caliente < baja) or (self.ancho_caliente > alta and self.ancho_caliente <= maxima):
 				color = amarillo
 				color_class ='badge badge-{0} badge-pill'.format(color)
 			if self.ancho_caliente < minima or self.ancho_caliente > maxima:
@@ -261,9 +261,9 @@ class BloqueProducido(models.Model):
 		color_class = ''
 
 		if maxima and minima and alta and baja:
-			if self.alto_caliente > baja and self.alto_caliente < alta:
+			if self.alto_caliente >= baja and self.alto_caliente <= alta:
 				color_class = ''
-			if (self.alto_caliente > minima and self.alto_caliente < baja) or (self.alto_caliente > alta and self.alto_caliente < maxima):
+			if (self.alto_caliente >= minima and self.alto_caliente < baja) or (self.alto_caliente > alta and self.alto_caliente <= maxima):
 				color = amarillo
 				color_class ='badge badge-{0} badge-pill'.format(color)
 			if self.alto_caliente < minima or self.alto_caliente > maxima:
