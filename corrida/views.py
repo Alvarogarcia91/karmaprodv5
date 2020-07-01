@@ -119,38 +119,29 @@ def producir_corrida(request, corrida_id):
 	return redirect('corrida:producir_bloques',corrida_id )
 
 def producir_bloques(request, corrida_id, elementoCorrida_id=None):
-	bloques_corridas = BloqueProducido.objects.filter(created__date = datetime.datetime.today()).distinct('elemento_corrida__corrida_id')
-	print(bloques_corridas)
 	elementos = ElementoCorrida.objects.filter(corrida = corrida_id).annotate(num_bloques = Count('bloqueproducido'))
-	print(elementos[0].num_bloques)
-	inicio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Inicio')[0].id
-	cambio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Cambio')[0].id
-	normal_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Normal')[0].id
 	opciones = None
 
 	if elementoCorrida_id:
 		elementoCorrida = ElementoCorrida.objects.get(id = elementoCorrida_id)
 	else:	
-		elementoCorrida = elementos.filter(bloqueMedidas__tipo_de_unidad = inicio_id)[0]
-	bloqueMedidas = BloqueMedidas.objects.get(id = elementoCorrida.bloqueMedidas.id)
-	if bloqueMedidas.tipo_de_unidad_id == inicio_id: 
-		opciones = elementos.filter(bloqueMedidas__tipo_de_espuma = bloqueMedidas.tipo_de_espuma).filter(bloqueMedidas__tipo_de_unidad = normal_id)
-	if bloqueMedidas.tipo_de_unidad_id == cambio_id: 
-		opciones = elementos.filter(bloqueMedidas__tipo_de_unidad = normal_id)
-		# print(opciones)
+		elementoCorrida = elementos[0]
 	
-	bloquesProducidos = BloqueProducido.objects.filter(elemento_corrida = elementoCorrida.id).order_by('-no_de_bloque')
+	bloqueMedidas = BloqueMedidas.objects.get(id = elementoCorrida.bloqueMedidas.id)
+	opciones = elementos.filter(bloqueMedidas__tipo_de_unidad__tipo_de_unidad = 'Normal')
+	
+	bloquesProducidos = BloqueProducido.objects.filter(elemento_corrida__corida_id = corrida_id).order_by('-no_de_bloque')
 	bloquesProducidosCount = bloquesProducidos.count()
 	defectos = BloqueProducido.DEFECTOS_CHOICES
 	context ={
-        'elementoCorrida': elementoCorrida,
-        'bloqueMedidas': bloqueMedidas,
-        'elementos': elementos,
+		'elementoCorrida': elementoCorrida,
+		'bloqueMedidas': bloqueMedidas,
+		'elementos': elementos,
 		'bloquesProducidos': bloquesProducidos,
 		'tipos_defectos':defectos,
 		'opciones':opciones,
 		'bloquesProducidosCount':bloquesProducidosCount,
-    }
+	}
 	
 	return render(request, 'ordenes/produccion.html',context) 
 
@@ -158,7 +149,6 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 
 def producir_bloque_seleccionado (request):
 	if request.method == 'POST':
-		print(request.POST)
 		print(request.POST.get('revision_calidad'))
 		elemento_corrida = ElementoCorrida.objects.get(id=request.POST.get('elemento_corrida'))
 		bloque_producido = BloqueProducido()
