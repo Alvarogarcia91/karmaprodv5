@@ -13,6 +13,8 @@ urlpatterns = [
 
 
     #------CRUD MEDIDAS----
+    #http://127.0.0.1:8000/espumas/medidas
+    path('medidas/', views.medidas, name='medidas'),
     #http://127.0.0.1:8000/espumas/1/
     path('<int:item_id>/',views.detalle_medidas,name='detalle_medidas'),
     #http://127.0.0.1:8000/espumas/agregarmedida

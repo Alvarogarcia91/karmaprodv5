@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<br>
+
+<br>
+<div class="dropdown show">
+        <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tipos De Espuma
+        </a>
+        <a class="btn btn-success" href="{% url 'espumas:agregar_medidas' %}" role="button"> Agregar Medidas </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for menuItem in menufront %}
+            <a class="dropdown-item"  href="{% url 'espumas:espumas_filtrado' menuItem.id %}"> {{menuItem}}</a>
+        {% endfor %}  
+        </div>
+      </div>
+<br>
+
+
+<br>
+
+<table class="table table-hover" >
+        <thead>
+          <tr>
+
+
+            <th>Tipo espuma</th>
+            <th>Medidas Descripcion </th>
+            <th>Forma</th>
+            <th>Tipo de Unidad</th>
+
+            <th>Editar</th>
+            <th>Borrar </th>
+            <th>Ver Detalles</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for item in itemsFront%}
+
+        <tr>
+
+        <td>{{ item.tipo_de_espuma }}</td>
+        <td><a href="{% url 'espumas:detalle_medidas' item.id %} "> {{ item.descripcion}} </a></td>
+        <td>{{ item.forma }}</td>
+        <td>{{ item.tipo_de_unidad }}</td>
+
+        <td>
+            <a class="btn btn-warning" href="{% url 'espumas:editar_medidas' item.id %}" role="button"> editar  </a>
+        </td>
+        <td>
+            <a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' item.id %}" role="button"> Borrar </a>
+        </td>
+        <td>
+            <a class="btn btn-primary" href="{% url 'espumas:detalle_medidas' item.id %}" role="button"> Ver A Detalle </a>
+        </td>
+
+
+
+            {% endfor %}
+
+        </td>
+
+        </tbody>
+    </table>
+
+
+
+
+    <br>
+    <br>
+    {% endblock %}

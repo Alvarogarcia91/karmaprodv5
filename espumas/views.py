@@ -60,6 +60,17 @@ def espumas(request, tipo_id=0):
 
 
 #----MEDIDAS----
+
+
+def medidas(request):
+    item_list = BloqueMedidas.objects.all()
+    tde_menus= Tipos_de_Espuma.objects.all()
+    context ={
+        'itemsFront':item_list,
+        'menufront':tde_menus,
+    }
+    return render(request,'espumas/medidas/medidas.html',context)
+
 def detalle_medidas(request,item_id):
     item = BloqueMedidas.objects.get(pk=item_id)
     context = {
