@@ -19,8 +19,8 @@
           <tr>
             <th class="text-center align-middle">Tipo espuma</th>
             <th class="text-center align-middle">Medidas Descripcion </th>
-            <th class="text-center align-middle">Forma</th>
-            <th class="text-center align-middle">Tipo de Unidad</th>
+            <th class="text-center align-middle">Familia</th> 
+            <th class="text-center align-middle">Forma</th> 
             <th class="text-center align-middle">Borrar </th>
             <th class="text-center align-middle">Agregar a Corrida</th>
           </tr>
@@ -30,8 +30,8 @@
         <tr>
             <td class="text-center align-middle" >{{ item.tipo_de_espuma }}</td>
             <td class="text-center align-middle" ><a href="{% url 'espumas:detalle_medidas' item.id %} "> {{ item.descripcion}} </a></td>
+            <td class="text-center align-middle" >{{ item.familia_de_medidas }}</td>
             <td class="text-center align-middle" >{{ item.forma }}</td>
-            <td class="text-center align-middle" >{{ item.tipo_de_unidad }}</td>
             <td class="text-center align-middle" ><a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' item.id %}" role="button"> Borrar </a></td>
             <td class="text-center align-middle" ><a class="btn btn-success" href="{% url 'corrida:agregar_a_corrida' item.id  %}" role="button"> Agregar A Corrida </a></td>
             {% endfor %}
