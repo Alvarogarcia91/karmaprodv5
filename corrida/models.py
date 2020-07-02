@@ -116,6 +116,7 @@ class BloqueProducido(models.Model):
 		('mm','Mal manejo'),
 		('fdm', 'Fuera de medida'),
 		('a', 'Algodonozo'),
+		('ma', 'Manchado'),
 	]
 
 	created = models.DateTimeField(auto_now_add=True)
