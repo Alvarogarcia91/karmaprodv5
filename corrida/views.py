@@ -134,7 +134,6 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		else:
 			elementoCorrida = elementos[0]
 	
-	bloqueMedidas = BloqueMedidas.objects.get(id = elementoCorrida.bloqueMedidas.id)
 	opciones = elementos.filter(bloqueMedidas__tipo_de_unidad__tipo_de_unidad = 'Normal')
 	
 	primer_bloque = True
@@ -144,11 +143,14 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 	multiples_elementos = False
 	if elementos_normales.count() > 1:
 		multiples_elementos = True
-
+	
+	cilindro = False
+	if elementos[0].bloqueMedidas.forma == "Cilindro":
+		cilindro = True
+	
 	defectos = BloqueProducido.DEFECTOS_CHOICES
 	context ={
 		'elementoCorrida': elementoCorrida,
-		'bloqueMedidas': bloqueMedidas,
 		'elementos': elementos,
 		'bloquesProducidos': bloquesProducidos,
 		'tipos_defectos':defectos,
@@ -156,6 +158,7 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		'bloquesProducidosCount':bloquesProducidosCount,
 		'primer_bloque': primer_bloque,
 		'multiples_elementos': multiples_elementos,
+		'cilindro': cilindro,
 	}
 	
 	return render(request, 'ordenes/produccion.html',context) 

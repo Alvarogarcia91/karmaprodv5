@@ -109,8 +109,10 @@
                         <tr>
                         <th><b> Largo(CM)</b></th>
                         <th><b> Ancho(CM)</b></th>
+                        {% if cilindro %}
+                        {% else %}
                         <th><b> Alto(CM)</b> </th>
-
+                        {% endif %}
                         <th><b> Flujo de Aire</b> </th>
                         <th><b> Peso (KG)</b></th>
                         <th><b> OK </th></b>
@@ -132,9 +134,12 @@
                             <td>
                             <input type="text" size="5" id="ancho_caliente" name="ancho_caliente">
                             </td>
+                            {% if cilindro %}
+                            {% else %}
                             <td>
                             <input type="text" size="5" id="alto_caliente" name="alto_caliente">
                             </td>
+                            {% endif %}
                             <td>
                             <input type="text" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
                             </td>
