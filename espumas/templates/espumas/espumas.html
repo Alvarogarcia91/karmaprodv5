@@ -1,120 +1,78 @@
 {% extends "base.html" %}
-
 {% block content %}
 <br>
-<br>
-
 <br>
 <div class="dropdown show">
         <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Tipos De Espuma
         </a>
         <a class="btn btn-info" href="{% url 'espumas:agregar_medidas' %}" role="button"> Agregar Medidas </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        {% for menuItem in menufront %}
-            <a class="dropdown-item"  href="{% url 'espumas:espumas_filtrado' menuItem.id %}"> {{menuItem}}</a>
-        {% endfor %}  
-        </div>
-      </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {% for menuItem in menufront %}
+                    <a class="dropdown-item"  href="{% url 'espumas:espumas_filtrado' menuItem.id %}"> {{menuItem}}</a>
+                {% endfor %}  
+            </div>
+</div>
 <br>
-
-
-<br>
-
-<table class="table table-hover" >
+<table class="table table-hover table-sm" >
         <thead>
           <tr>
-
-
-            <th>Tipo espuma</th>
-            <th>Medidas Descripcion </th>
-            <th>Forma</th>
-            <th>Tipo de Unidad</th>
-
-            <th>Editar</th>
-            <th>Borrar </th>
-            <th>Agregar a Corrida</th>
-
+            <th class="text-center align-middle">Tipo espuma</th>
+            <th class="text-center align-middle">Medidas Descripcion </th>
+            <th class="text-center align-middle">Forma</th>
+            <th class="text-center align-middle">Tipo de Unidad</th>
+            <th class="text-center align-middle">Borrar </th>
+            <th class="text-center align-middle">Agregar a Corrida</th>
           </tr>
         </thead>
-
         <tbody>
             {% for item in itemsFront%}
-
         <tr>
-
-        <td>{{ item.tipo_de_espuma }}</td>
-        <td><a href="{% url 'espumas:detalle_medidas' item.id %} "> {{ item.descripcion}} </a></td>
-        <td>{{ item.forma }}</td>
-        <td>{{ item.tipo_de_unidad }}</td>
-
-        <td>
-            <a class="btn btn-warning" href="{% url 'espumas:editar_medidas' item.id %}" role="button"> editar  </a>
-        </td>
-        <td>
-            <a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' item.id %}" role="button"> Borrar </a>
-        </td>
-        <td>
-            <a class="btn btn-success" href="{% url 'corrida:agregar_a_corrida' item.id  %}" role="button"> Agregar A Corrida </a>
-        </td>
-
-
-
+            <td class="text-center align-middle" >{{ item.tipo_de_espuma }}</td>
+            <td class="text-center align-middle" ><a href="{% url 'espumas:detalle_medidas' item.id %} "> {{ item.descripcion}} </a></td>
+            <td class="text-center align-middle" >{{ item.forma }}</td>
+            <td class="text-center align-middle" >{{ item.tipo_de_unidad }}</td>
+            <td class="text-center align-middle" ><a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' item.id %}" role="button"> Borrar </a></td>
+            <td class="text-center align-middle" ><a class="btn btn-success" href="{% url 'corrida:agregar_a_corrida' item.id  %}" role="button"> Agregar A Corrida </a></td>
             {% endfor %}
-
-        </td>
-
+        </tr>
         </tbody>
     </table>
-
-
-
-
 <br>
 <hr class="style1">
-
-<h4> Pre Orden de Corrida</h4>
-
+<h4 class="text-primary"> <b> Pre Orden de Corrida </b></h4>
     <table class="table table-hover" >
         <thead>
             <tr>
-
-            <th> Tipo de espuma</th>
-            <th> Descripcion </th>
-            <th> Tipo de unidad </th>
-            <th> Forma </th>
-            <th> Cantidad </th>
-            <th> Remover </th>
+                <th class="text-center align-middle"><b> Tipo de espuma </b></th>
+                <th class="text-center align-middle"><b> Descripcion </b></th>
+                <th class="text-center align-middle"><b> Tipo de unidad </b></th>
+                <th class="text-center align-middle"><b> Forma </b></th>
+                <th class="text-center align-middle"><b> Cantidad </b></th>
+                <th class="text-center align-middle"><b> Remover </b></th>
             </tr>
         </thead>
-
         <tbody>
             <form action="{% url 'corrida:orden_de_corrida' %}" method="POST">
             {% csrf_token %}
-            <label class="col-sm-2 col-form-label">Fecha a producir:</label> 
+            <label class="col-sm-2 col-form-label"><b> Fecha a producir:</b></label> 
             <input type="date" name="fecha_programada">
             {% for elementoCorrida in corridaFront %}
-
             <tr>
-                <td>{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
-                <td>{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
-                <td>{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
-                <td>{{ elementoCorrida.bloqueMedidas.forma }}</td>
-                <td>
+                <td class="text-center">{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
+                <td class="text-center">{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
+                <td class="text-center">{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
+                <td class="text-center">{{ elementoCorrida.bloqueMedidas.forma }}</td>
+                <td class="text-center"> 
                     <input type="text" size="3" id="{{elementoCorrida.cantidad}}" name="cantidades" value="{{ elementoCorrida.cantidad }}">
-                    <input type="hidden" id ="{{elementoCorrida.id}}" name="elementoIds" value="{{elementoCorrida.id}}">
-                </td>
-                <td>
-                    <a class="btn btn-danger" href="{% url 'corrida:remover_elemento_catalogo' elementoCorrida.id %}" role="button"> Remover  </a>
-                </td>
+                    <input type="hidden" id ="{{elementoCorrida.id}}" name="elementoIds" value="{{elementoCorrida.id}}"> </td>
+                <td class="text-center"> <a class="btn btn-danger" href="{% url 'corrida:remover_elemento_catalogo' elementoCorrida.id %}" role="button"> Remover  </a> </td>
             </tr>
             {% endfor %}
-
         </tbody>
     </table>
     <input class="btn btn-success" type="submit" value="Generar Orden De Corrida">
     </form>
-
     <br>
     <br>
     {% endblock %}

@@ -1,122 +1,285 @@
 {% extends "basedetalles.html" %}
 {% block content %}
 
-
+<h1 class="text-left text-secondary"><b> Detalles de: <font color="green">{{ itemsFront.tipo_de_espuma }} </font> </b></h1>
 <br>
-<h2>Detalles de: <font color="green">{{ itemsFront.tipo_de_espuma }} </font></h2>
-
-
+<h2 class="text-primary">Datos Generales: </h2>
 <br>
-<table class="table table-hover" >
-        <thead>
-          <tr>
-
-            <th>ID</th>
-            <th>Tipo espuma</th>
-            <th>Formulacion Clave </th>
-            <th>Multiplicador</th>
-            <th>Precio</th>
-            <th>Familia</th>
-
-            <th>Disponible </th>
-            
-            <th>Densidad Descripcion </th>
-            <th>Densidad Tipo </th>
-            <th>Densidad Objetivo Maxima </th>
-            <th>Densidad Objetivo Minima </th>
-            <th>Densidad Objetivo Parametro Alto </th>
-            <th>Densidad Objetivo Parametro Bajo </th>
-
-            <th>Dureza Tipo </th>
-            <th>Dureza Objetivo Maxima </th>
-            <th>Dureza Objetivo Minima </th>
-            <th>Dureza Objetivo Parametro Alto </th>
-            <th>Dureza Objetivo Parametro Bajo </th>
-
-            <th>Flujo De Aire ASTM Maximo </th>
-            <th>Flujo De Aire ASTM Minimo </th>
-            <th>Flujo De Aire ASTM Parametro Alto </th>
-            <th>Flujo De Aire ASTM Parametro Bajo </th>
-
-            <th>Flujo De Aire Campo Maximo  </th>
-            <th>Flujo De Aire Campo Minimo  </th>
-            <th>Flujo De Aire Campo Parametro Alto  </th>
-            <th>Flujo De Aire Campo Parametro Bajo </th>
-            
-            <th>Retardante flama</th>
-            <th>Anti bacterial</th>
-            <th>Anti estatica</th>
-            <th>Color</th>
-            <th>Elongacion</th>
-            <th>Histasis</th>
-            <th>Sag factor</th>
-            <th>Extra1</th>
-            <th>Extra2</th>
-            
-            
-
-
-          </tr>
-        </thead>
-
-        <tbody>
-            
-
-        <tr>
-
-
-        <td>{{ itemsFront.id }}</td>
-        <td>{{ itemsFront.tipo_de_espuma }}</td>
-        <td>{{ itemsFront.formulacion_o_clave }}</td>
-        <td>{{ itemsFront.multiplicador }}</td>
-        <td>{{ itemsFront.precio }}</td>
-        <td>{{ itemsFront.familia }}</td>
-        <td>{{ itemsFront.disponible }}</td>
-
-        <td>{{ itemsFront.densidad_descripcion }}</td>
-        <td>{{ itemsFront.densidad_objetivo }}</td>
-        <td>{{ itemsFront.densidad_objetivo_maxima }}</td>
-        <td>{{ itemsFront.densidad_objetivo_minima }}</td>
-        <td>{{ itemsFront.densidad_objetivo_alta }}</td>
-        <td>{{ itemsFront.densidad_objetivo_baja }}</td>
-       
-        <td>{{ itemsFront.dureza_objetivo }}</td>
-        <td>{{ itemsFront.dureza_objetivo_maxima }}</td>
-        <td>{{ itemsFront.dureza_objetivo_minima }}</td>
-        <td>{{ itemsFront.dureza_objetivo_alta }}</td>
-        <td>{{ itemsFront.dureza_objetivo_baja }}</td>
-
-        <td>{{ itemsFront.flujo_de_aire_astm_maximo }}</td>
-        <td>{{ itemsFront.flujo_de_aire_astm_minimo }}</td>
-        <td>{{ itemsFront.flujo_de_aire_astm_bajo }}</td>
-        <td>{{ itemsFront.flujo_de_aire_astm_alto }}</td>
-
-        <td>{{ itemsFront.flujo_de_aire_campo_maximo }}</td>
-        <td>{{ itemsFront.flujo_de_aire_campo_minimo }}</td>
-        <td>{{ itemsFront.flujo_de_aire_campo_bajo }}</td>
-        <td>{{ itemsFront.flujo_de_aire_campo_alto }}</td>
-
-        <td>{{ itemsFront.retardante_flama }}</td>
-        <td>{{ itemsFront.anti_bacterial }}</td>
-        <td>{{ itemsFront.anti_estatica }}</td>
-        <td>{{ itemsFront.color }}</td>
-        <td>{{ itemsFront.elongacion }}</td>
-        <td>{{ itemsFront.histasis }}</td>
-        <td>{{ itemsFront.sag_factor }}</td>
-        <td>{{ itemsFront.extra1 }}</td>
-        <td>{{ itemsFront.extra2 }}</td>
-
-
-
-        
-
-           
-
-        </td>
-
-        </tbody>
-    </table>
-    <br>
+<div>
+  <!-- row 1 generales-->
+  <table class="table table-sm " >
+          <thead>
+            <tr>
+                <td class="text-center align-middle"><b>ID</b></td>
+                <td class="text-center align-middle"><b>Tipo espuma</b></td>
+                <td class="text-center align-middle"><b>Formulacion Clave</b></td>
+                <td class="text-center align-middle"><b>Multiplicador</b></td>
+                <td class="text-center align-middle"><b>Precio</b></td>  
+                <th class="text-center align-middle"><b>Familia</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center align-middle">{{ itemsFront.id }} </td>
+              <td class="text-center align-middle">{{ itemsFront.tipo_de_espuma }}</td>
+              <td class="text-center align-middle">{{ itemsFront.formulacion_o_clave }}</td>
+              <td class="text-center align-middle">{{ itemsFront.multiplicador }}</td>
+              <td class="text-center align-middle">{{ itemsFront.precio }}</td>
+              <td class="text-center align-middle"> {{ itemsFront.familia }}</td>
+            </tr>
+          </tbody>
+      </table>
+<!-- Row 2 generales-->
+<table class="table  table-sm " >
+    <thead>
+      <tr>
+        <th class="text-center align-middle"><b>Retardante flama</b></th>
+        <th class="text-center align-middle"><b>Anti bacterial</b></th>
+        <th class="text-center align-middle"><b>Anti estatica</b></th>
+        <th class="text-center align-middle"><b>Color </b></th>
+        <th class="text-center align-middle"><b>Elongacion</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          {% if itemsFront.retardante_flama %}
+            <td class="text-center align-middle">   {{ itemsFront.retardante_flama }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.anti_bacterial %}
+            <td class="text-center align-middle">   {{ itemsFront.anti_bacterial }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.anti_estatica %}
+            <td class="text-center align-middle">   {{ itemsFront.anti_estatica }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.color %}
+            <td class="text-center align-middle">   {{ itemsFront.color }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.elongacion %}
+            <td class="text-center align-middle">   {{ itemsFront.elongacion }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+      </tr>
+    </tbody>
+</table>
+<!-- row 3 generales -->
+<table class="table table-sm " >
+    <thead>
+      <tr>
+          <td class="text-center align-middle"><b>Histasis</b></td>
+          <td class="text-center align-middle"><b>Sag factor</b></td>
+          <td class="text-center align-middle"><b>Disponible</b></td>
+          <td class="text-center align-middle"><b>Densidad descripcion</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% if itemsFront.histasis %}
+          <td class="text-center align-middle">   {{ itemsFront.histasis }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.sag_factor %}
+          <td class="text-center align-middle">   {{ itemsFront.sag_factor }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.disponible %}
+          <td class="text-center align-middle"> <font color="green">&#10003; </font>   </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.densidad_descripcion %}
+          <td class="text-center align-middle">   {{ itemsFront.densidad_descripcion }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+      </tr>
+    </tbody>
+</table>
+<br>
+<h2 class="text-primary">Parametros: </h2>
+<br>
+<!-- row 1 parametros -->
+<table class="table table-sm " >
+    <thead>
+      <tr>
+          <td class="text-center align-middle"><b>Densidad Objetivo Minima</b></td>
+          <td class="text-center align-middle"><b>Densidad Objetivo Parametro Bajo</b></td>
+          <td class="text-center align-middle"><b>Densidad Objetivo</b></td>
+          <td class="text-center align-middle"><b>Densidad Objetivo Parametro Alto</b></td>
+          <td class="text-center align-middle"><b>Densidad Objetivo Maxima</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% if itemsFront.densidad_objetivo_minima %}
+          <td class="text-center align-middle">   {{ itemsFront.densidad_objetivo_minima }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.densidad_objetivo_baja %}
+          <td class="text-center align-middle">   {{ itemsFront.densidad_objetivo_baja }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.densidad_objetivo %}
+          <td class="text-center align-middle">   {{ itemsFront.densidad_objetivo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.densidad_objetivo_alta %}
+          <td class="text-center align-middle">   {{ itemsFront.densidad_objetivo_alta }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.densidad_objetivo_maxima %}
+          <td class="text-center align-middle">   {{ itemsFront.densidad_objetivo_maxima }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+      </tr>
+    </tbody>
+</table>
+<!-- row 2 parametros -->
+<table class="table table-sm " >
+    <thead>
+      <tr>
+          <td class="text-center align-middle"><b>Dureza Objetivo Minima</b></td>
+          <td class="text-center align-middle"><b>Dureza Objetivo Parametro Bajo</b></td>
+          <td class="text-center align-middle"><b>Dureza Objetivo </b></td>
+          <td class="text-center align-middle"><b>Dureza Objetivo Parametro Alto</b></td>
+          <td class="text-center align-middle"><b>Dureza Objetivo Maxima</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% if itemsFront.dureza_objetivo_minima %}
+          <td class="text-center align-middle">   {{ itemsFront.dureza_objetivo_minima }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.dureza_objetivo_baja %}
+          <td class="text-center align-middle">   {{ itemsFront.dureza_objetivo_baja }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.dureza_objetivo %}
+          <td class="text-center align-middle">   {{ itemsFront.dureza_objetivo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.dureza_objetivo_alta %}
+          <td class="text-center align-middle">   {{ itemsFront.dureza_objetivo_alta }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.dureza_objetivo_maxima %}
+          <td class="text-center align-middle">   {{ itemsFront.dureza_objetivo_maxima }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+      </tr>
+    </tbody>
+</table>
+<!-- row 3 parametros -->
+<table class="table table-sm " >
+    <thead>
+      <tr>
+          <td class="text-center align-middle"><b>Flujo De Aire ASTM Minimo</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire ASTM Parametro Bajo</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire ASTM Objetivo</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire ASTM Parametro Alto</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire ASTM Maximo</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% if itemsFront.flujo_de_aire_astm_minimo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_astm_minimo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_astm_bajo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_astm_bajo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_astm_objetivo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_astm_objetivo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_astm_alto %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_astm_alto }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_astm_maximo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_astm_maximo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+      </tr>
+    </tbody>
+</table>
+<!-- row 4 parametros -->
+<table class="table table-sm " >
+    <thead>
+      <tr>
+          <td class="text-center align-middle"><b>Flujo De Aire Campo Minimo</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire Campo Parametro Alto</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire Campo Objetivo</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire Campo Parametro Alto</b></td>
+          <td class="text-center align-middle"><b>Flujo De Aire Campo Maximo </b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% if itemsFront.flujo_de_aire_campo_minimo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_campo_minimo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_campo_bajo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_campo_bajo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_campo_objetivo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_campo_objetivo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_campo_alto %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_campo_alto }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+        {% if itemsFront.flujo_de_aire_campo_maximo %}
+          <td class="text-center align-middle">   {{ itemsFront.flujo_de_aire_campo_maximo }} </td>
+        {% else %}
+          <td class="text-center align-middle" > <font color="red"> X </font> </td>
+        {%endif%}
+      </tr>
+    </tbody>
+</table>
+</div>
+<br>
+<br>
     <a class="btn btn-primary" href="{% url 'espumas:tde' %}" role="button"> Regresar </a>
+    <td class="text-center align-middle"><a class="btn btn-warning" href="{% url 'espumas:editar_tde' itemsFront.id %}" role="button"> editar  </a> </td>
 <br>
+<br>
+<br>
+
+
 {%endblock%}
