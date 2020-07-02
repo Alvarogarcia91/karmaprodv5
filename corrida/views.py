@@ -197,7 +197,8 @@ def producir_bloque_seleccionado (request):
 		bloque_producido.revision_calidad = request.POST.get('revision_calidad') or False
 		bloque_producido.defecto = request.POST.get('defecto')
 		bloque_producido.peso_caliente = request.POST.get('peso_caliente')
-		bloque_producido.alto_caliente = request.POST.get('alto_caliente')
+		if bloque_medidas.forma != "Cilindro":
+			bloque_producido.alto_caliente = request.POST.get('alto_caliente')
 		bloque_producido.largo_caliente = request.POST.get('largo_caliente')
 		bloque_producido.ancho_caliente = request.POST.get('ancho_caliente')
 		bloque_producido.flujo_de_aire_caliente = request.POST.get('flujo_de_aire_caliente')
