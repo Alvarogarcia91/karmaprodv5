@@ -194,7 +194,6 @@ def producir_bloque_seleccionado (request):
 		bloque_producido.flujo_de_aire_caliente = request.POST.get('flujo_de_aire_caliente')
 		bloque_producido.comentario = request.POST.get('comentario')
 		
-		
 		if 'final' in request.POST:
 			bloque_medidas = BloqueMedidas.filter(tipo_de_unidad__tipo_de_unidad ="Final").filter(tipo_de_espuma = bloque_medidas.tipo_de_espuma).filter(largo_frio_objetivo = bloque_medidas.largo_frio_objetivo).filter(ancho_frio_objetivo = bloque_medidas.ancho_frio_objetivo)
 			elemento_corrida_final = ElementoCorrida.objects.create(
@@ -205,7 +204,7 @@ def producir_bloque_seleccionado (request):
 			elemento_corrida_final.save()
 			bloque_producido.elemento_corrida_id = elemento_corrida_final.id
 			bloque_producido.save()
-			
+
 			corrida = Corrida.objects.get(pk=elemento_corrida.corrida_id )
 			corrida.pendiente_produccion = False
 			corrida.en_produccion = False
