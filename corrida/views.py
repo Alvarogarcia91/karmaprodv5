@@ -275,8 +275,8 @@ def corrida_producida(request,corrida_id):
 	resumen['bloques_ok'] = bloques_producidos.filter(revision_calidad = True).count()
 	resumen['bloques_ng'] = bloques_producidos.filter(revision_calidad = False).count()
 	resumen['bloques_cambio'] = bloques_producidos.filter(elemento_corrida__bloqueMedidas__tipo_de_unidad__tipo_de_unidad = "Cambio").count()
-	resumen['metros_planeados'] = str(bloques_producidos.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum'])
-	resumen['metros_producidos'] = str(bloques_producidos.aggregate(Sum('largo_caliente'))['largo_caliente__sum'])
+	resumen['metros_planeados'] = str(bloques_producidos.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum']/100)
+	resumen['metros_producidos'] = str(bloques_producidos.aggregate(Sum('largo_caliente'))['largo_caliente__sum']/100)
 	resumen['densidad_promedio'] = bloques_producidos.aggregate(Avg('densidad'))['densidad__avg']
 	resumen['peso_producido'] = str(bloques_producidos.aggregate(Sum('peso_caliente'))['peso_caliente__sum'])
 	corrida = Corrida.objects.get(id=corrida_id)
@@ -291,8 +291,8 @@ def corrida_producida(request,corrida_id):
 			ng_count = bloques_ng.count()
 			porcentaje_ng = (ng_count/bloques_count)*100
 			densidad_promedio = bloques.aggregate(Avg('densidad'))['densidad__avg']
-			metros_planeados = str(bloques.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum'])
-			metros_producidos = str(bloques.aggregate(Sum('largo_caliente'))['largo_caliente__sum'])
+			metros_planeados = str(bloques.aggregate(Sum('elemento_corrida__bloqueMedidas__largo_frio_objetivo'))['elemento_corrida__bloqueMedidas__largo_frio_objetivo__sum']/100)
+			metros_producidos = str(bloques.aggregate(Sum('largo_caliente'))['largo_caliente__sum']/100)
 			metros_ng = str(bloques_ng.aggregate(Sum('largo_caliente'))['largo_caliente__sum'] or 0)
 			peso_producido = str(bloques.aggregate(Sum('peso_caliente'))['peso_caliente__sum'])
 			
