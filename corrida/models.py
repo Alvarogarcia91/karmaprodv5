@@ -165,9 +165,14 @@ class BloqueProducido(models.Model):
 			elemento_corrida = self.elemento_corrida
 			elemento_corrida.lote_id = lote.id
 			elemento_corrida.save()
-
+		
 		# volumen
-		volumen = round((float(self.largo_caliente) * float(self.ancho_caliente) * float(self.alto_caliente))/(1000000),2)
+		if self.elemento_corrida.bloqueMedidas.forma.forma == "Cilindro":
+			radio = float(self.ancho_caliente)/2
+			area = (radio * radio * 3.1415)/ 2
+			volumen = round((float(self.largo_caliente) * area)/1000000, 2)
+		else:
+			volumen = round((float(self.largo_caliente) * float(self.ancho_caliente) * float(self.alto_caliente))/(1000000),2)
 		self.volumen = volumen
 
 		# densidad

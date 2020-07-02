@@ -145,9 +145,9 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		multiples_elementos = True
 	
 	cilindro = False
-	if elementos[0].bloqueMedidas.forma == "Cilindro":
+	if elementos[0].bloqueMedidas.forma.forma == 'Cilindro':
 		cilindro = True
-	
+
 	defectos = BloqueProducido.DEFECTOS_CHOICES
 	context ={
 		'elementoCorrida': elementoCorrida,
