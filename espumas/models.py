@@ -92,7 +92,7 @@ class BloqueMedidas(models.Model):
     tipo_de_espuma = models.ForeignKey(Tipos_de_Espuma, on_delete = models.CASCADE)
     tipo_de_unidad = models.ForeignKey(Tipos_de_Unidad,on_delete = models.CASCADE)
     forma = models.ForeignKey(Formas,on_delete = models.CASCADE)
-
+    familia_de_medidas = models.CharField(max_length = 10, blank = True, null = True)
 
     largo_frio_objetivo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
     ancho_frio_objetivo = models.DecimalField(max_digits=10, decimal_places=2,blank = False, null=True)
@@ -121,7 +121,6 @@ class BloqueMedidas(models.Model):
 
    
     uso_objetivo  = models.CharField(max_length=200, blank=True,null=True)
-    medida_dispobible =models.BooleanField(default = True)
 
     disponible =models.BooleanField(default = True)
 

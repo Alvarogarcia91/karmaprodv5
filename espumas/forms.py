@@ -9,7 +9,7 @@ class medidasForm(forms.ModelForm):
     def informacion_general(self):
         fields = self.visible_fields()
         return [field for field in fields if (field.name in [
-        'tipo_de_espuma','tipo_de_unidad','forma','medida_dispobible','descripcion',
+        'tipo_de_espuma','tipo_de_unidad','forma','disponible','descripcion',
         'largo_frio_objetivo','ancho_frio_objetivo','alto_frio_objetivo','uso_objetivo',
         ])]
     
@@ -23,7 +23,7 @@ class medidasForm(forms.ModelForm):
     
     class Meta:
         model = BloqueMedidas
-        fields = ['tipo_de_espuma','tipo_de_unidad','forma','medida_dispobible','descripcion','uso_objetivo',
+        fields = ['tipo_de_espuma','tipo_de_unidad','forma','disponible','descripcion','uso_objetivo',
         'largo_frio_objetivo','ancho_frio_objetivo','alto_frio_objetivo',
         'largo_caliente_minimo','largo_caliente_parametro_bajo','largo_caliente_setting_predefinido','largo_caliente_parametro_alto','largo_caliente_maximo',
         'ancho_caliente_minimo','ancho_caliente_parametro_bajo','ancho_caliente_setting_predefinido','ancho_caliente_parametro_alto','ancho_caliente_maximo',
