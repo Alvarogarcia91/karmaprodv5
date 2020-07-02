@@ -1,122 +1,215 @@
 {% extends "basedetalles.html" %}
 {% block content %}
-
-<div class="container">
-    <div class="row">
-        <div class="col-12 offset-1">
-          
-            <br>
-            <h2>Detalles de: <font color="green">{{ itemsFront.descripcion }}</font> - TDE:<font color="red"> {{ itemsFront.tipo_de_espuma }}</font> - Unidad: <font color="orange">{{ itemsFront.tipo_de_unidad }} </font></h2>
-            
-            <br>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-hover table-bordered  " >
-                <thead class="thead-light">
-                  <tr>
-        
-                    <th>ID</th>
-                    <th>Descripcion </th>
-                    <th>Tipo espuma</th>
-                    <th>Tipo de Unidad </th>
-                    <th>forma</th>
-        
-                    <th>Largo Frio Objetivo</th>
-                    <th>Ancho Frio Objetivo</th>
-                    <th>Alto Frio Objetivo </th>
-        
-                    <th>Largo Caliente Setting Predefinido  </th>
-                    <th>Largo Caliente Maximo  </th>
-                    <th>Largo Caliente Minimo  </th>
-                    <th>Largo Caliente Parametro Alto  </th>
-                    <th>Largo Caliente Parametro Bajo  </th>
-
-                    <th>Ancho Caliente Setting Predefinido </th>
-                    <th>Ancho Caliente Maximo </th>
-                    <th>Ancho Caliente Minimo </th>
-                    <th>Ancho Caliente Parametro Alto </th>
-                    <th>Ancho Caliente Parametro Bajo </th>
-
-                    <th>Alto Caliente Setting Predefinido </th>
-                    <th>Alto Caliente Maximo  </th>
-                    <th>Alto Caliente Minimo  </th>
-                    <th>Alto Caliente Parametro Alto </th>
-                    <th>Alto Caliente Parametro Bajo </th>
-                    
-                    <th>Uso objetivo </th>
-                    <th>Medida Disponible </th>
-                    
-                    <th>Fecha_De_Creado </th>
-                    <th>Fecha_Actualizado</th>
-        
-                  </tr>
-                </thead>
-        
-                <tbody>
-                    
-                <tr>
-        
-                <td>{{ itemsFront.id }}</td>
-                <td>{{ itemsFront.descripcion }}</td>
-                <td>{{ itemsFront.tipo_de_espuma }}</td>
-                <td>{{ itemsFront.tipo_de_unidad }}</td>
-                <td>{{ itemsFront.forma }}</td>
-        
-                <td>{{ itemsFront.largo_frio_objetivo }}</td>
-                <td>{{ itemsFront.ancho_frio_objetivo }}</td>
-                <td>{{ itemsFront.alto_frio_objetivo }}</td>
-        
-                <td>{{ itemsFront.largo_caliente_setting_predefinido }}</td>
-                <td>{{ itemsFront.largo_caliente_maximo }}</td>
-                <td>{{ itemsFront.largo_caliente_minimo }}</td>
-                <td>{{ itemsFront.largo_caliente_parametro_alto }}</td>
-                <td>{{ itemsFront.largo_caliente_parametro_bajo }}</td>
-
-                <td>{{ itemsFront.ancho_caliente_setting_predefinido }}</td>
-                <td>{{ itemsFront.ancho_caliente_maximo }}</td>
-                <td>{{ itemsFront.ancho_caliente_minimo }}</td>
-                <td>{{ itemsFront.ancho_caliente_parametro_alto }}</td>
-                <td>{{ itemsFront.ancho_caliente_parametro_bajo }}</td>
-
-                <td>{{ itemsFront.alto_caliente_setting_predefinido }}</td>
-                <td>{{ itemsFront.alto_caliente_maximo }}</td>
-                <td>{{ itemsFront.alto_caliente_minimo }}</td>
-                <td>{{ itemsFront.alto_caliente_parametro_alto }}</td>
-                <td>{{ itemsFront.alto_caliente_parametro_bajo }}</td>
-        
-                <td>{{ itemsFront.uso_objetivo }}</td>
-                <td>{{ itemsFront.disponible }}</td>
-        
-                <td>{{ itemsFront.created }}</td>
-                <td>{{ itemsFront.updated }}</td>      
-        
-                </td>
-                </tbody>
-            </table>
-                  
-                  
-
-    
+<h1 class="text-left text-secondary"><b> Detalles de Medidas: <font color="green">{{ itemsFront.descripcion }} </font> </b></h1>
+<h3 class="text-left text-secondary"><b> Tipo de Espuma: <font color="green">{{ itemsFront.tipo_de_espuma}} </font> </b></h3>
+<h3 class="text-left text-secondary"><b> Tipo de Unidad: <font color="green">{{ itemsFront.tipo_de_unidad}} </font> </b></h3>
+<br>
+<h2 class="text-primary">Datos Generales: </h2>
+<br>
+<div>
+    <!-- row 1 generales-->
+    <table class="table table-sm " >
+            <thead>
+              <tr>
+                  <td class="text-center align-middle"><b>ID</b></td>
+                  <td class="text-center align-middle"><b>Tipo espuma</b></td>
+                  <td class="text-center align-middle"><b>Tipo de unidad</b></td>
+                  <td class="text-center align-middle"><b>Forma</b></td>
+                  <td class="text-center align-middle"><b>Disponible</b></td>  
+                  <th class="text-center align-middle"><b>Descripcion</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center align-middle">{{ itemsFront.id }} </td>
+                <td class="text-center align-middle">{{ itemsFront.tipo_de_espuma }}</td>
+                <td class="text-center align-middle">{{ itemsFront.tipo_de_unidad }}</td>
+                <td class="text-center align-middle">{{ itemsFront.forma }}</td>
+                {% if itemsFront.disponible %}
+                  <td class="text-center align-middle"> <font color="green">&#10003; </font>   </td>
+                {% else %}
+                  <td class="text-center align-middle" > <font color="red"> X </font> </td>
+                {%endif%}
+                <td class="text-center align-middle"> {{ itemsFront.descripcion }}</td>
+              </tr>
+            </tbody>
+        </table>
+  <!-- Row 2 generales-->
+  <table class="table  table-sm " >
+      <thead>
+        <tr>
+          <th class="text-center align-middle"><b>Familia de medidas </b></th>
+          <th class="text-center align-middle"><b>Uso objetivo </b></th>
+          <th class="text-center align-middle"><b>Largo frio objetivo </b></th>
+          <th class="text-center align-middle"><b>Ancho frio objetivo</b></th>
+          <th class="text-center align-middle"><b>Alto frio objetivo </b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            {% if itemsFront.familia_de_medidas %}
+              <td class="text-center align-middle">   {{ itemsFront.familia_de_medidas }} </td>
+            {% else %}
+              <td class="text-center align-middle" > <font color="red"> X </font> </td>
+            {%endif%}
+            {% if itemsFront.uso_objetivo %}
+              <td class="text-center align-middle">   {{ itemsFront.uso_objetivo }} </td>
+            {% else %}
+              <td class="text-center align-middle" > <font color="red"> X </font> </td>
+            {%endif%}
+            {% if itemsFront.largo_frio_objetivo %}
+              <td class="text-center align-middle">   {{ itemsFront.largo_frio_objetivo }} </td>
+            {% else %}
+              <td class="text-center align-middle" > <font color="red"> X </font> </td>
+            {%endif%}
+            {% if itemsFront.ancho_frio_objetivo %}
+              <td class="text-center align-middle">   {{ itemsFront.ancho_frio_objetivo }} </td>
+            {% else %}
+              <td class="text-center align-middle" > <font color="red"> X </font> </td>
+            {%endif%}
+            {% if itemsFront.alto_frio_objetivo %}
+              <td class="text-center align-middle">   {{ itemsFront.alto_frio_objetivo }} </td>
+            {% else %}
+              <td class="text-center align-middle" > <font color="red"> X </font> </td>
+            {%endif%}
+        </tr>
+      </tbody>
+  </table>
+  <br>
+  <h2 class="text-primary">Parametros: </h2>
+  <br>
+  <!-- row 1 parametros -->
+  <table class="table table-sm " >
+      <thead>
+        <tr>
+            <td class="text-center align-middle"><b>Largo caliente Minimo</b></td>
+            <td class="text-center align-middle"><b>Largo caliente parametro bajo</b></td>
+            <td class="text-center align-middle"><b>Largo caliente setting predefinido</b></td>
+            <td class="text-center align-middle"><b>Largo caliente parametro alto</b></td>
+            <td class="text-center align-middle"><b>Largo caliente maximo</b></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% if itemsFront.largo_caliente_minimo %}
+            <td class="text-center align-middle">   {{ itemsFront.largo_caliente_minimo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.largo_caliente_parametro_bajo %}
+            <td class="text-center align-middle">   {{ itemsFront.largo_caliente_parametro_bajo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.largo_caliente_setting_predefinido %}
+            <td class="text-center align-middle">   {{ itemsFront.largo_caliente_setting_predefinido }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.largo_caliente_parametro_alto %}
+            <td class="text-center align-middle">   {{ itemsFront.largo_caliente_parametro_alto }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.largo_caliente_maximo %}
+            <td class="text-center align-middle">   {{ itemsFront.largo_caliente_maximo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+        </tr>
+      </tbody>
+  </table>
+  <!-- row 2 parametros -->
+  <table class="table table-sm " >
+      <thead>
+        <tr>
+            <td class="text-center align-middle"><b>Ancho caliente minimo</b></td>
+            <td class="text-center align-middle"><b>Ancho caliente parametro bajo</b></td>
+            <td class="text-center align-middle"><b>Ancho caliente setting predefinido </b></td>
+            <td class="text-center align-middle"><b>Ancho caliente parametro alto</b></td>
+            <td class="text-center align-middle"><b>Ancho caliente maximo</b></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% if itemsFront.ancho_caliente_minimo %}
+            <td class="text-center align-middle">   {{ itemsFront.ancho_caliente_minimo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.ancho_caliente_parametro_bajo %}
+            <td class="text-center align-middle">   {{ itemsFront.ancho_caliente_parametro_bajo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.ancho_caliente_setting_predefinido %}
+            <td class="text-center align-middle">   {{ itemsFront.ancho_caliente_setting_predefinido }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.ancho_caliente_parametro_alto %}
+            <td class="text-center align-middle">   {{ itemsFront.ancho_caliente_parametro_alto }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.ancho_caliente_maximo %}
+            <td class="text-center align-middle">   {{ itemsFront.ancho_caliente_maximo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+        </tr>
+      </tbody>
+  </table>
+  <!-- row 3 parametros -->
+  <table class="table table-sm " >
+      <thead>
+        <tr>
+            <td class="text-center align-middle"><b>Alto caliente minimo</b></td>
+            <td class="text-center align-middle"><b>Alto caliente parametro bajo</b></td>
+            <td class="text-center align-middle"><b>Alto caliente setting predefinido</b></td>
+            <td class="text-center align-middle"><b>Alto caliente parametro alto</b></td>
+            <td class="text-center align-middle"><b>Alto caliente maximo</b></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% if itemsFront.alto_caliente_minimo %}
+            <td class="text-center align-middle">   {{ itemsFront.alto_caliente_minimo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.alto_caliente_parametro_bajo %}
+            <td class="text-center align-middle">   {{ itemsFront.alto_caliente_parametro_bajo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.alto_caliente_setting_predefinido %}
+            <td class="text-center align-middle">   {{ itemsFront.alto_caliente_setting_predefinido }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.alto_caliente_parametro_alto %}
+            <td class="text-center align-middle">   {{ itemsFront.alto_caliente_parametro_alto }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+          {% if itemsFront.alto_caliente_maximo %}
+            <td class="text-center align-middle">   {{ itemsFront.alto_caliente_maximo }} </td>
+          {% else %}
+            <td class="text-center align-middle" > <font color="red"> X </font> </td>
+          {%endif%}
+        </tr>
+      </tbody>
+  </table>
+  </div>
      
-      
+<br>
+<a class="btn btn-primary" href="{% url 'espumas:medidas' %}" role="button"> Regresar </a>
+<td class="text-center align-middle"><a class="btn btn-warning" href="{% url 'espumas:editar_medidas' itemsFront.id %}" role="button"> Editar  </a> </td>
+<br>
+
+             
     
-      <div class="container">
-        <div class="row">
-          <div class="col-12 offset-2">
-            
-            
-                    <br>
-                    <a class="btn btn-primary" href="{% url 'espumas:medidas' %}" role="button"> Regresar </a>
-            
-                  <br>
-              </div>
-          </div>
-      </div>
       
 
 {%endblock%}
