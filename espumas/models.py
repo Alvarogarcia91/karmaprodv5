@@ -128,7 +128,7 @@ class BloqueMedidas(models.Model):
     updated = models.DateTimeField(auto_now=True) 
     
     class Meta:
-        ordering = ('tipo_de_espuma','tipo_de_unidad')
+        ordering = ('familia_de_medidas','tipo_de_espuma','tipo_de_unidad')
         verbose_name = 'Bloque Medidas'
         verbose_name_plural = 'Bloques Medidas'
 

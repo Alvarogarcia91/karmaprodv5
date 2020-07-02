@@ -106,7 +106,7 @@ def borrar_medidas(request,id):
 
     if request.method =='POST':
         item.delete()
-        return redirect('espumas:espumas')
+        return redirect('espumas:medidas')
     return render(request,'espumas/medidas/borrarmedidas.html',{'item':item})
 
 

@@ -18,6 +18,7 @@
           <tr>
             <th class="text-center"><b> Tipo espuma </b></th>
             <th class="text-center"><b> Medidas Descripcion </b></th>
+            <th class="text-center"><b> Familia </b></th>
             <th class="text-center"><b> Forma </b></th>
             <th class="text-center"><b> Tipo de Unidad </b></th>
             <th class="text-center"><b> Editar </b></th>
@@ -30,6 +31,11 @@
         <tr>
             <td class="text-center">{{ item.tipo_de_espuma }}</td>
             <td class="text-center"><a href="{% url 'espumas:detalle_medidas' item.id %} "> {{ item.descripcion}} </a></td>
+            {% if item.familia_de_medidas %}
+                <td class="text-center align-middle">   {{ item.familia_de_medidas }} </td>
+            {% else %}
+                <td class="text-center align-middle" > <font color="red"> X </font> </td>
+            {%endif%}
             <td class="text-center">{{ item.forma }}</td>
             <td class="text-center">{{ item.tipo_de_unidad }}</td>
             <td class="text-center"><a class="btn btn-warning" href="{% url 'espumas:editar_medidas' item.id %}" role="button"> editar  </a></td>
