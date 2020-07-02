@@ -39,9 +39,9 @@
                         <td><span class="badge badge-primary badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
                         {%endif%}
                         <td class="text-center"> <b> {{elemento.num_bloques}}/{{elemento.cantidad}} </b></td>
-<!--                        
+                       
                         <td><a class="btn btn-primary" href="{% url 'corrida:producir_bloques' elemento.corrida_id  elemento.id %}" role="button"> Selecionar </a> 
-                        </td> -->
+                        </td>
                     {%else%}
                     <tr >
 
@@ -53,9 +53,9 @@
                         <td><span class="badge badge-primary badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
                         {%endif%}
                         <td class="text-center"> <b> {{elemento.num_bloques}}/{{elemento.cantidad}} </b></td>
-<!--                        
+                       
                         <td><a class="btn btn-primary" href="{% url 'corrida:producir_bloques' elemento.corrida_id  elemento.id %}" role="button"> Selecionar </a> 
-                        </td> -->
+                        </td>
                     </tr>
                     {%endif%}
                     {% endfor %}

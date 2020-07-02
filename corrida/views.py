@@ -121,11 +121,6 @@ def producir_corrida(request, corrida_id):
 def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 	elementos = ElementoCorrida.objects.filter(corrida = corrida_id).annotate(num_bloques = Count('bloqueproducido'))
 	opciones = None
-
-	if elementoCorrida_id:
-		elementoCorrida = ElementoCorrida.objects.get(id = elementoCorrida_id)
-	else:	
-		elementoCorrida = elementos[0]
 	
 	bloqueMedidas = BloqueMedidas.objects.get(id = elementoCorrida.bloqueMedidas.id)
 	opciones = elementos.filter(bloqueMedidas__tipo_de_unidad__tipo_de_unidad = 'Normal')
@@ -136,6 +131,11 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 	primer_bloque = True
 	if bloquesProducidosCount:
 		primer_bloque = False
+	
+	if elementoCorrida_id:
+		elementoCorrida = ElementoCorrida.objects.get(id = elementoCorrida_id)
+	else:	
+		elementoCorrida = elementos[0]
 	
 	defectos = BloqueProducido.DEFECTOS_CHOICES
 	context ={
