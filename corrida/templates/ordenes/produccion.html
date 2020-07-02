@@ -82,7 +82,7 @@
                             <tbody>
                                 <tr>
                                     <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}</span></td>
-                                    <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}</span></td>
+                                    <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}</span></td>
             
                                     <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.alto_caliente_setting_predefinido}}</span></td>
                                     <td><span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.tipo_de_espuma.flujo_de_aire_campo_alto}}</span></td>
@@ -129,19 +129,19 @@
                                 <input type="hidden" id ="{{elementoCorrida.id}}" name="elemento_corrida" value="{{elementoCorrida.id}}">
                                 
                             <td>
-                            <input type="text" size="5" id="largo_caliente" name="largo_caliente">
+                            <input type="text" size="5" id="largo_caliente" name="largo_caliente" value="{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}">
                             </td>
                             <td>
-                            <input type="text" size="5" id="ancho_caliente" name="ancho_caliente">
+                            <input type="text" size="5" id="ancho_caliente" name="ancho_caliente" value="{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}">
                             </td>
                             {% if cilindro %}
                             {% else %}
                             <td>
-                            <input type="text" size="5" id="alto_caliente" name="alto_caliente">
+                            <input autofocus type="text" size="5" id="alto_caliente" name="alto_caliente">
                             </td>
                             {% endif %}
                             <td>
-                            <input type="text" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
+                            <input autofocus type="text" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
                             </td>
                             <td>
                             <input type="text" size="5" id="peso_caliente" name="peso_caliente">
