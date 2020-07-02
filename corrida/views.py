@@ -132,6 +132,11 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 	
 	bloquesProducidos = BloqueProducido.objects.filter(elemento_corrida__corida_id = corrida_id).order_by('-no_de_bloque')
 	bloquesProducidosCount = bloquesProducidos.count()
+
+	primer_bloque = True
+	if bloquesProducidosCount:
+		primer_bloque = False
+	
 	defectos = BloqueProducido.DEFECTOS_CHOICES
 	context ={
 		'elementoCorrida': elementoCorrida,
@@ -141,6 +146,7 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		'tipos_defectos':defectos,
 		'opciones':opciones,
 		'bloquesProducidosCount':bloquesProducidosCount,
+		'primer_bloque': primer_bloque,
 	}
 	
 	return render(request, 'ordenes/produccion.html',context) 
@@ -149,17 +155,37 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 
 def producir_bloque_seleccionado (request):
 	if request.method == 'POST':
-		print(request.POST.get('revision_calidad'))
 		elemento_corrida = ElementoCorrida.objects.get(id=request.POST.get('elemento_corrida'))
-		bloque_producido = BloqueProducido()
-		bloques_producidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = elemento_corrida.corrida_id)
-		bloque_producido.elemento_corrida_id = request.POST.get('elemento_corrida')
+		elemento_siguiente = elemento_corrida
+		bloque_medidas = elemento_corrida.bloqueMedidas
+		
+		if 'inicio' in request.POST:
+			bloque_medidas = BloqueMedidas.filter(tipo_de_unidad__tipo_de_unidad ="Inicio").filter(tipo_de_espuma = bloque_medidas.tipo_de_espuma).filter(largo_frio_objetivo = bloque_medidas.largo_frio_objetivo).filter(ancho_frio_objetivo = bloque_medidas.ancho_frio_objetivo)
+			elemento_corrida_inicio = ElementoCorrida.objects.create(
+					bloqueMedidas = bloque_medidas,
+					corrida = elemento_corrida.corrida,
+					cantidad = 1
+			)
+			elemento_corrida_inicio.save()
+			elemento_corrida = elemento_corrida_inicio
 
+		if 'opcion' in request.POST:
+			bloque_medidas = BloqueMedidas.filter(tipo_de_unidad__tipo_de_unidad ="Cambio").filter(tipo_de_espuma = bloque_medidas.tipo_de_espuma).filter(largo_frio_objetivo = bloque_medidas.largo_frio_objetivo).filter(ancho_frio_objetivo = bloque_medidas.ancho_frio_objetivo)
+			elemento_corrida_cambio = ElementoCorrida.objects.create(
+					bloqueMedidas = bloque_medidas,
+					corrida = elemento_corrida.corrida,
+					cantidad = 1
+			)
+			elemento_corrida_cambio.save()
+			elemento_corrida = elemento_corrida_cambio
+			elemento_siguiente = ElementoCorrida.objects.get(id=request.POST.get('selector'))
+
+		bloque_producido = BloqueProducido()
+		bloque_producido.elemento_corrida_id = elemento_corrida.id
 		if 	request.POST.get('revision_calidad'):
 			bloque_producido.revision_calidad = request.POST.get('revision_calidad')
 		else:
 			bloque_producido.revision_calidad = False
-			
 		bloque_producido.defecto = request.POST.get('defecto')
 		bloque_producido.peso_caliente = request.POST.get('peso_caliente')
 		bloque_producido.alto_caliente = request.POST.get('alto_caliente')
@@ -168,35 +194,26 @@ def producir_bloque_seleccionado (request):
 		bloque_producido.flujo_de_aire_caliente = request.POST.get('flujo_de_aire_caliente')
 		bloque_producido.comentario = request.POST.get('comentario')
 		
-
-		elemento_siguiente = elemento_corrida
-		if 'cambio' in request.POST:
-			cambio_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Cambio')[0].id
-			elemento_siguiente = ElementoCorrida.objects.filter(corrida_id=elemento_corrida.corrida_id).filter(bloqueMedidas__tipo_de_espuma = elemento_corrida.bloqueMedidas.tipo_de_espuma).filter(bloqueMedidas__tipo_de_unidad_id = cambio_id).filter(bloqueMedidas__largo_caliente_setting_predefinido = elemento_corrida.bloqueMedidas.largo_caliente_setting_predefinido).filter(bloqueMedidas__ancho_caliente_setting_predefinido = elemento_corrida.bloqueMedidas.ancho_caliente_setting_predefinido).first()
-			
-			print(elemento_siguiente)
-			
-		if 'opcion' in request.POST:
-			print(request.POST.get('selector'))
-			elemento_siguiente = ElementoCorrida.objects.get(id=request.POST.get('selector'))
-
 		
-
 		if 'final' in request.POST:
-			final_id = Tipos_de_Unidad.objects.filter(tipo_de_unidad='Final')[0].id
-			elemento_final = ElementoCorrida.objects.filter(corrida_id=elemento_corrida.corrida_id).filter(bloqueMedidas__tipo_de_unidad_id = final_id)[0]
-			bloque_producido.elemento_corrida_id = elemento_final.id
-			corrida = Corrida.objects.get(pk=elemento_corrida.corrida_id )
+			bloque_medidas = BloqueMedidas.filter(tipo_de_unidad__tipo_de_unidad ="Final").filter(tipo_de_espuma = bloque_medidas.tipo_de_espuma).filter(largo_frio_objetivo = bloque_medidas.largo_frio_objetivo).filter(ancho_frio_objetivo = bloque_medidas.ancho_frio_objetivo)
+			elemento_corrida_final = ElementoCorrida.objects.create(
+					bloqueMedidas = bloque_medidas,
+					corrida = elemento_corrida.corrida,
+					cantidad = 1
+			)
+			elemento_corrida_final.save()
+			bloque_producido.elemento_corrida_id = elemento_corrida_final.id
 			bloque_producido.save()
+			
+			corrida = Corrida.objects.get(pk=elemento_corrida.corrida_id )
 			corrida.pendiente_produccion = False
 			corrida.en_produccion = False
 			corrida.pre_orden = False
 			corrida.cancelada = False
 			corrida.producto_terminado = True
 			corrida.save()
-
-		
-			return redirect('corrida:corrida_producida',corrida)#al resumen de prod
+			return redirect('corrida:corrida_producida',corrida)
 		
 		bloque_producido.save()
 
