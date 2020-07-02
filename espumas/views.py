@@ -85,7 +85,7 @@ def agregar_medidas(request):
 
     if form.is_valid():
         form.save()
-        return redirect('espumas:espumas')
+        return redirect('espumas:medidas')
 
     return render(request,'espumas/medidas/agregarmedidas.html',{'form':form})
 
