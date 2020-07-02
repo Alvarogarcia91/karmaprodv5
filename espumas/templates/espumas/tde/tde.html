@@ -1,62 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-
-
+<h1 class="text-right text-secondary"> <b> Tipos de Espuma </b></h1>
 <div >
     <br>
     <a class="btn btn-success" href="{% url 'espumas:agregar_tde' %}" role="button"> Agregar Tipo De Espuma </a>
     <br>
     <br>
-
 </div>
-
 <div>
-
-    
     <table class="table table-hover " >
             <thead>
               <tr>
-    
-    
-                <th>Tipo espuma</th>
-                <th>Formulacion Clave </th>
-                <th>Multiplicador</th>
-                <th>Precio</th>
-    
-                <th>Editar</th>
-                <th>Borrar </th>
-                <th>Agregar a Corrida</th>
-    
+                <th class="text-center align-middle"><b>Tipo espuma</b></th>
+                <th class="text-center align-middle"><b>Formulacion Clave </b></th>
+                <th class="text-center align-middle"><b>Multiplicador</b></th>
+                <th class="text-center align-middle"><b>Precio</b></th> 
+                <th class="text-center align-middle"><b>Editar</b></th>
+                <th class="text-center align-middle"><b>Borrar </b></th>
+                <th class="text-center align-middle"><b>Agregar a Corrida </b></th>
               </tr>
             </thead>
-    
             <tbody>
                 {% for item in itemsFront%}
-    
             <tr>
-    
-    
-            <td><a href="{% url 'espumas:detalle_tde' item.id %} "> {{ item.tipo_de_espuma}} </a></td>
-            <td>{{ item.formulacion_o_clave }}</td>
-            <td>{{ item.multiplicador }}</td>
-            <td>{{ item.precio }}</td>
-    
-            <td>
-                <a class="btn btn-warning" href="{% url 'espumas:editar_tde' item.id %}" role="button"> editar  </a>
-            </td>
-            <td>
-                <a class="btn btn-danger" href="{% url 'espumas:borrar_tde' item.id %}" role="button"> Borrar </a>
-            </td>
-            <td>
-                <a class="btn btn-primary" href="{% url 'espumas:detalle_tde' item.id %}" role="button"> Ver A Detalle </a>
-            </td>
-    
-    
-    
+            <td class="text-center align-middle"><a href="{% url 'espumas:detalle_tde' item.id %} "> {{ item.tipo_de_espuma}} </a></td>
+            <td class="text-center align-middle">{{ item.formulacion_o_clave }}</td>
+            <td class="text-center align-middle">{{ item.multiplicador }}</td>
+            <td class="text-center align-middle">{{ item.precio }}</td>
+            <td class="text-center align-middle"><a class="btn btn-warning" href="{% url 'espumas:editar_tde' item.id %}" role="button"> editar  </a> </td>
+            <td class="text-center align-middle"><a class="btn btn-danger" href="{% url 'espumas:borrar_tde' item.id %}" role="button"> Borrar </a></td >
+            <td class="text-center align-middle"><a class="btn btn-primary" href="{% url 'espumas:detalle_tde' item.id %}" role="button"> Ver A Detalle </a></td>
                 {% endfor %}
-    
-            </td>
-    
+            </tr>
             </tbody>
         </table>
         <br>

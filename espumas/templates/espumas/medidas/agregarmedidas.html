@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-
-{% block content %}
-	
-
+{% block content %}	
 <br>
 <br>
 <div class="container">
@@ -66,7 +63,7 @@
         {% endfor %}
         <br>
         <button class="btn btn-success" type="submit" formnovalidate> Guardar</button>
-        <a class="btn btn-primary" href="{% url 'espumas:tde' %}" role="button"> Regresar </a>
+        <a class="btn btn-primary" href="{% url 'espumas:medidas' %}" role="button"> Regresar </a>
     </form>
     <br>
 </div>
