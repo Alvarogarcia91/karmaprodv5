@@ -62,8 +62,11 @@ def espumas(request, tipo_id=0):
 #----MEDIDAS----
 
 
-def medidas(request):
-    item_list = BloqueMedidas.objects.all()
+def medidas(request,tipo_id=0):
+    if tipo_id !=0:
+        item_list = BloqueMedidas.objects.filter(tipo_de_espuma=tipo_id)
+    else:
+        item_list = BloqueMedidas.objects.all()
     tde_menus= Tipos_de_Espuma.objects.all()
     context ={
         'itemsFront':item_list,

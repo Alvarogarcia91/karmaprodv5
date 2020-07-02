@@ -38,6 +38,7 @@ urlpatterns = [
     path('deletetde/<int:id>',views.borrar_tde,name='borrar_tde'),
 
     path('filtro/<int:tipo_id>/',views.espumas,name='espumas_filtrado'),
+    path('filtro/<int:tipo_id>/',views.medidas,name='espumas_filtrado'),
 
 
 #     path('sand1/', views.sand1, name='sand1'),
