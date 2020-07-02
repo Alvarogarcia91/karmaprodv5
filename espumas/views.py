@@ -41,7 +41,7 @@ def espumas(request, tipo_id=0):
     if tipo_id != 0:
         item_list = BloqueMedidas.objects.filter(tipo_de_espuma=tipo_id)
     else:
-        item_list = BloqueMedidas.objects.all()
+        item_list = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Normal").filter(disponible = True)
     corrida = _corrida_actual()
     tde_menus= Tipos_de_Espuma.objects.all()
 
@@ -96,7 +96,7 @@ def editar_medidas(request,id):
 
     if form.is_valid():
         form.save()
-        return redirect('espumas:espumas')
+        return redirect('espumas:medidas')
 
     return render(request,'espumas/medidas/agregarmedidas.html',{'form':form,'item':item})
 
