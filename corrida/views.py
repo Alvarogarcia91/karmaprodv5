@@ -120,23 +120,31 @@ def producir_corrida(request, corrida_id):
 
 def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 	elementos = ElementoCorrida.objects.filter(corrida = corrida_id).annotate(num_bloques = Count('bloqueproducido'))
+	elementos_normales = elementos.filter(bloqueMedidas__tipo_de_unidad__tipo_de_unidad="Normal")
 	opciones = None
+
+	bloquesProducidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = elementos[0].corrida_id).order_by('-no_de_bloque')
+	bloquesProducidosCount = bloquesProducidos.count()
+
+	if elementoCorrida_id:
+		elementoCorrida = ElementoCorrida.objects.get(id = elementoCorrida_id)
+	else:	
+		if bloquesProducidosCount:
+			elementoCorrida = bloquesProducidos[0].elemento_corrida
+		else:
+			elementoCorrida = elementos[0]
 	
 	bloqueMedidas = BloqueMedidas.objects.get(id = elementoCorrida.bloqueMedidas.id)
 	opciones = elementos.filter(bloqueMedidas__tipo_de_unidad__tipo_de_unidad = 'Normal')
 	
-	bloquesProducidos = BloqueProducido.objects.filter(elemento_corrida__corida_id = corrida_id).order_by('-no_de_bloque')
-	bloquesProducidosCount = bloquesProducidos.count()
-
 	primer_bloque = True
 	if bloquesProducidosCount:
 		primer_bloque = False
 	
-	if elementoCorrida_id:
-		elementoCorrida = ElementoCorrida.objects.get(id = elementoCorrida_id)
-	else:	
-		elementoCorrida = elementos[0]
-	
+	multiples_elementos = False
+	if elementos_normales.count() > 1:
+		multiples_elementos = True
+
 	defectos = BloqueProducido.DEFECTOS_CHOICES
 	context ={
 		'elementoCorrida': elementoCorrida,
@@ -147,6 +155,7 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		'opciones':opciones,
 		'bloquesProducidosCount':bloquesProducidosCount,
 		'primer_bloque': primer_bloque,
+		'multiples_elementos': multiples_elementos,
 	}
 	
 	return render(request, 'ordenes/produccion.html',context) 
@@ -160,7 +169,7 @@ def producir_bloque_seleccionado (request):
 		bloque_medidas = elemento_corrida.bloqueMedidas
 		
 		if 'inicio' in request.POST:
-			bloque_medidas = BloqueMedidas.filter(tipo_de_unidad__tipo_de_unidad ="Inicio").filter(tipo_de_espuma = bloque_medidas.tipo_de_espuma).filter(largo_frio_objetivo = bloque_medidas.largo_frio_objetivo).filter(ancho_frio_objetivo = bloque_medidas.ancho_frio_objetivo)
+			bloque_medidas = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Inicio").filter(familia_de_medidas = bloque_medidas.familia_de_medidas)[0]
 			elemento_corrida_inicio = ElementoCorrida.objects.create(
 					bloqueMedidas = bloque_medidas,
 					corrida = elemento_corrida.corrida,
@@ -170,7 +179,7 @@ def producir_bloque_seleccionado (request):
 			elemento_corrida = elemento_corrida_inicio
 
 		if 'opcion' in request.POST:
-			bloque_medidas = BloqueMedidas.filter(tipo_de_unidad__tipo_de_unidad ="Cambio").filter(tipo_de_espuma = bloque_medidas.tipo_de_espuma).filter(largo_frio_objetivo = bloque_medidas.largo_frio_objetivo).filter(ancho_frio_objetivo = bloque_medidas.ancho_frio_objetivo)
+			bloque_medidas = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Cambio").filter(familia_de_medidas = bloque_medidas.familia_de_medidas)[0]
 			elemento_corrida_cambio = ElementoCorrida.objects.create(
 					bloqueMedidas = bloque_medidas,
 					corrida = elemento_corrida.corrida,
@@ -182,10 +191,7 @@ def producir_bloque_seleccionado (request):
 
 		bloque_producido = BloqueProducido()
 		bloque_producido.elemento_corrida_id = elemento_corrida.id
-		if 	request.POST.get('revision_calidad'):
-			bloque_producido.revision_calidad = request.POST.get('revision_calidad')
-		else:
-			bloque_producido.revision_calidad = False
+		bloque_producido.revision_calidad = request.POST.get('revision_calidad') or False
 		bloque_producido.defecto = request.POST.get('defecto')
 		bloque_producido.peso_caliente = request.POST.get('peso_caliente')
 		bloque_producido.alto_caliente = request.POST.get('alto_caliente')
@@ -195,7 +201,7 @@ def producir_bloque_seleccionado (request):
 		bloque_producido.comentario = request.POST.get('comentario')
 		
 		if 'final' in request.POST:
-			bloque_medidas = BloqueMedidas.filter(tipo_de_unidad__tipo_de_unidad ="Final").filter(tipo_de_espuma = bloque_medidas.tipo_de_espuma).filter(largo_frio_objetivo = bloque_medidas.largo_frio_objetivo).filter(ancho_frio_objetivo = bloque_medidas.ancho_frio_objetivo)
+			bloque_medidas = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Final").filter(familia_de_medidas = bloque_medidas.familia_de_medidas)[0]
 			elemento_corrida_final = ElementoCorrida.objects.create(
 					bloqueMedidas = bloque_medidas,
 					corrida = elemento_corrida.corrida,

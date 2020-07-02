@@ -114,7 +114,7 @@ class BloqueProducido(models.Model):
 		('g', 'Grieta'),
 		('v', 'Vena'),
 		('mm','Mal manejo'),
-		('fdm', 'Fuera de medida'),
+		('fm', 'Fuera de medida'),
 		('a', 'Algodonozo'),
 		('ma', 'Manchado'),
 	]
