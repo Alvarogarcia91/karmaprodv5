@@ -3,10 +3,10 @@
 <br>
 <br>
 <div class="dropdown show">
-        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!-- <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Tipos De Espuma
         </a>
-        <a class="btn btn-info" href="{% url 'espumas:agregar_medidas' %}" role="button"> Agregar Medidas </a>
+        <a class="btn btn-info" href="{% url 'espumas:agregar_medidas' %}" role="button"> Agregar Medidas </a> -->
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 {% for menuItem in menufront %}
                     <a class="dropdown-item"  href="{% url 'espumas:espumas_filtrado' menuItem.id %}"> {{menuItem}}</a>
@@ -21,7 +21,7 @@
             <th class="text-center align-middle">Medidas Descripcion </th>
             <th class="text-center align-middle">Familia</th> 
             <th class="text-center align-middle">Forma</th> 
-            <th class="text-center align-middle">Borrar </th>
+            <!-- <th class="text-center align-middle">Borrar </th> -->
             <th class="text-center align-middle">Agregar a Corrida</th>
           </tr>
         </thead>
@@ -32,7 +32,7 @@
             <td class="text-center align-middle" ><a href="{% url 'espumas:detalle_medidas' item.id %} "> {{ item.descripcion}} </a></td>
             <td class="text-center align-middle" >{{ item.familia_de_medidas }}</td>
             <td class="text-center align-middle" >{{ item.forma }}</td>
-            <td class="text-center align-middle" ><a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' item.id %}" role="button"> Borrar </a></td>
+            <!-- <td class="text-center align-middle" ><a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' item.id %}" role="button"> Borrar </a></td> -->
             <td class="text-center align-middle" ><a class="btn btn-success" href="{% url 'corrida:agregar_a_corrida' item.id  %}" role="button"> Agregar A Corrida </a></td>
             {% endfor %}
         </tr>
