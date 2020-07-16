@@ -81,6 +81,7 @@ class ElementoCorrida(models.Model):
 
 	class Meta:
 		db_table = 'ElementoCorrida'
+		ordering = ['lote']
 
 	def sub_total(self):
 		return self.bloqueMedidas.price * self.cantidad
