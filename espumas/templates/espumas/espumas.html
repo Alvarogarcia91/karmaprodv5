@@ -56,7 +56,7 @@
             <form action="{% url 'corrida:orden_de_corrida' %}" method="POST">
             {% csrf_token %}
             <label class="col-sm-2 col-form-label"><b> Fecha a producir:</b></label> 
-            <input type="date" name="fecha_programada">
+            <input required type="date" name="fecha_programada">
             {% for elementoCorrida in corridaFront %}
             <tr>
                 <td class="text-center">{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
