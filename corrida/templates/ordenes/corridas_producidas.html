@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3> <b>Corridas producidas </b>  </h3>
+<h3 class="text-primary text-right" > <b>Corridas producidas </b>  </h3>
     
     
     <div class="container">
@@ -11,19 +11,19 @@
     <table class="table table-striped table-sm">
             <thead>
               <tr>
-                <th> Numero De Corrida </th>
-                <th> Fecha de Producida </th>
-                <th> Fecha a Programada </th>
+                <th class="text-center align-middle" > Numero De Corrida </th>
+                <th class="text-center align-middle" > Fecha de Producida </th>
+                <th class="text-center align-middle" > Fecha a Programada </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                    {% for corridas_producidas in corridas_producidas %}
-                <td><a href="{% url 'corrida:corrida_producida' corridas_producidas.id %} "> {{corridas_producidas.id}} </a></td>
+                    {% for corrida_producida in corridas_producidas %}
+                <td class="text-center align-middle"><a href="{% url 'corrida:corrida_producida' corrida_producida.id %} "> {{corrida_producida.id}} </a></td>
                
-                <td>{{corridas_producidas.created}}</td>
+                <td class="text-center align-middle" >{{corrida_producida.created.date}}</td>
                 
-                <td>{{bloque_producido.fecha_programada}}</td>
+                <td class="text-center align-middle" >{{corrida_producida.fecha_programada.date}}</td>
                 
     
               </tr>
