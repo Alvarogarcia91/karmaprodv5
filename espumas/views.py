@@ -39,19 +39,19 @@ def _corrida_actual():
 
 def espumas(request, tipo_id=0):
     if tipo_id != 0:
-        item_list = BloqueMedidas.objects.filter(tipo_de_espuma=tipo_id)
+        bloques_medidas = BloqueMedidas.objects.filter(tipo_de_espuma=tipo_id)
     else:
-        item_list = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Normal").filter(disponible = True)
+        bloques_medidas = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Normal").filter(disponible = True)
     corrida = _corrida_actual()
     tde_menus= Tipos_de_Espuma.objects.all()
 
     try:
-        elementoCorrida_list = ElementoCorrida.objects.filter(corrida = corrida)
+        elementos_corrida = ElementoCorrida.objects.filter(corrida = corrida)
     except ElementoCorrida.DoesNotExist:
-        elementoCorrida_list = None
+        elementos_corrida = None
     context ={
-        'itemsFront':item_list,
-        'corridaFront': elementoCorrida_list,
+        'bloques_medidas':bloques_medidas,
+        'elementos_corrida': elementos_corrida,
         'menufront':tde_menus,
         'tipo_id':tipo_id,
     }

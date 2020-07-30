@@ -26,14 +26,14 @@
           </tr>
         </thead>
         <tbody>
-            {% for item in itemsFront%}
+            {% for bloque in bloques_medidas%}
         <tr>
-            <td class="text-center align-middle" >{{ item.tipo_de_espuma }}</td>
-            <td class="text-center align-middle" ><a href="{% url 'espumas:detalle_medidas' item.id %} "> {{ item.descripcion}} </a></td>
-            <td class="text-center align-middle" >{{ item.familia_de_medidas }}</td>
-            <td class="text-center align-middle" >{{ item.forma }}</td>
-            <!-- <td class="text-center align-middle" ><a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' item.id %}" role="button"> Borrar </a></td> -->
-            <td class="text-center align-middle" ><a class="btn btn-success" href="{% url 'corrida:agregar_a_corrida' item.id  %}" role="button"> Agregar A Corrida </a></td>
+            <td class="text-center align-middle" >{{ bloque.tipo_de_espuma }}</td>
+            <td class="text-center align-middle" ><a href="{% url 'espumas:detalle_medidas' bloque.id %} "> {{ bloque.descripcion}} </a></td>
+            <td class="text-center align-middle" >{{ bloque.familia_de_medidas }}</td>
+            <td class="text-center align-middle" >{{ bloque.forma }}</td>
+            <!-- <td class="text-center align-middle" ><a class="btn btn-danger" href="{% url 'espumas:borrar_medidas' bloque.id %}" role="button"> Borrar </a></td> -->
+            <td class="text-center align-middle" ><a class="btn btn-success" href="{% url 'corrida:agregar_a_corrida' bloque.id  %}" role="button"> Agregar A Corrida </a></td>
             {% endfor %}
         </tr>
         </tbody>
@@ -57,7 +57,7 @@
             {% csrf_token %}
             <label class="col-sm-2 col-form-label"><b> Fecha a producir:</b></label> 
             <input required type="date" name="fecha_programada">
-            {% for elementoCorrida in corridaFront %}
+            {% for elementoCorrida in elementos_corrida %}
             <tr>
                 <td class="text-center">{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
                 <td class="text-center">{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
