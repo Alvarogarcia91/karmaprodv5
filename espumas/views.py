@@ -159,3 +159,12 @@ def borrar_tde(request,id):
         item.delete()
         return redirect('espumas:tde')
     return render(request,'espumas/tde/borrartde.html',{'item':item})
+
+
+
+def formas(request):
+    item_list = Formas.objects.all()
+    context ={
+        'itemsFront':item_list,
+    }
+    return render(request,'espumas/selectores/formas.html',context)

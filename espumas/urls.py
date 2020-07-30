@@ -38,7 +38,9 @@ urlpatterns = [
     path('editartde/<int:id>',views.editar_tde,name='editar_tde'),
     #http://127.0.0.1:8000/espumas/deletetde/3
     path('deletetde/<int:id>',views.borrar_tde,name='borrar_tde'),
-
+   
+    #http://127.0.0.1:8000/espumas/medidas  
+    path('formas/', views.formas, name='formas'),
 
 
 #     path('sand1/', views.sand1, name='sand1'),

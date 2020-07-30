@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-right text-secondary"> <b> Crear Corrida </b></h1>
+
+
+<h5 class="text-left text-primary"> <b> Selecione una Forma para iniciar la orden de corrida </b></h5>
+
+      
+{% for item in itemsFront%}
+        <div class="card text-center">
+            <div class="card-header">
+          
+            </div>
+            <div class="card-body">
+            <h5 class="card-title"> {{item.forma}}</h5>
+            <p class="card-text">Para crear una orden de {{item.forma}} .</p>
+            <a href="{% url 'corrida:nueva_corrida' item.id %}" class="btn btn-primary"> {{item.forma}} &raquo;</a>
+            </div>
+            <div class="card-footer text-muted">
+            Forma Disponible
+            </div>
+        </div>
+        <br>
+{% endfor %}
+
+
+
+
+{% endblock %}

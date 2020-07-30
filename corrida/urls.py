@@ -42,4 +42,6 @@ urlpatterns = [
 
     path('bloques_disponibles/', views.bloques_disponibles, name='bloques_disponibles'),
 
+    
+
 ]
