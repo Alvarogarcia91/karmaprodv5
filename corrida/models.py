@@ -8,14 +8,15 @@ class Corrida(models.Model):
 	#corrida_id = models.CharField(max_length=250, blank=True)
 	created = models.DateTimeField(auto_now_add = True)
 	updated = models.DateTimeField(auto_now = True)
+	fecha_programada = models.DateTimeField(null = True)
+	fecha_creacion = models.DateTimeField(null = True)
+	fecha_produccion = models.DateTimeField(null = True)
 	pre_orden = models.BooleanField(default = True)
 	pendiente_produccion = models.BooleanField(default = False)
 	en_produccion = models.BooleanField(default = False)
 	cancelada = models.BooleanField(default = False)
 	producto_terminado = models.BooleanField(default = False)
-	fecha_programada = models.DateTimeField(null = True)
-	fecha_creacion = models.DateTimeField(null = True)
-
+	
 	class Meta:
 		db_table = 'Corrida'
 		ordering = ['-id']

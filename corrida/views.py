@@ -8,8 +8,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.db.models import Max, Count, Sum, Avg
-import datetime
-
+from datetime import datetime
 
 #from django.core.mail import EmailMessage
 
@@ -221,6 +220,7 @@ def producir_bloque_seleccionado (request):
 			corrida.pre_orden = False
 			corrida.cancelada = False
 			corrida.producto_terminado = True
+			corrida.fecha_produccion = datetime.now()
 			corrida.save()
 			return redirect('corrida:corrida_producida',corrida)
 		
