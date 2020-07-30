@@ -21,8 +21,8 @@ from .forms import *
 def index(request):
     return render(request, 'index.html')
 
-def espumas(request):
-    return HttpResponse('espumas Respuesta http: Hola')
+# def espumas(request):
+#     return HttpResponse('espumas Respuesta http: Hola')
 
 def respuesta(request):
     return HttpResponse('Respuesta http: Hola')
