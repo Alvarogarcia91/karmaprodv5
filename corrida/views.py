@@ -13,6 +13,8 @@ from datetime import datetime
 #from django.core.mail import EmailMessage
 
 
+#funcion para la corrida actual
+#esta func entrega la activa=true y si no existe la crea
 def _corrida_actual():
 	try:
 		corrida = Corrida.objects.get(pre_orden= True)
@@ -20,6 +22,28 @@ def _corrida_actual():
 		corrida = Corrida.objects.create()
 		corrida.save()
 	return corrida
+
+def nueva_corrida(request, forma_id=1, tipo_de_espuma_id=0):
+    if tipo_de_espuma_id:
+        bloques_medidas = BloqueMedidas.objects.filter(tipo_de_espuma_id = tipo_de_espuma_id).filter(forma_id = forma_id).filter(tipo_de_unidad__tipo_de_unidad ="Normal").filter(disponible = True)
+    else:
+        bloques_medidas = BloqueMedidas.objects.filter(forma_id = forma_id).filter(tipo_de_unidad__tipo_de_unidad ="Normal").filter(disponible = True)
+
+    corrida = _corrida_actual()
+    tipos_de_espuma = Tipos_de_Espuma.objects.all()
+
+    try:
+        elementos_corrida = ElementoCorrida.objects.filter(corrida = corrida)
+    except ElementoCorrida.DoesNotExist:
+        elementos_corrida = None
+    context ={
+        'bloques_medidas':bloques_medidas,
+        'elementos_corrida': elementos_corrida,
+        'tipos_de_espuma':tipos_de_espuma,
+        'forma_id':forma_id,
+    }
+    return render(request,'espumas/espumas.html',context)
+
 
 def agrega_a_corrida(request, bloque_medidas_id):
 	bloqueMedidas = BloqueMedidas.objects.get(id=bloque_medidas_id)

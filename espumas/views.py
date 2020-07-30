@@ -43,7 +43,7 @@ def espumas(request, tipo_id=0):
     else:
         bloques_medidas = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Normal").filter(disponible = True)
     corrida = _corrida_actual()
-    tde_menus= Tipos_de_Espuma.objects.all()
+    formas= Formas.objects.all()
 
     try:
         elementos_corrida = ElementoCorrida.objects.filter(corrida = corrida)
@@ -52,7 +52,7 @@ def espumas(request, tipo_id=0):
     context ={
         'bloques_medidas':bloques_medidas,
         'elementos_corrida': elementos_corrida,
-        'menufront':tde_menus,
+        'formas':formas,
         'tipo_id':tipo_id,
     }
     return render(request,'espumas/espumas.html',context)

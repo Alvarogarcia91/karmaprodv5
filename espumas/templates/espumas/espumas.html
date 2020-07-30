@@ -1,19 +1,18 @@
 {% extends "base.html" %}
-{% block content %}
-<br>
-<br>
+{% block content %} 
+<h1 class="text-right text-secondary"><b> Corrida nueva </b></h1>
 <div class="dropdown show">
-        <!-- <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Tipos De Espuma
-        </a>
-        <a class="btn btn-info" href="{% url 'espumas:agregar_medidas' %}" role="button"> Agregar Medidas </a> -->
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                {% for menuItem in menufront %}
-                    <a class="dropdown-item"  href="{% url 'espumas:espumas_filtrado' menuItem.id %}"> {{menuItem}}</a>
-                {% endfor %}  
-            </div>
-</div>
+    <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Tipos De Espuma
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for tipo_de_espuma in tipos_de_espuma %}
+        <a class="dropdown-item"  href="{% url 'corrida:nueva_corrida' forma_id tipo_de_espuma.id %}"> {{tipo_de_espuma}}</a>
+        {% endfor %}
+    </div>
+    <a class="btn btn-success" href="{% url 'corrida:nueva_corrida' forma_id %}" role="button"> Mostrar todos </a>
 <br>
+
 <table class="table table-hover table-sm" >
         <thead>
           <tr>

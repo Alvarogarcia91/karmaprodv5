@@ -7,9 +7,13 @@ urlpatterns = [
 
     #aqui defines el tipo y nombre  del parametro que le mandas al view
 
-	path('add/<int:bloque_medidas_id>/', views.agrega_a_corrida, name='agregar_a_corrida'),
+    path('nueva/', views.nueva_corrida, name='nueva_corrida'),
+    path('nueva/<int:forma_id>/', views.nueva_corrida, name='nueva_corrida'),
+    path('nueva/<int:forma_id>/<int:tipo_de_espuma_id>', views.nueva_corrida, name='nueva_corrida'),
+
+    path('add/<int:bloque_medidas_id>/', views.agrega_a_corrida, name='agregar_a_corrida'),
     path('orden/', views.orden_de_corrida, name='orden_de_corrida'),
-	path('remover_elemento_catalogo/<int:elemento_id>/', views.remover_elemento_catalogo, name='remover_elemento_catalogo'),
+    path('remover_elemento_catalogo/<int:elemento_id>/', views.remover_elemento_catalogo, name='remover_elemento_catalogo'),
     path('remover_elemento_ordenes/<int:elemento_id>/', views.remover_elemento_ordenes, name='remover_elemento_ordenes'),
     path('remover_elemento_ordenes_pendientes/<int:elemento_id>/', views.remover_elemento_ordenes_pendientes, name='remover_elemento_ordenes_pendientes'),
 
