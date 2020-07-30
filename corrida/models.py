@@ -14,7 +14,7 @@ class Corrida(models.Model):
 	cancelada = models.BooleanField(default = False)
 	producto_terminado = models.BooleanField(default = False)
 	fecha_programada = models.DateTimeField(null = True)
-
+	fecha_creacion = models.DateTimeField(null = True)
 
 	class Meta:
 		db_table = 'Corrida'
