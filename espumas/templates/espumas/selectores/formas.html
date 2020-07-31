@@ -8,13 +8,11 @@
       
 {% for item in itemsFront%}
         <div class="card text-center">
-            <div class="card-header">
-          
-            </div>
+
             <div class="card-body">
             <h5 class="card-title"> {{item.forma}}</h5>
             <p class="card-text">Para crear una orden de {{item.forma}} .</p>
-            <a href="{% url 'corrida:nueva_corrida' item.id %}" class="btn btn-primary"> {{item.forma}} &raquo;</a>
+            <a href="{% url 'corrida:nueva_corrida' item.id %}" class="btn btn-primary"> Empezar &raquo;</a>
             </div>
             <div class="card-footer text-muted">
             Forma Disponible

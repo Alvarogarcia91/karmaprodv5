@@ -32,11 +32,15 @@ def nueva_corrida(request, forma_id=1, tipo_de_espuma_id=0):
     corrida = _corrida_actual()
     tipos_de_espuma = Tipos_de_Espuma.objects.all()
 
+    conflicto = False
     try:
         elementos_corrida = ElementoCorrida.objects.filter(corrida = corrida)
-    except ElementoCorrida.DoesNotExist:
+        if elementos_corrida[0].bloqueMedidas.forma_id != forma_id:
+            conflicto = True
+    except IndexError:
         elementos_corrida = None
     context ={
+        'conflicto' : conflicto,
         'bloques_medidas':bloques_medidas,
         'elementos_corrida': elementos_corrida,
         'tipos_de_espuma':tipos_de_espuma,
