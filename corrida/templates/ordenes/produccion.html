@@ -169,6 +169,13 @@
                     
                 <div class="col-7 offset-3">
                 {% if primer_bloque %}
+                        <div class="align-middle">
+                            <select id="opcionesInicio" name="selectorInicio" >
+                            {% for opcion in opciones %}
+                                <option value="{{opcion.id}}">{{opcion}}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
                     <input type="submit" class="btn btn-success" value="Capturar bloque Inicio" name="inicio">
                 {% else %}
                     <input type="submit" class="btn btn-success" value="Normal" name="siguiente">

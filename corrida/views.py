@@ -64,7 +64,7 @@ def agrega_a_corrida(request, bloque_medidas_id):
 			)
 		elemento_corrida.save()
 		
-	return redirect('espumas:espumas')
+	return redirect('corrida:nueva_corrida')
 
 
 def orden_de_corrida(request):
@@ -199,6 +199,8 @@ def producir_bloque_seleccionado (request):
 		bloque_medidas = elemento_corrida.bloqueMedidas
 		
 		if 'inicio' in request.POST:
+			elemento_corrida_normal = ElementoCorrida.objects.get(id=request.POST.get('selectorInicio'))
+			bloque_medidas = elemento_corrida_normal.bloqueMedidas
 			bloque_medidas = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Inicio").filter(familia_de_medidas = bloque_medidas.familia_de_medidas)[0]
 			elemento_corrida_inicio = ElementoCorrida.objects.create(
 					bloqueMedidas = bloque_medidas,
@@ -207,6 +209,7 @@ def producir_bloque_seleccionado (request):
 			)
 			elemento_corrida_inicio.save()
 			elemento_corrida = elemento_corrida_inicio
+			elemento_siguiente = elemento_corrida_normal
 
 		if 'opcion' in request.POST:
 			bloque_medidas = BloqueMedidas.objects.filter(tipo_de_unidad__tipo_de_unidad ="Cambio").filter(familia_de_medidas = bloque_medidas.familia_de_medidas)[0]
