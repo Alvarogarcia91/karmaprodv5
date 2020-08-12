@@ -4,10 +4,10 @@
 
 <br>
 <br>
-
+<!-- 
 <h1 class="text-left my_title text-primary" ><b> Ordenes Pendientes </b></h1>
-<br>
-<hr class="style1">
+<br> -->
+<!-- <hr class="style1">
     <h3 class="text-left my_title text-info"> <b>Corridas en Producción </b></h3>
     {% for corrida in corridas_en_produccion %}
     <table class="table table-hover" >
@@ -53,11 +53,14 @@
     <hr class="style4">
     <br>
     {% endfor %}
-    <hr class="style7">
+    <hr class="style7">-->
     <br>
-    <h3 class="text-left my_title text-info" > <b> Corridas Pendientes </b></h3>
+    <h1 class="text-right text-secondary"> <b> Ordenes Pendientes </b></h1>
+    <br>
+
+    <!-- <h3 class="text-left my_title text-info" > <b> Corridas Pendientes </b></h3> -->
     {% for corrida in corridas_pendientes %}
-    <table class="table table-hover" >
+    <table class="table table-hover table-sm" >
         <thead>
             <tr>
             <th class="text-center"> No.Orden</th>
