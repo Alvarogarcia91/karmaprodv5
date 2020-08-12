@@ -293,6 +293,7 @@ def editar_cantidades_corrida(request):
 def corrida_producida(request,corrida_id):
 	bloques_producidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = corrida_id).order_by('no_de_bloque')
 	resumen = {
+		"bloques_totales": 0,
 		"bloques_normales": 0,
 		"bloques_ok": 0,
 		"bloques_ng": 0,
@@ -302,6 +303,7 @@ def corrida_producida(request,corrida_id):
 		"metros_producidos": 0,
 		"peso_producido": 0,
 	}
+	resumen['bloques_totales'] = bloques_producidos.count()
 	resumen['bloques_normales'] = bloques_producidos.filter(elemento_corrida__bloqueMedidas__tipo_de_unidad__tipo_de_unidad = "Normal").count()
 	resumen['bloques_ok'] = bloques_producidos.filter(revision_calidad = True).count()
 	resumen['bloques_ng'] = bloques_producidos.filter(revision_calidad = False).count()
