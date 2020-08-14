@@ -1,0 +1,175 @@
+{% extends "baseprod.html" %}
+{% block content %}
+<meta http-equiv="refresh" content="20">
+
+        <div class="row">
+                <div class="col-12 ">
+    <h3><b>Produciendo Orden:<font color="green"> {{elementoCorrida.corrida_id}} </font></b></h3>
+                </div>
+            </div>
+
+<!--  Row Master-->
+    <div class="row">
+        <!-- COL Elementos -->
+        <div class="col-4" >
+            
+            <table class="table table-hover  table-responsive  "  >
+                <thead class="thead-light">
+                    <tr>
+                    <th style="width: 1px"> Tipo de espuma</th>
+                    <th style="width: 1px"> Descripcion </th>
+                    <th style="width: 1px"> Tipo de unidad </th>
+                    
+                    <th style="width: 1px"> Cantidad </th>
+                  
+                    <!-- <th> Selecionar </th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for elemento in elementos_corrida %}
+                    <tr >
+                        <td>{{ elemento.bloqueMedidas.tipo_de_espuma }}</td>
+                        <td>{{ elemento.bloqueMedidas.descripcion }}</td>         
+                        {% if elementoCorrida.bloqueMedidas.id == elemento.bloqueMedidas.id   %}
+                        <td><span class="badge badge-success badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
+                        {%else%}
+                        <td><span class="badge badge-primary badge-pill">{{elemento.bloqueMedidas.tipo_de_unidad}}</span></td>
+                        {%endif%}
+                        <td class="text-center"> <b> {{elemento.num_bloques}}/{{elemento.cantidad}} </b></td>
+                       
+                        <!-- <td><a class="btn btn-primary" href="{% url 'corrida:producir_bloques' elemento.corrida_id  elemento.id %}" role="button"> Selecionar </a> </td> -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>        
+        </div>
+
+        
+        <!-- Settings -->
+        <div class="col-8" style="padding: 0" >
+            <div class="row">
+                <div class="col-6">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                          <h1 class="card-title">{{bloques_aprobados_porcentaje}} <small class="text-muted">%</small></h1>
+                          <ul class="list-unstyled mt-3 mb-4">
+                            <li>bloques aprobados</li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-6">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                            <h1 class="card-title">{{bloques_rechazados_count}} </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                            <li>bloques rechazados</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row de Heading del visor -->
+            <div class="row">
+                <div class="col-12 offset-0">
+                    <p><b>Bloques Producidos de: <font color="green"> {{elementoCorrida.bloqueMedidas.tipo_de_espuma}}</font>
+                    Numero de Lote: <font color="blue">{{elementoCorrida.lote.no_de_lote}}</font> </p></b>
+                </div>
+            </div>
+
+            <div class="row">
+                    <table class="table table-striped table-sm table-responsive{-sm|-md|-lg|-xl}" >
+                        <thead class="thead-light">
+                            <tr class="table-primary">
+                            <th> # </th>
+                            <th> TDE </th>
+                            <th> Largo </th>
+                            <th> Ancho </th>
+                            <th> Alto </th>
+                            <th> F.Aire </th>
+                            <th> Peso </th>
+                           
+                            <th> OK </th>
+                            <th> Observacion </th>
+                            <th> Comentario </th>
+                            <th> Volumen </th>
+                            <th> Densidad </th>
+                            
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            
+                            {% for bloque in bloques_producidos %}
+                            <tr >
+                                <td>{{bloque.no_de_bloque}}  </td>
+                                <td>{{bloque.elemento_corrida.bloqueMedidas.tipo_de_espuma}}  </td>
+                                <td> <span class="{{bloque.largo_caliente_class}}"> {{bloque.largo_caliente}} </span>  </td>
+                                <td> <span class="{{bloque.ancho_caliente_class}}"> {{bloque.ancho_caliente}} </span> </td>
+                                <td> <span class="{{bloque.alto_caliente_class}}"> {{bloque.alto_caliente}} </span>    </td> 
+                                <td>{{bloque.flujo_de_aire_caliente}}  </td>
+                                <td>{{bloque.peso_caliente}}  </td>
+                                
+                                {% if bloque.revision_calidad == True %}
+                                    <td>   </td>
+                                {% else %}
+                                    <td> X </td>
+
+                                {%endif%}
+                                <td>{{bloque.get_defecto_display}}   </td>
+                                <td>{{bloque.comentario}}  </td>
+                                <td> <span class="">{{bloque.volumen}}</span>  </td>
+                                <td><span class="{{bloque.densidad_class}}"> {{bloque.densidad}}  </span></td>
+                                
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>    
+            </div>
+
+        </div>  
+    </div>
+
+
+
+
+{%endblock%}
+
+
+
+        <!-- <div class="col-3 offset-0 ">
+            
+            <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-center align-items-center">
+                                Settings 
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Largo: 
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Ancho:
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Alto:
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.alto_caliente_setting_predefinido}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                F.Aire:
+                          <span class="badge badge-primary badge-pill"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Uso:
+                          <span class="badge badge-primary badge-pill">{{elementoCorrida.bloqueMedidas.uso_objetivo}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <b>Bloques Producidos: </b>
+                          <span class="badge badge-warning badge-pill">0/{{elementoCorrida.cantidad}}</span>
+                        </li>
+                        
+                    </ul> 
+        </div>   -->

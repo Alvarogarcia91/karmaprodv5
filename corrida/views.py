@@ -176,6 +176,7 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 		cilindro = True
 
 	defectos = BloqueProducido.DEFECTOS_CHOICES
+	
 	context ={
 		'elementoCorrida': elementoCorrida,
 		'elementos': elementos,
@@ -190,6 +191,24 @@ def producir_bloques(request, corrida_id, elementoCorrida_id=None):
 	
 	return render(request, 'ordenes/produccion.html',context) 
 
+def monitoreo_de_produccion(request, corrida_id):
+	
+	elementos_corrida = ElementoCorrida.objects.filter(corrida = corrida_id).annotate(num_bloques = Count('bloqueproducido'))
+	
+	bloques_producidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = elementos_corrida[0].corrida_id).order_by('-no_de_bloque')
+	bloques_producidos_count = bloques_producidos.count()
+	bloques_rechazados_count = bloques_producidos.filter(revision_calidad = False).count()
+	bloques_aprobados_porcentaje = (bloques_producidos_count - bloques_rechazados_count)*100/bloques_producidos_count
+	
+	context ={
+		'elementos_corrida': elementos_corrida,
+		'bloques_producidos': bloques_producidos,
+		'bloques_producidos_count':bloques_producidos_count,
+		'bloques_rechazados_count':bloques_rechazados_count,
+		'bloques_aprobados_porcentaje': bloques_aprobados_porcentaje,
+	}
+	
+	return render(request, 'ordenes/monitoreo.html', context)
 
 
 def producir_bloque_seleccionado (request):
