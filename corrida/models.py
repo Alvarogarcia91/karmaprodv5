@@ -87,6 +87,9 @@ class ElementoCorrida(models.Model):
 	def sub_total(self):
 		return self.bloqueMedidas.price * self.cantidad
 
+	def bloques_producidos(self):
+		return self.bloqueproducido_set.all().count()
+
 	def area_de_curado(self):
 		bloques = self.bloqueproducido_set.all()
 		area_total = 0
