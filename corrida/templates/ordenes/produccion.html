@@ -129,22 +129,22 @@
                                 <input type="hidden" id ="{{elementoCorrida.id}}" name="elemento_corrida" value="{{elementoCorrida.id}}">
                                 
                             <td>
-                            <input type="text" size="5" id="largo_caliente" name="largo_caliente" value="{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}">
+                            <input required type="number" size="5" id="largo_caliente" name="largo_caliente" value="{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}">
                             </td>
                             <td>
-                            <input type="text" size="5" id="ancho_caliente" name="ancho_caliente" value="{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}">
+                            <input required type="number" size="5" id="ancho_caliente" name="ancho_caliente" value="{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}">
                             </td>
                             {% if cilindro %}
                             {% else %}
                             <td>
-                            <input autofocus type="text" size="5" id="alto_caliente" name="alto_caliente">
+                            <input required autofocus type="number" size="5" id="alto_caliente" name="alto_caliente">
                             </td>
                             {% endif %}
                             <td>
-                            <input autofocus type="text" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
+                            <input required autofocus type="number" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
                             </td>
                             <td>
-                            <input type="text" size="5" id="peso_caliente" name="peso_caliente">
+                            <input required type="number" size="5" id="peso_caliente" name="peso_caliente">
                             </td>
                             <td>
                             <input class="form-check-input" type="checkbox" name="revision_calidad"  checked id="revision_calidad" value="True">
