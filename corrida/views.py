@@ -186,7 +186,10 @@ def monitoreo_de_produccion(request, corrida_id):
 	bloques_producidos = BloqueProducido.objects.filter(elemento_corrida__corrida_id = elementos_corrida[0].corrida_id).order_by('-no_de_bloque')
 	bloques_producidos_count = bloques_producidos.count()
 	bloques_rechazados_count = bloques_producidos.filter(revision_calidad = False).count()
-	bloques_aprobados_porcentaje = (bloques_producidos_count - bloques_rechazados_count)*100/bloques_producidos_count
+	if bloques_producidos_count:
+		bloques_aprobados_porcentaje = (bloques_producidos_count - bloques_rechazados_count)*100/bloques_producidos_count
+	else:
+		bloques_aprobados_porcentaje = 100
 	
 	context ={
 		'elementos_corrida': elementos_corrida,
