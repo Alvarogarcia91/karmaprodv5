@@ -13,9 +13,6 @@ urlpatterns = [
 
     path('add/<int:bloque_medidas_id>/', views.agrega_a_corrida, name='agregar_a_corrida'),
     path('orden/', views.orden_de_corrida, name='orden_de_corrida'),
-    path('remover_elemento_catalogo/<int:elemento_id>/', views.remover_elemento_catalogo, name='remover_elemento_catalogo'),
-    path('remover_elemento_ordenes/<int:elemento_id>/', views.remover_elemento_ordenes, name='remover_elemento_ordenes'),
-    path('remover_elemento_ordenes_pendientes/<int:elemento_id>/', views.remover_elemento_ordenes_pendientes, name='remover_elemento_ordenes_pendientes'),
 
     path('cancelar_corrida/<int:corrida_id>/', views.cancelar_corrida, name='cancelar_corrida'),
     path('ordenes/', views.ordenes, name='ordenes'),

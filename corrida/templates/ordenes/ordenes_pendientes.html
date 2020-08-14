@@ -89,7 +89,7 @@
                     <input type="hidden" id ="{{elementoCorrida.id}}" name="elementoIds" value="{{elementoCorrida.id}}">
                 </td>
                 <td class="text-center" >
-                    <a class="btn btn-danger" href="{% url 'corrida:remover_elemento_ordenes_pendientes' elementoCorrida.id %}" role="button"> Remover  </a>
+                    <a class="btn btn-danger" href="{% url 'corrida:remover_elemento_corrida' elementoCorrida.id %}" role="button"> Remover  </a>
                 </td>
             </tr>
             {% endfor %}

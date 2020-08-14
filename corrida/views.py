@@ -64,7 +64,7 @@ def agrega_a_corrida(request, bloque_medidas_id):
 			)
 		elemento_corrida.save()
 		
-	return redirect('corrida:nueva_corrida')
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def orden_de_corrida(request):
@@ -88,22 +88,10 @@ def orden_de_corrida(request):
 		#redirigir a las ordenes de corridas
 	return redirect('corrida:ordenes_pendientes')
 
-
-def remover_elemento_catalogo(request, elemento_id):
-	elemento = ElementoCorrida.objects.get(pk= elemento_id)
+def remover_elemento_corrida(request, elemento_id):
+	elemento = ElementoCorrida.objects.get(pk = elemento_id)
 	elemento.delete()
-	return redirect('espumas:espumas')
-
-def remover_elemento_ordenes(request, elemento_id):
-	elemento = ElementoCorrida.objects.get(pk= elemento_id)
-	elemento.delete()
-	return redirect('corrida:ordenes')
-
-def remover_elemento_ordenes_pendientes(request, elemento_id):
-	elemento = ElementoCorrida.objects.get(pk= elemento_id)
-	elemento.delete()
-	return redirect('corrida:ordenes_pendientes')
-
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 #
 # def ordenes(request):

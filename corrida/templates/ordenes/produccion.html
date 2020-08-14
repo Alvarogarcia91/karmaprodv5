@@ -129,35 +129,35 @@
                                 <input type="hidden" id ="{{elementoCorrida.id}}" name="elemento_corrida" value="{{elementoCorrida.id}}">
                                 
                             <td>
-                            <input required type="number" size="5" id="largo_caliente" name="largo_caliente" value="{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}">
+                                <input class= "col-lg-12" required type="number" size="5" id="largo_caliente" name="largo_caliente" value="{{elementoCorrida.bloqueMedidas.largo_caliente_setting_predefinido}}">
                             </td>
                             <td>
-                            <input required type="number" size="5" id="ancho_caliente" name="ancho_caliente" value="{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}">
+                                <input class= "col-lg-12" required type="number" size="5" id="ancho_caliente" name="ancho_caliente" value="{{elementoCorrida.bloqueMedidas.ancho_caliente_setting_predefinido}}">
                             </td>
                             {% if cilindro %}
                             {% else %}
                             <td>
-                            <input required autofocus type="number" size="5" id="alto_caliente" name="alto_caliente">
+                                <input class= "col-lg-12" required autofocus type="number" size="5" id="alto_caliente" name="alto_caliente">
                             </td>
                             {% endif %}
-                            <td>
-                            <input required autofocus type="number" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
+                            <td >
+                                <input class= "col-lg-12" required autofocus type="number" size="5" id="flujo_de_aire_caliente" name="flujo_de_aire_caliente">
+                            </td>
+                            <td >
+                                <input class= "col-lg-12" required type="number" size="5" id="peso_caliente" name="peso_caliente">
+                            </td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <input type="checkbox" name="revision_calidad"  checked id="revision_calidad" value="True">
                             </td>
                             <td>
-                            <input required type="number" size="5" id="peso_caliente" name="peso_caliente">
-                            </td>
-                            <td>
-                            <input class="form-check-input" type="checkbox" name="revision_calidad"  checked id="revision_calidad" value="True">
-                            </td>
-                            <td>
-                                <select id="defecto" name="defecto">
+                                <select class= "col-lg-12"  id="defecto" name="defecto">
                                     {% for choice in tipos_defectos %}
                                     <option value="{{choice.0}}">{{choice.1}}</option>
                                     {% endfor %}
                                 </select>
                             </td>
                             <td>
-                                <input type="text" size="25" id="alto_caliente" name="comentario">
+                                <input type="text" size="25" id="comentario" name="comentario">
                             </td>
                         </tr>
                     </tbody>
