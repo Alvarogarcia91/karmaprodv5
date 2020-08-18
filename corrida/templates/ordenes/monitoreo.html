@@ -1,6 +1,6 @@
 {% extends "baseprod.html" %}
 {% block content %}
-<meta http-equiv="refresh" content="20">
+<meta http-equiv="refresh" content="10">
 
         <div class="row">
                 <div class="col-12 ">
@@ -51,7 +51,7 @@
                 <div class="col-6">
                     <div class="card mb-4 box-shadow">
                         <div class="card-body">
-                          <h1 class="card-title">{{bloques_aprobados_porcentaje}} <small class="text-muted">%</small></h1>
+                          <h1 class="card-title">{{bloques_aprobados_porcentaje |floatformat:2}} <small class="text-muted">%</small></h1>
                           <ul class="list-unstyled mt-3 mb-4">
                             <li>bloques aprobados</li>
                           </ul>

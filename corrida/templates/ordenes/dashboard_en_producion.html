@@ -8,7 +8,7 @@
         <!-- COL Elementos -->
     <div class="col-10 offset-1" >
         <br>
-        <h1 class="text-center my_title text-primary" ><b>  Dashboard de Corridas en Producción</h1>  </b>
+        <h1 class="text-center text-primary"><b> Dashboard de Corridas en Producción </b></h1>
         <br>   
         {% if not corridas_en_produccion%}
         <!-- Si no hay corridas produciendose -->
@@ -23,34 +23,26 @@
             </div>
         </div>
         {% else %}
-
             {% for corrida in corridas_en_produccion %}
+            <h4 class="text-left text-info"><b> <a href="{% url 'corrida:monitoreo' corrida.id %} "> Corrida: {{ corrida.id }}   </a></b></h4> 
             <table class="table table-hover table-sm" >
                 <thead >
                     <tr>
-                        <th class="text-center"> No.Orden</th>
                         <th class="text-center"> Tipo de espuma</th>
                         <th class="text-center"> Descripcion </th>
                         <th class="text-center"> Tipo de unidad </th>
                         <th class="text-center"> Cantidad </th>
-                        
                     </tr>
                 </thead>
                 <tbody>
-                    {% for elementoCorrida in corrida %}
-
+                    {% for elementoCorrida in corrida.elementocorrida_set.all %}
                     <tr>
-                        <td class="text-center" >{{ elementoCorrida.corrida }}</td>
                         <td class="text-center" >{{ elementoCorrida.bloqueMedidas.tipo_de_espuma }}</td>
                         <td class="text-center" >{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
                         <td class="text-center" >{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
-                    
-                        <td class="text-center" >{{elementoCorrida.num_bloques}}/{{ elementoCorrida.cantidad }}</td>
-                    
+                        <td class="text-center" >{{ elementoCorrida.bloques_producidos }}/{{ elementoCorrida.cantidad }}</td>
                     </tr>
-                
                     {% endfor %}
-
                 </tbody>
             </table>
             <br>
@@ -59,7 +51,6 @@
             <hr class="style7">
             <br>
         {% endif %}
-
     </div>
 </div>
 

@@ -425,19 +425,10 @@ def inventario(request):
 	}
 	return render(request ,'ordenes/inventario.html' ,context )
 
-
-
-
-
-
 def dashboard_en_producion(request):
-	corridas_en_produccion = Corrida.objects.filter(en_produccion = True)
-	corridas_en_produccion_list = []
-	for corrida in corridas_en_produccion:
-		elementos = ElementoCorrida.objects.filter(corrida = corrida).annotate(num_bloques = Count('bloqueproducido'))
-		corridas_en_produccion_list.append(list(elementos))
+	corridas_en_produccion = Corrida.objects.filter(en_produccion = True).prefetch_related('elementocorrida_set')
 	context ={
-		'corridas_en_produccion': corridas_en_produccion_list,
+		'corridas_en_produccion': corridas_en_produccion,
 	}
 	return render(request,'ordenes/dashboard_en_producion.html',context)
 
