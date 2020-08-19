@@ -18,7 +18,6 @@ $(document).ready(function() {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();
             var last=null;
- 
             api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
                 if ( last !== group ) {
                     $(rows).eq( i ).before(
@@ -63,7 +62,7 @@ $(document).ready(function() {
             {% for bloques in bloques_disponibles %}
             <tr>
                 <td>{{bloques.elemento_corrida.bloqueMedidas}} </td>
-                <td > <b> {{bloques.elemento_corrida.bloqueMedidas.tipo_de_espuma}} </b></td>
+                <td > <b> {{bloques.elemento_corrida.bloqueMedidas.tipo_de_espuma.tipo_de_espuma}} </b></td>
                 <td>{{bloques.no_de_bloque}} </td>
                 <td>{{bloques.elemento_corrida.lote.no_de_lote}} </td>
                 <td>{{bloques.largo_caliente}} </td>
