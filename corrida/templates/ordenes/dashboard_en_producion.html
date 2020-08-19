@@ -15,7 +15,6 @@
         <div>
             <div class="text-center">
                 <br>
-                <br>
                 <h2 class="text-center my_title">
                     No hay ordenes produciendose actualmente.
                 </h2>
@@ -24,7 +23,12 @@
         </div>
         {% else %}
             {% for corrida in corridas_en_produccion %}
-            <h4 class="text-left text-info"><b> <a href="{% url 'corrida:monitoreo' corrida.id %} "> Corrida: {{ corrida.id }}   </a></b></h4> 
+            <br>
+            <br>
+            <div class="text-right mb-3">
+                    <h4 class="text-left text-info"><b> <a href="{% url 'corrida:monitoreo' corrida.id %} "> Corrida: {{ corrida.id }}   </a> </b></h4> 
+                    <a class="btn btn-primary" href="{% url 'corrida:monitoreo' corrida.id %}" role="button"> Ver A Detalle  &raquo;</a>
+            </div>
             <table class="table table-hover table-sm" >
                 <thead >
                     <tr>
@@ -45,9 +49,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <br>
             {% endfor %}
-            <br>
             <hr class="style7">
             <br>
         {% endif %}
