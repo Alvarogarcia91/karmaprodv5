@@ -424,7 +424,7 @@ def inventario(request):
 	return render(request ,'ordenes/inventario.html' ,context )
 
 def dashboard_en_producion(request):
-	corridas_en_produccion = Corrida.objects.filter(en_produccion = True).prefetch_related('elementocorrida_set')
+	corridas_en_produccion = Corrida.objects.filter(en_produccion = True).prefetch_related('elementocorrida_set__bloqueMedidas__tipo_de_espuma').prefetch_related('elementocorrida_set__bloqueMedidas__tipo_de_unidad')
 	context ={
 		'corridas_en_produccion': corridas_en_produccion,
 	}
@@ -458,6 +458,7 @@ def aprobar_lote(request, lote_id):
 	return redirect('corrida:lotes')
 
 def bloques_disponibles(request):
+	bloques_aprobados.filter(elemento_corrida__lote__pruebas_pasadas = True)
 	bloques_disponibles = BloqueProducido.objects.all().prefetch_related('elemento_corrida__bloqueMedidas__tipo_de_espuma').prefetch_related('elemento_corrida__lote')
 	context ={
 		'bloques_disponibles':bloques_disponibles,

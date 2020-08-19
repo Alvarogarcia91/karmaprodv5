@@ -12,19 +12,19 @@ class CorridaAdmin(admin.ModelAdmin):
 admin.site.register(Corrida,CorridaAdmin)
 
 class LoteAdmin(admin.ModelAdmin):
-    list_display = ['created','no_de_lote','dureza_capturada','sag_factor_capturado','densidad_capturada','flujo_de_aire_astm_capturado','pruebas_realizadas','pruebas_pasadas']
+    list_display = ['id', 'created','no_de_lote','dureza_capturada','sag_factor_capturado','densidad_capturada','flujo_de_aire_astm_capturado','pruebas_realizadas','pruebas_pasadas']
     list_editable = ['pruebas_realizadas','pruebas_pasadas']
     # prepopulated_fields = {'slug':('name',)}
 admin.site.register(Lote,LoteAdmin)
 
 class ElementoCorridaAdmin(admin.ModelAdmin):
-    list_display = ['created','bloqueMedidas','corrida','cantidad',]
+    list_display = ['id', 'created','lote_id','bloqueMedidas','corrida','cantidad',]
     #list_editable = []
     # prepopulated_fields = {'slug':('name',)}
 admin.site.register(ElementoCorrida,ElementoCorridaAdmin)
 
 class BloqueProducidoAdmin(admin.ModelAdmin):
-    list_display = ['created', 'no_de_bloque','elemento_corrida', 'revision_calidad', 'defecto', 'alto_caliente', 'peso_caliente', 'flujo_de_aire_caliente','volumen','densidad',]
+    list_display = ['id', 'created', 'no_de_bloque','elemento_corrida', 'revision_calidad', 'defecto', 'alto_caliente', 'peso_caliente', 'flujo_de_aire_caliente','volumen','densidad',]
     #list_editable = []
     # prepopulated_fields = {'slug':('name',)}
 admin.site.register(BloqueProducido,BloqueProducidoAdmin)
