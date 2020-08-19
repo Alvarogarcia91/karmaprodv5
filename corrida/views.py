@@ -114,7 +114,7 @@ def ordenes(request):
 	return render(request,'ordenes/ordenes.html',context)
 
 def ordenes_pendientes(request):
-	corridas_pendientes = Corrida.objects.filter(pendiente_produccion= True).prefetch_related('elementocorrida_set')
+	corridas_pendientes = Corrida.objects.filter(pendiente_produccion= True).prefetch_related('elementocorrida_set__bloqueMedidas__tipo_de_espuma').prefetch_related('elementocorrida_set__bloqueMedidas__tipo_de_unidad').prefetch_related('elementocorrida_set__bloqueMedidas__forma')
 	context ={
 		'corridas_pendientes': corridas_pendientes,
 	}
