@@ -114,10 +114,9 @@ def ordenes(request):
 	return render(request,'ordenes/ordenes.html',context)
 
 def ordenes_pendientes(request):
-	corridas_pendientes = Corrida.objects.filter(pendiente_produccion= True)
+	corridas_pendientes = Corrida.objects.filter(pendiente_produccion= True).
 	context ={
 		'corridas_pendientes': corridas_pendientes,
-		'corridas_en_produccion': corridas_en_produccion,
 	}
 	return render(request, 'ordenes/ordenes_pendientes.html', context)
 
