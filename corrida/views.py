@@ -460,7 +460,7 @@ def aprobar_lote(request, lote_id):
 	return redirect('corrida:lotes')
 
 def bloques_disponibles(request):
-	bloques_disponibles = BloqueProducido.objects.all()
+	bloques_disponibles = BloqueProducido.objects.all().prefetch_related('elemento_corrida__bloqueMedidas__tipo_de_espuma').prefetch_related('elemento_corrida__lote')
 	context ={
 		'bloques_disponibles':bloques_disponibles,
 	}
