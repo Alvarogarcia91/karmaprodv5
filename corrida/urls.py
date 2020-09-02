@@ -42,6 +42,7 @@ urlpatterns = [
 
     path('bloques_disponibles/', views.bloques_disponibles, name='bloques_disponibles'),
 
-    
+    path('bloque_no_disponible/<int:bloque_id>', views.bloque_no_disponible, name='bloque_no_disponible'),
+
 
 ]
