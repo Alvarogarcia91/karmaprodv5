@@ -71,8 +71,9 @@ $(document).ready(function() {
                 <td>{{bloques.ancho_caliente}} </td>
                 <td>{{bloques.alto_caliente}} </td>
                 <td>{{bloques.peso_caliente}} </td>
-                <td class="text-center"><a class="btn btn-danger" href="#" role="button"> Borrar </a></td>
-               
+                <td class="text-center"><a class="btn btn-danger" href="{% url 'corrida:bloque_no_disponible' item.id %}" role="button"> Borrar </a></td>
+               <!-- comment -->
+
             </tr>
            {%endfor%}
         <tfoot>
