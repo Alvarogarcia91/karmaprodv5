@@ -465,6 +465,8 @@ def bloques_disponibles(request):
 	}
 	return render(request,'bloques/bloques_disponibles.html',context)
 
-
-
-	
+def bloque_no_disponible(request, bloque_id):
+	bloque = BloqueProducido.objects.get(id=bloque_id)
+	bloque.disponible = False
+	bloque.save()
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
