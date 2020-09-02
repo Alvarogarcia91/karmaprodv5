@@ -24,7 +24,7 @@ class ElementoCorridaAdmin(admin.ModelAdmin):
 admin.site.register(ElementoCorrida,ElementoCorridaAdmin)
 
 class BloqueProducidoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created', 'no_de_bloque','elemento_corrida', 'revision_calidad', 'defecto', 'alto_caliente', 'peso_caliente', 'flujo_de_aire_caliente','volumen','densidad',]
+    list_display = ['id', 'disponible', 'created', 'no_de_bloque','elemento_corrida', 'revision_calidad', 'defecto', 'alto_caliente', 'peso_caliente', 'flujo_de_aire_caliente','volumen','densidad',]
     #list_editable = []
     # prepopulated_fields = {'slug':('name',)}
 admin.site.register(BloqueProducido,BloqueProducidoAdmin)

@@ -61,17 +61,17 @@ $(document).ready(function() {
             </tr>
         </thead>
         <tbody>
-            {% for bloques in bloques_disponibles %}
+            {% for bloque in bloques_disponibles %}
             <tr>
-                <td>{{bloques.elemento_corrida.bloqueMedidas}} </td>
-                <td > <b> {{bloques.elemento_corrida.bloqueMedidas.tipo_de_espuma.tipo_de_espuma}} </b></td>
-                <td>{{bloques.no_de_bloque}} </td>
-                <td>{{bloques.elemento_corrida.lote.no_de_lote}} </td>
-                <td>{{bloques.largo_caliente}} </td>
-                <td>{{bloques.ancho_caliente}} </td>
-                <td>{{bloques.alto_caliente}} </td>
-                <td>{{bloques.peso_caliente}} </td>
-                <td class="text-center"><a class="btn btn-danger" href="{% url 'corrida:bloque_no_disponible' item.id %}" role="button"> Borrar </a></td>
+                <td>{{bloque.elemento_corrida.bloqueMedidas}} </td>
+                <td > <b> {{bloque.elemento_corrida.bloqueMedidas.tipo_de_espuma.tipo_de_espuma}} </b></td>
+                <td>{{bloque.no_de_bloque}} </td>
+                <td>{{bloque.elemento_corrida.lote.no_de_lote}} </td>
+                <td>{{bloque.largo_caliente}} </td>
+                <td>{{bloque.ancho_caliente}} </td>
+                <td>{{bloque.alto_caliente}} </td>
+                <td>{{bloque.peso_caliente}} </td>
+                <td class="text-center"><a class="btn btn-danger" href="{% url 'corrida:bloque_no_disponible' bloque.id %}" role="button"> Borrar </a></td>
                <!-- comment -->
 
             </tr>
