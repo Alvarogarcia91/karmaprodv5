@@ -56,6 +56,7 @@ $(document).ready(function() {
                 <th>Ancho</th>
                 <th>Alto</th>
                 <th>Peso</th>
+                <th>Disponible</th>
                 <th>Baja</th>
                 
             </tr>
@@ -71,7 +72,12 @@ $(document).ready(function() {
                 <td>{{bloque.ancho_caliente}} </td>
                 <td>{{bloque.alto_caliente}} </td>
                 <td>{{bloque.peso_caliente}} </td>
-                <td class="text-center"><a class="btn btn-danger" href="{% url 'corrida:bloque_no_disponible' bloque.id %}" role="button"> Borrar </a></td>
+                {% if bloque.disponible %}
+                    <td class="text-center align-middle"> <font color="green">&#10003; </font>   </td>
+                {% else %}
+                    <td class="text-center align-middle" > <font color="red"> X </font> </td>
+                {%endif%}
+                <td class="text-center"><a class="btn btn-danger" href="{% url 'corrida:bloque_no_disponible' bloque.id %}" role="button"> Dar de baja </a></td>
                <!-- comment -->
 
             </tr>

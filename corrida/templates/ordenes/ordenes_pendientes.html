@@ -73,10 +73,11 @@
     {% else %}
     <!-- <h3 class="text-left my_title text-info" > <b> Corridas Pendientes </b></h3> -->
     {% for corrida in corridas_pendientes %}
+    <h3>No de orden: {{corrida.id}}</h3>
+    <h3>Fecha programada: {{corrida.fecha_programada.date}}</h3>
     <table class="table table-hover table-sm" >
         <thead>
             <tr>
-            <th class="text-center"> No.Orden</th>
             <th class="text-center"> Tipo de espuma</th>
             <th class="text-center"> Descripcion </th>
             <th class="text-center"> Tipo de unidad </th>
@@ -92,7 +93,6 @@
             {% for elementoCorrida in corrida.elementocorrida_set.all %}
 
             <tr>
-                <td class="text-center" >{{ elementoCorrida.corrida_id }}</td>
                 <td class="text-center" >{{ elementoCorrida.bloqueMedidas.tipo_de_espuma.tipo_de_espuma }}</td>
                 <td class="text-center" >{{ elementoCorrida.bloqueMedidas.descripcion }}</td>
                 <td class="text-center" >{{ elementoCorrida.bloqueMedidas.tipo_de_unidad }}</td>
