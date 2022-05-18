@@ -178,7 +178,7 @@ class BloqueProducido(models.Model):
 		# volumen
 		if self.elemento_corrida.bloqueMedidas.forma.forma == "Cilindro":
 			radio = float(self.ancho_caliente)/2
-			area = (radio * radio * 3.1415)/ 2
+			area = (radio * radio * 3.1415)
 			volumen = round((float(self.largo_caliente) * area)/1000000, 2)
 		else:
 			volumen = round((float(self.largo_caliente) * float(self.ancho_caliente) * float(self.alto_caliente))/(1000000),2)
